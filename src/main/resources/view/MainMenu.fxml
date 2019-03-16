@@ -5,7 +5,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
-            fx:controller="MainMenuController"
+            fx:controller="controller.MainMenuController"
             prefHeight="18.0" prefWidth="600.0"
             style="-fx-background-color: #BF3333; -fx-border-color: black;">
 <children>

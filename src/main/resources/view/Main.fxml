@@ -12,14 +12,8 @@
                 <fx:include fx:id="mainMenu" source="MainMenu.fxml" BorderPane.alignment="CENTER" />
                 <SplitPane dividerPositions="0.4" style="-fx-background-color: #7F7941; -fx-border-color: black;">
                     <items>
-                        <AnchorPane SplitPane.resizableWithParent="true">
-                            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                <children>
-                                    <fx:include fx:id="metadata" source="Metadata.fxml" />
-                                </children>
-                            </VBox>
-                        </AnchorPane>
-                        <fx:include fx:id="preview" source="Preview.fxml"  />
+                        <fx:include fx:id="sideBar" source="SideBar.fxml" SplitPane.resizableWithParent="true"/>
+                        <fx:include fx:id="preview" source="Preview.fxml" SplitPane.resizableWithParent="true"/>
                     </items>
                 </SplitPane>
 
