@@ -1,25 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="MetadataController"
-            style="-fx-background-color: yellow; -fx-border-color: black;"
-            >
 
-    <VBox>
-        <Text text="Metadata"  />
-        <GridPane fx:id="gridPane" style="-fx-background-color: red; -fx-border-color: black;"
-                  AnchorPane.bottomAnchor="0.0"
-                  AnchorPane.leftAnchor="0.0"
-                  AnchorPane.rightAnchor="0.0"
-        >
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity"  prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: yellow; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MetadataController">
+    <children>
+        <VBox prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
-        </GridPane>
-    </VBox>
+            <HBox style="-fx-background-color: pink; -fx-border-color: black;" >
+                <children>
+                    <Text text="Image Metadata" />
+                </children>
+            </HBox>
 
 
 
+            <GridPane fx:id="gridPane" hgap="5" vgap="5" style="-fx-background-color: red; -fx-border-color: black;" >
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                </columnConstraints>
+                <children>
+                    <Label text="type" GridPane.columnIndex="0"></Label>
+                    <Label text="name" GridPane.columnIndex="1"></Label>
+                    <TextField text="value" GridPane.columnIndex="2"></TextField>
+                </children>
+            </GridPane>
+        </VBox>
+    </children>
 </AnchorPane>
