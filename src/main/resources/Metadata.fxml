@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.text.Text?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="MetadataController"
+            style="-fx-background-color: blue; -fx-border-color: black;"
+            >
+
+    <VBox>
+        <Text text="Metadata"  />
+        <GridPane fx:id="gridPane" style="-fx-background-color: red; -fx-border-color: black;"
+                  AnchorPane.bottomAnchor="0.0"
+                  AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0"
+        >
+
+        </GridPane>
+    </VBox>
+
+
+
+</AnchorPane>
