@@ -5,6 +5,7 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -20,10 +21,6 @@ import java.util.ResourceBundle;
 public class MetadataController implements Initializable {
     @FXML
     private GridPane gridPane;
-
-    public MetadataController()  {
-        System.out.println("CTOR");
-    }
 
     public void loadMetadata(InputStream input) {
         try {
@@ -57,6 +54,9 @@ public class MetadataController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("INIT");
+        System.out.println("MetadataController.INIT");
+    }
+
+    public void selectDirectory(ActionEvent actionEvent) {
     }
 }
