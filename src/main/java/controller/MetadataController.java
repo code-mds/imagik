@@ -5,13 +5,14 @@ import com.drew.imaging.ImageProcessingException;
 import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
+import model.ImageMetadata;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,32 +21,21 @@ import java.util.ResourceBundle;
 
 public class MetadataController implements Initializable {
     @FXML
-    private GridPane gridPane;
+    private TableView<ImageMetadata> tableView;
+
+    private final ObservableList<ImageMetadata> imageMetadataList = FXCollections.observableArrayList();
 
     public void loadMetadata(InputStream input) {
         try {
-            gridPane.getChildren().clear();
-
-            int rowIndex = 0;
-
             Metadata metadata = ImageMetadataReader.readMetadata(input);
             for (Directory directory : metadata.getDirectories()) {
                 for (Tag tag : directory.getTags()) {
-                    System.out.println(tag);
+                    //System.out.println(tag);
 
-                    final Label labelGroup = new Label(tag.getDirectoryName());
-                    gridPane.add(labelGroup,0, rowIndex);
-
-                    final Label label = new Label(tag.getTagName());
-                    gridPane.add(label,1, rowIndex);
-
-                    final TextField textField = new TextField(tag.getDescription());
-                    gridPane.add(textField, 2, rowIndex);
-                    rowIndex++;
+                    ImageMetadata imageMetadata = new ImageMetadata(tag.getDirectoryName(), tag.getTagName(), tag.getDescription());
+                    imageMetadataList.add(imageMetadata);
                 }
             }
-
-            gridPane.requestLayout();
         } catch (ImageProcessingException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -54,6 +44,7 @@ public class MetadataController implements Initializable {
     }
 
     public void initialize(URL location, ResourceBundle resources) {
+        tableView.setItems(imageMetadataList);
         System.out.println("MetadataController.INIT");
     }
 

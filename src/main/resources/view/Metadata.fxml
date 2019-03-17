@@ -1,37 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
+
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: yellow; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MetadataController">
-    <VBox style="-fx-background-color: green; -fx-border-color: black;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
+    <VBox style="-fx-background-color: green; -fx-border-color: black;"
+          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" >
 
-        <HBox style="-fx-background-color: pink; -fx-border-color: black;">
-            <Text text="Image Metadata" />
-        </HBox>
-        <ScrollPane>
-            <GridPane fx:id="gridPane" hgap="5" style="-fx-background-color: red; -fx-border-color: black;" vgap="5">
-                <columnConstraints>
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-                    <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
-                </columnConstraints>
-                <Label text="type" GridPane.columnIndex="0" />
-                <Label text="name" GridPane.columnIndex="1" />
-                <TextField editable="false" text="value" GridPane.columnIndex="2" />
-            <rowConstraints>
-               <RowConstraints />
-            </rowConstraints>
-            </GridPane>
-        </ScrollPane>
+        <Label style="-fx-font: NORMAL 20 Tahoma;" text="Image Metadata" GridPane.rowIndex="0" />
+        <TableView fx:id="tableView" GridPane.rowIndex="1">
+            <columns>
+                <TableColumn text="Type">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="type" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Name">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="name" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn text="Value">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="value" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
     </VBox>
+
 </AnchorPane>
