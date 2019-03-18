@@ -18,8 +18,8 @@ public class SideBarController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        InputStream input = getClass().getResourceAsStream("/test.jpg");
-        metadataController.loadMetadata(input);
+//        InputStream input = getClass().getResourceAsStream("/test.jpg");
+//        metadataController.loadMetadata(input);
     }
 
     /*

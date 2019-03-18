@@ -8,6 +8,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.MainModel;
+
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -32,6 +34,7 @@ public class ThumbnailController implements Initializable {
 
         thumbnails.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             System.out.println("Selected item: " + newValue);
+            MainModel.getInstance().setSelectedFile(newValue);
         });
 
         thumbnails.setCellFactory(param -> new ListCell<File>() {

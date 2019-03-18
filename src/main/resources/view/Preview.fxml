@@ -19,10 +19,7 @@
             <Button mnemonicParsing="false" text="Ruota Dx" />
         </ToolBar>
         
-        <ImageView fitWidth="200.0" fitHeight="200">
-            <image>
-                <Image url="/test.JPG" />
-            </image>
+        <ImageView fx:id="imageView" fitWidth="200.0" fitHeight="200">
         </ImageView>
 
     </VBox>
