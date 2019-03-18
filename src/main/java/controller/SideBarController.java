@@ -22,13 +22,16 @@ public class SideBarController implements Initializable {
         metadataController.loadMetadata(input);
     }
 
+    /*
+    The user has selected a directory
+     */
     public void selectDirectory(ActionEvent actionEvent) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         Scene scene = ((Node)actionEvent.getSource()).getScene();
-        File res = directoryChooser.showDialog(scene.getWindow());
-        if(res == null || !res.isDirectory())
+        File dir = directoryChooser.showDialog(scene.getWindow());
+        if(dir == null || !dir.isDirectory())
             return;
 
-        thumbnailController.update(res);
+        thumbnailController.update(dir);
     }
 }

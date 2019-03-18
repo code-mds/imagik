@@ -10,7 +10,7 @@ public class MainController implements Initializable {
 
     @FXML private MainMenuController mainMenuController;
     @FXML private SideBarController sideBarController;
-    @FXML private SideBarController contentAreaController;
+    @FXML private ContentAreaController contentAreaController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

@@ -45,7 +45,6 @@ public class MetadataController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         tableView.setItems(imageMetadataList);
-        System.out.println("MetadataController.INIT");
     }
 
     public void selectDirectory(ActionEvent actionEvent) {
