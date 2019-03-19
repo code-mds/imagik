@@ -5,16 +5,19 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ToolBar?>
 <AnchorPane prefHeight="600.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MetadataController">
 
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ToolBar>
+            <Label text="Metadata: " minWidth="-Infinity" />
+            <Label fx:id="fileName"/>
+        </ToolBar>
 
-        <Label style="-fx-font: NORMAL 20 Tahoma;" text="Image Metadata" GridPane.rowIndex="0" />
-        <TableView fx:id="tableView" GridPane.rowIndex="1" VBox.vgrow="SOMETIMES">
+        <TableView fx:id="tableView" VBox.vgrow="SOMETIMES">
             <columns>
                 <TableColumn text="Type">
                     <cellValueFactory>

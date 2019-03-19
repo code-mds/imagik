@@ -1,14 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import javafx.scene.image.ImageView?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.ContentAreaController"
             prefHeight="400.0" prefWidth="600.0">
+    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <ToolBar>
+            <Button mnemonicParsing="false" text="Zoom +" onAction="#zoomIn" />
+            <Button mnemonicParsing="false" text="Zoom -" onAction="#zoomOut" />
 
+            <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+            <Button mnemonicParsing="false" text="Scala" onAction="#resize" />
+            <Button mnemonicParsing="false" text="B/N" onAction="#blackWhite" />
+            <Button mnemonicParsing="false" text="Ruota Sx" onAction="#rotateLeft" />
+            <Button mnemonicParsing="false" text="Ruota Dx" onAction="#rotateRight"/>
+
+            <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+            <Button mnemonicParsing="false" text="Reset" onAction="#resetChanges" />
+            <Button mnemonicParsing="false" text="Salva" onAction="#saveChanges"/>
+
+        </ToolBar>
+
+        <!--prefWidth="${imageView.parent.width}"-->
+        <ImageView fx:id="imageView" fitWidth="300" preserveRatio="true">
+        </ImageView>
+
+    </VBox>
 </AnchorPane>

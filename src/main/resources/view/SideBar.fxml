@@ -6,14 +6,18 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.SideBarController"
-            prefHeight="600.0" prefWidth="400.0" fx:id="ap" >
+            prefHeight="600.0" prefWidth="400.0"
+            fx:id="anchorPane" >
 
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <Button text="Open Dir ..." onAction="#selectDirectory" AnchorPane.topAnchor="0.0" />
+        <ToolBar>
+            <Button text="Open..." onAction="#selectFolder" minWidth="-Infinity" />
+            <Label fx:id="folderName"/>
+        </ToolBar>
 
         <SplitPane orientation="VERTICAL">
-            <fx:include fx:id="thumbnail" source="Thumbnail.fxml"  />
-            <fx:include fx:id="metadata" source="Metadata.fxml"  />
+            <fx:include source="Thumbnail.fxml"  />
+            <fx:include source="Metadata.fxml"  />
         </SplitPane>
     </VBox>
 

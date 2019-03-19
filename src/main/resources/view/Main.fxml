@@ -11,11 +11,11 @@
           AnchorPane.rightAnchor="0.0"
           AnchorPane.topAnchor="0.0">
 
-        <fx:include fx:id="mainMenu" source="MainMenu.fxml"/>
+        <fx:include source="MainMenu.fxml"/>
 
         <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
-            <fx:include fx:id="sideBar" source="SideBar.fxml" SplitPane.resizableWithParent="true" />
-            <fx:include fx:id="preview" source="Preview.fxml" SplitPane.resizableWithParent="true" />
+            <fx:include source="SideBar.fxml" SplitPane.resizableWithParent="true" />
+            <fx:include source="ContentArea.fxml" SplitPane.resizableWithParent="true" />
         </SplitPane>
 
     </VBox>

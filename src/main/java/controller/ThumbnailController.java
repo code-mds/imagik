@@ -17,18 +17,12 @@ import java.util.ResourceBundle;
 public class ThumbnailController implements Initializable {
     private final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final int THUMB_SIZE = 50;
-
     @FXML private ListView<File> thumbnails;
-
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
-
-    public void update(File dir) {
-        File[] files = dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
-        imageList.setAll(files);
-    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        MainModel.getInstance().addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
 
         thumbnails.setItems(imageList);
 
@@ -72,6 +66,12 @@ public class ThumbnailController implements Initializable {
         }
         return false;
     }
+
+    private void listFiles(File dir) {
+        File[] files = dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
+        imageList.setAll(files);
+    }
+
 
 //    private Image getScaledImage(File file){
 //        try {

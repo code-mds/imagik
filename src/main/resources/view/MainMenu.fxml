@@ -8,36 +8,24 @@
             fx:controller="controller.MainMenuController"
             prefHeight="18.0" prefWidth="600.0"
             style="-fx-background-color: #BF3333; -fx-border-color: black;">
-<children>
-    <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <menus>
-            <Menu mnemonicParsing="false" text="File">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Open" onAction="#open" />
-                    <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit" />
-                </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Image">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn" />
-                    <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut" />
-                </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Option">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                </items>
-            </Menu>
-        </menus>
+    <MenuBar useSystemMenuBar="true"
+             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+             AnchorPane.topAnchor="0.0">
+        <Menu mnemonicParsing="false" text="File">
+            <MenuItem mnemonicParsing="false" text="Open" onAction="#openFolder"/>
+            <MenuItem mnemonicParsing="false" text="Open" onAction="#saveChanges"/>
+            <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="View">
+            <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
+            <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Image">
+            <MenuItem mnemonicParsing="false" text="Rotate Left" onAction="#rotateLeft"/>
+            <MenuItem mnemonicParsing="false" text="Rotate Left" onAction="#rotateRight"/>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Help">
+            <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
+        </Menu>
     </MenuBar>
-</children></AnchorPane>
+</AnchorPane>
