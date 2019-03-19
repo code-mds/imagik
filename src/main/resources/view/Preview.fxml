@@ -11,15 +11,16 @@
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
             <Button mnemonicParsing="false" text="Zoom +" onAction="#zoomIn" />
-            <Button mnemonicParsing="false" text="Zoom -" />
+            <Button mnemonicParsing="false" text="Zoom -" onAction="#zoomOut" />
 
             <Button mnemonicParsing="false" text="Scala" />
             <Button mnemonicParsing="false" text="B/N" />
             <Button mnemonicParsing="false" text="Ruota Sx" />
             <Button mnemonicParsing="false" text="Ruota Dx" />
         </ToolBar>
-        
-        <ImageView fx:id="imageView" fitWidth="200.0" fitHeight="200">
+
+        <!--prefWidth="${imageView.parent.width}"-->
+        <ImageView fx:id="imageView" fitWidth="300" preserveRatio="true">
         </ImageView>
 
     </VBox>

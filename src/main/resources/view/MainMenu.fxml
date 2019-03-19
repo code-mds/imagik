@@ -24,7 +24,8 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Image">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
+                    <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn" />
+                    <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut" />
                 </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Option">
