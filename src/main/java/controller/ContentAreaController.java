@@ -23,8 +23,12 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EventManager.getInstance().register(this);
-        MainModel.getInstance().addSelectedFileListener((observable, oldValue, newValue) -> loadImage(newValue));
+        EventManager.getInstance()
+                .register(this);
+        MainModel.getInstance()
+                .addSelectedFileListener((observable, oldValue, newValue) -> loadImage(newValue));
+
+        //imageView.fitWidthProperty().bind(imageView.getScene())
     }
 
     private void loadImage(File file) {

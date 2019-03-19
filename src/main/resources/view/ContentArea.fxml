@@ -27,9 +27,9 @@
 
         </ToolBar>
 
-        <!--prefWidth="${imageView.parent.width}"-->
-        <ImageView fx:id="imageView" fitWidth="300" preserveRatio="true">
-        </ImageView>
+        <ScrollPane fx:id="scrollPane" VBox.vgrow="SOMETIMES" styleClass="edge-to-edge">
+            <ImageView  fx:id="imageView" fitWidth="${scrollPane.width}" fitHeight="${scrollPane.height}" preserveRatio="true" />
+        </ScrollPane>
 
     </VBox>
 </AnchorPane>

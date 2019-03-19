@@ -15,7 +15,7 @@
             <Label fx:id="folderName"/>
         </ToolBar>
 
-        <SplitPane orientation="VERTICAL">
+        <SplitPane orientation="VERTICAL" >
             <fx:include source="Thumbnail.fxml"  />
             <fx:include source="Metadata.fxml"  />
         </SplitPane>

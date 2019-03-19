@@ -17,21 +17,21 @@ import java.util.ResourceBundle;
 public class ThumbnailController implements Initializable {
     private final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final int THUMB_SIZE = 50;
-    @FXML private ListView<File> thumbnails;
+    @FXML private ListView<File> thumbListView;
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        MainModel.getInstance().addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
+        MainModel.getInstance()
+                .addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
 
-        thumbnails.setItems(imageList);
+        thumbListView.setItems(imageList);
 
-        thumbnails.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Selected item: " + newValue);
-            MainModel.getInstance().setSelectedFile(newValue);
-        });
+        thumbListView.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, oldValue, newValue) -> MainModel.getInstance().setSelectedFile(newValue));
 
-        thumbnails.setCellFactory(param -> new ListCell<File>() {
+        thumbListView.setCellFactory(param -> new ListCell<File>() {
             private ImageView imageView = new ImageView();
 
             @Override
@@ -55,7 +55,6 @@ public class ThumbnailController implements Initializable {
 
     private Image getThumbnail(File file) {
         String uri = file.toURI().toString();
-        System.out.println(uri);
         return new Image(uri);
     }
 
