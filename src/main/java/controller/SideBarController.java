@@ -4,10 +4,12 @@ import com.google.common.eventbus.Subscribe;
 import event.EventManager;
 import event.SelectFolderEvent;
 import event.EventSubscriber;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -20,10 +22,16 @@ import java.util.ResourceBundle;
 public class SideBarController implements Initializable, EventSubscriber {
     @FXML private Label folderName;
     @FXML private AnchorPane anchorPane;
+    @FXML private TextField searchField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
+        searchField.textProperty().addListener(this::search);
+    }
+
+    private void search(ObservableValue<? extends String> obs, String oldVal, String newVal) {
+        MainModel.getInstance().setFilter(newVal);
     }
 
     public void selectFolder(ActionEvent e) {

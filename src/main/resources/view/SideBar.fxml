@@ -11,7 +11,13 @@
 
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
-            <Button text="Open..." onAction="#selectFolder" minWidth="-Infinity" />
+            <Button text="Open" onAction="#selectFolder" minWidth="-Infinity" />
+
+            <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+            <TextField fx:id="searchField" promptText="Search..." />
+        </ToolBar>
+        <ToolBar>
             <Label fx:id="folderName"/>
         </ToolBar>
 

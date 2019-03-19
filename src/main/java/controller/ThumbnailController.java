@@ -2,6 +2,7 @@ package controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
@@ -12,6 +13,8 @@ import model.MainModel;
 
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ThumbnailController implements Initializable {
@@ -19,13 +22,18 @@ public class ThumbnailController implements Initializable {
     private final int THUMB_SIZE = 50;
     @FXML private ListView<File> thumbListView;
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
+    private final FilteredList<File> filteredImageList = new FilteredList<>(imageList);
+    private final Map<File, Image> imageCache = new HashMap<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         MainModel.getInstance()
                 .addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
 
-        thumbListView.setItems(imageList);
+        MainModel.getInstance()
+                .addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
+
+        thumbListView.setItems(filteredImageList);
 
         thumbListView.getSelectionModel()
                 .selectedItemProperty()
@@ -41,7 +49,13 @@ public class ThumbnailController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    Image image = getThumbnail(file);
+                    Image image;
+                    if(!imageCache.containsKey(file)) {
+                        image = getThumbnail(file);
+                        imageCache.put(file, image);
+                    } else {
+                        image = imageCache.get(file);
+                    }
                     imageView.fitHeightProperty().setValue(THUMB_SIZE);
                     imageView.fitWidthProperty().setValue(THUMB_SIZE);
                     imageView.setImage(image);
@@ -51,6 +65,10 @@ public class ThumbnailController implements Initializable {
                 }
             }
         });
+    }
+
+    private void filterList(String filter) {
+        filteredImageList.setPredicate(file -> file.getName().contains(filter));
     }
 
     private Image getThumbnail(File file) {
