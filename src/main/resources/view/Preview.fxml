@@ -10,7 +10,7 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: white; -fx-border-color: black;" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PreviewController">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
-            <Button mnemonicParsing="false" text="Zoom +" />
+            <Button mnemonicParsing="false" text="Zoom +" onAction="#zoomIn" />
             <Button mnemonicParsing="false" text="Zoom -" />
 
             <Button mnemonicParsing="false" text="Scala" />

@@ -52,6 +52,6 @@ public class MetadataController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         tableView.setItems(imageMetadataList);
-        MainModel.getInstance().addListener((observable, oldValue, newValue) -> loadMetadata(newValue));
+        MainModel.getInstance().addSelectedFileListener((observable, oldValue, newValue) -> loadMetadata(newValue));
     }
 }

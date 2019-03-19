@@ -1,5 +1,8 @@
 package model;
 
+import com.google.common.eventbus.EventBus;
+import controller.Subscriber;
+import controller.event.PostableEvent;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -7,12 +10,14 @@ import javafx.beans.value.ChangeListener;
 import java.io.File;
 
 public class MainModel {
-    private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
+    // single instance
     private static MainModel instance;
 
-    private MainModel() {
+    private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
+    private EventBus eventBus = new EventBus();
 
-    }
+
+    private MainModel() { }
 
     public static MainModel getInstance() {
         if(instance == null)
@@ -21,13 +26,10 @@ public class MainModel {
         return instance;
     }
 
-    public void addListener(ChangeListener<File> listener) {
+    public void addSelectedFileListener(ChangeListener<File> listener) {
         instance.selectedFileProperty.addListener(listener);
     }
-
-    public void removeListener(ChangeListener<File> listener) {
-        instance.selectedFileProperty.removeListener(listener);
-    }
+    public void removeSelectedFileListener(ChangeListener<File> listener) {  instance.selectedFileProperty.removeListener(listener); }
 
     public void setSelectedFile(File file) {
         selectedFileProperty.set(file);
@@ -37,4 +39,11 @@ public class MainModel {
         return selectedFileProperty.get();
     }
 
+    public void register(Subscriber subscriber) {
+        eventBus.register(subscriber);
+    }
+
+    public void post(PostableEvent event) {
+        eventBus.post(event);
+    }
 }
