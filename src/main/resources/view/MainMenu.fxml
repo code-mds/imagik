@@ -13,7 +13,7 @@
              AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
             <MenuItem mnemonicParsing="false" text="Open" onAction="#openFolder"/>
-            <MenuItem mnemonicParsing="false" text="Open" onAction="#saveChanges"/>
+            <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
             <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
         </Menu>
         <Menu mnemonicParsing="false" text="View">
