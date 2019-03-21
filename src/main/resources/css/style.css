@@ -1,0 +1,9 @@
+#searchField1 {
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: right center;
+  -fx-font-size: 20;
+  -fx-content: "\f002";
+}
+
+.toolbarButton {
+}

@@ -9,6 +9,16 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-jerady-maven</id>
+            <name>bintray</name>
+            <url>https://dl.bintray.com/jerady/maven</url>
+        </repository>
+    </repositories>
     <build>
         <plugins>
 
@@ -78,7 +88,33 @@
             <artifactId>guava</artifactId>
             <version>25.0-jre</version>
         </dependency>
+
+        <!-- Icons -->
+
+        <!--<dependency>-->
+            <!--<groupId>com.cathive.fonts</groupId>-->
+            <!--<artifactId>fonts-fontawesome</artifactId>-->
+            <!--<version>RELEASE</version>-->
+        <!--</dependency>-->
+
+        <!--https://bitbucket.org/Jerady/fontawesomefx-->
+        <!--https://github.com/Jerady/fontawesomefx-glyphsbrowser-->
+        <dependency>
+            <groupId>de.jensd</groupId>
+            <artifactId>fontawesomefx</artifactId>
+            <version>8.1</version>
+        </dependency>
+
+        <!--<dependency>-->
+            <!--<groupId>org.kordamp.ikonli</groupId>-->
+            <!--<artifactId>ikonli-javafx</artifactId>-->
+            <!--<version>2.4.0</version>-->
+        <!--<dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.controlsfx</groupId>-->
+            <!--<artifactId>controlsfx</artifactId>-->
+            <!--<version>8.40.14</version>-->
+        <!--</dependency>-->
+
     </dependencies>
-
-
 </project>

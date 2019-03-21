@@ -28,6 +28,7 @@ public class SideBarController implements Initializable, EventSubscriber {
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
         searchField.textProperty().addListener(this::search);
+        //searchField.setPromptText("U+F002");
     }
 
     private void search(ObservableValue<? extends String> obs, String oldVal, String newVal) {

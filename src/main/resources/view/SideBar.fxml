@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="controller.SideBarController"
-            prefHeight="600.0" prefWidth="400.0"
-            fx:id="anchorPane" >
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SideBarController">
 
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
-            <Button text="Open" onAction="#selectFolder" minWidth="-Infinity" />
+            <Button minWidth="-Infinity" onAction="#selectFolder" >
+                <tooltip><Tooltip text="Open Folder" /></tooltip>
+                <graphic>
+                    <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" size="1.5em" styleClass="toolbarButton"/>
+                </graphic>
+            </Button>
 
-            <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+            <Pane prefWidth="16.0" />
 
-            <TextField fx:id="searchField" promptText="Search..." />
+            <TextField fx:id="searchField" promptText="Search..." HBox.hgrow="SOMETIMES" />
         </ToolBar>
         <ToolBar>
-            <Label fx:id="folderName"/>
+            <Label fx:id="folderName" />
         </ToolBar>
 
-        <SplitPane orientation="VERTICAL" >
-            <fx:include source="Thumbnail.fxml"  />
-            <fx:include source="Metadata.fxml"  />
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+            <fx:include source="Thumbnail.fxml" />
+            <fx:include source="Metadata.fxml" />
         </SplitPane>
     </VBox>
 

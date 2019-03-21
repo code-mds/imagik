@@ -16,7 +16,9 @@ public class Main extends Application  {
         Parent root = FXMLLoader.load(getClass().getResource("view/Main.fxml"));
         primaryStage.setTitle("Imagik Image Viewer");
         primaryStage.getIcons().add(new Image(this.getClass().getResource("icon/wand.png").toString()));
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("css/style.css");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
