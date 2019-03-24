@@ -2,9 +2,13 @@ package controller;
 
 import com.google.common.eventbus.Subscribe;
 import event.*;
-import ij.IJ;
 import ij.ImagePlus;
 import ij.process.ImageConverter;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -25,7 +29,16 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private static final float ZOOM_FACTOR = 0.1f;
     private BufferedImage currentImage;
     private File currentFile;
+
     @FXML ImageView imageView;
+    private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
+    public BooleanProperty emptySelectionProperty() {
+        return emptySelection;
+    }
+    public boolean getEmptySelection()
+    {
+        return emptySelection.get();
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -39,15 +52,17 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     private void loadImage(File file) {
         try {
+            Image image = null;
             currentFile = file;
-            currentImage = ImageIO.read(currentFile);
-            Image image = SwingFXUtils.toFXImage(currentImage, null);
+            emptySelection.set(currentFile == null);
+            if(file != null) {
+                currentImage = ImageIO.read(currentFile);
+                image = SwingFXUtils.toFXImage(currentImage, null);
+            }
             imageView.imageProperty().setValue(image);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     public void zoomIn(ActionEvent e) {
@@ -106,4 +121,5 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         // TO DO private o public ?
         loadImage(currentFile);
     }
+
 }
