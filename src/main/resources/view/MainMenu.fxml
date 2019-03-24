@@ -16,15 +16,16 @@
             <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
             <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
         </Menu>
-        <Menu mnemonicParsing="false" text="View">
+        <Menu mnemonicParsing="false" text="%menu.view">
             <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
             <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
         </Menu>
-        <Menu mnemonicParsing="false" text="Image">
-            <MenuItem mnemonicParsing="false" text="Rotate Left" onAction="#rotateLeft"/>
-            <MenuItem mnemonicParsing="false" text="Rotate Left" onAction="#rotateRight"/>
+        <Menu mnemonicParsing="false" text="%menu.image">
+            <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#rotateLeft"/>
+            <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
+            <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
         </Menu>
-        <Menu mnemonicParsing="false" text="Help">
+        <Menu mnemonicParsing="false" text="%menu.help">
             <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
         </Menu>
     </MenuBar>
