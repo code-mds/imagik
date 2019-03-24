@@ -50,5 +50,4 @@ public class SideBarController implements Initializable, EventSubscriber {
         MainModel.getInstance().setSelectedFolder(dir);
         folderName.textProperty().setValue(dir.toString());
     }
-
 }

@@ -4,17 +4,15 @@ import com.google.common.eventbus.Subscribe;
 import event.*;
 import ij.ImagePlus;
 import ij.process.ImageConverter;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.value.ObservableBooleanValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.ImageService;
 import model.MainModel;
 
 
@@ -29,8 +27,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private static final float ZOOM_FACTOR = 0.1f;
     private BufferedImage currentImage;
     private File currentFile;
+    private ImageService imageService;
 
     @FXML ImageView imageView;
+
+    // bind to disable button property
     private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
     public BooleanProperty emptySelectionProperty() {
         return emptySelection;
@@ -46,6 +47,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 .register(this);
         MainModel.getInstance()
                 .addSelectedFileListener((observable, oldValue, newValue) -> loadImage(newValue));
+
+        imageService = MainModel.getInstance().getImageService();
 
         //imageView.fitWidthProperty().bind(imageView.getScene())
     }
@@ -66,6 +69,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
     public void zoomIn(ActionEvent e) {
+        System.out.println("ACTION EVENT ZOOM IN");
         zoomIn(new ZoomInEvent());
     }
 
@@ -100,13 +104,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     @Subscribe
     public void blackWhite(BlackWhiteEvent e) {
-        System.out.println("BlackAndWhite");
-        ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
-        ImageConverter imageToConvert = new ImageConverter(imageToEdit);
-        imageToConvert.convertToGray32();
-        currentImage=imageToEdit.getBufferedImage();
+        currentImage = imageService.greyScale(currentImage);
         imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-
     }
 
     public void saveChanges(ActionEvent e) {

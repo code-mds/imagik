@@ -15,7 +15,7 @@ public class MainModel {
     private StringProperty filterProperty = new SimpleStringProperty();
     private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
     private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
-
+    private ImageService imageService = new ImageService();
 
     private MainModel() { }
 
@@ -48,5 +48,9 @@ public class MainModel {
 
     public void setFilter(String filter) {
         filterProperty.setValue(filter);
+    }
+
+    public ImageService getImageService() {
+        return imageService;
     }
 }

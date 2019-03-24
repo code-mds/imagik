@@ -30,17 +30,21 @@ public class MetadataController implements Initializable {
 
     private void loadMetadata(File input) {
         try {
-            fileName.textProperty().setValue(input.getName());
+            imageMetadataList.clear();
 
-            Metadata metadata = ImageMetadataReader.readMetadata(input);
-            updateMetadataList(metadata);
+            String name = "";
+            if(input != null) {
+                name = input.getName();
+                Metadata metadata = ImageMetadataReader.readMetadata(input);
+                updateMetadataList(metadata);
+            }
+            fileName.textProperty().setValue(name);
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();
         }
     }
 
     private void updateMetadataList(Metadata metadata) {
-        imageMetadataList.clear();
         for (Directory directory : metadata.getDirectories()) {
             for (Tag tag : directory.getTags()) {
                 ImageMetadata imageMetadata = new ImageMetadata(tag.getDirectoryName(), tag.getTagName(), tag.getDescription());

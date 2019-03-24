@@ -7,14 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import model.ImageService;
 import model.MainModel;
 
 import java.io.File;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 
 public class ThumbnailController implements Initializable {
@@ -23,15 +21,16 @@ public class ThumbnailController implements Initializable {
     @FXML private ListView<File> thumbListView;
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
     private final FilteredList<File> filteredImageList = new FilteredList<>(imageList);
-    private final Map<File, Image> imageCache = new HashMap<>();
+
+    private ImageService imageService;
+    private MainModel mainModel;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        MainModel.getInstance()
-                .addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
-
-        MainModel.getInstance()
-                .addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
+        mainModel = MainModel.getInstance();
+        mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
+        mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
+        imageService = mainModel.getImageService();
 
         thumbListView.setItems(filteredImageList);
 
@@ -49,16 +48,9 @@ public class ThumbnailController implements Initializable {
                     setText(null);
                     setGraphic(null);
                 } else {
-                    Image image;
-                    if(!imageCache.containsKey(file)) {
-                        image = getThumbnail(file);
-                        imageCache.put(file, image);
-                    } else {
-                        image = imageCache.get(file);
-                    }
                     imageView.fitHeightProperty().setValue(THUMB_SIZE);
                     imageView.fitWidthProperty().setValue(THUMB_SIZE);
-                    imageView.setImage(image);
+                    imageView.setImage(imageService.getJavaFXImage(file));
 
                     setText(file.getName());
                     setGraphic(imageView);
@@ -69,11 +61,6 @@ public class ThumbnailController implements Initializable {
 
     private void filterList(String filter) {
         filteredImageList.setPredicate(file -> file.getName().contains(filter));
-    }
-
-    private Image getThumbnail(File file) {
-        String uri = file.toURI().toString();
-        return new Image(uri);
     }
 
     private boolean acceptExtension(String name) {
