@@ -91,12 +91,21 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 //        imageView.setFitWidth(imageView.getFitWidth() * ZOOM_FACTOR);
     }
 
-    public void rotateLeft(ActionEvent e) {
+    public void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
     }
-
-    public void rotateRight(ActionEvent e) {
+    @Subscribe
+    public void rotateLeft(RotateLeftEvent e){
+        currentImage = imageService.rotateLeft(currentImage);
+        imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
     }
-
+    public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent());
+    }
+    @Subscribe
+    public void rotateRight(RotateRightEvent e){
+        System.out.println("ROTATE RIGHT");
+        currentImage = imageService.rotateRight(currentImage);
+        imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+    }
     public void resize(ActionEvent e) {
     }
 
