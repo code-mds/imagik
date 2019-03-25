@@ -30,7 +30,7 @@
 
             <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
 
-            <Button mnemonicParsing="false" onAction="#resize" disable="${controller.emptySelection}">
+            <Button mnemonicParsing="false" onAction="#resize" disable="true">
                 <tooltip><Tooltip text="Scala" /></tooltip>
                 <graphic>
                     <FontAwesomeIcon iconName="COMPRESS" size="1.5em" />
@@ -63,7 +63,7 @@
                     <FontAwesomeIcon iconName="ARROW_CIRCLE_LEFT" size="1.5em" />
                 </graphic>
             </Button>
-            <Button mnemonicParsing="false" onAction="#saveChanges" disable="${controller.emptySelection}">
+            <Button mnemonicParsing="false" onAction="#saveChanges" disable="true">
                 <tooltip><Tooltip text="%button.save_as" /></tooltip>
                 <graphic>
                     <FontAwesomeIcon iconName="SAVE" size="1.5em" />
@@ -73,7 +73,7 @@
         </ToolBar>
 
         <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" VBox.vgrow="SOMETIMES">
-            <ImageView fx:id="imageView" fitHeight="${scrollPane.height}" fitWidth="${scrollPane.width}" preserveRatio="true" />
+            <ImageView fx:id="imageView" preserveRatio="true" />
         </ScrollPane>
 
     </VBox>

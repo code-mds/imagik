@@ -50,7 +50,7 @@ public class ThumbnailController implements Initializable {
                 } else {
                     imageView.fitHeightProperty().setValue(THUMB_SIZE);
                     imageView.fitWidthProperty().setValue(THUMB_SIZE);
-                    imageView.setImage(imageService.getJavaFXImage(file));
+                    imageView.setImage(imageService.getThumbnail(file, THUMB_SIZE));
 
                     setText(file.getName());
                     setGraphic(imageView);

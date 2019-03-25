@@ -10,6 +10,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import model.ImageService;
@@ -24,12 +25,16 @@ import java.util.ResourceBundle;
 import java.awt.image.BufferedImage;
 
 public class ContentAreaController implements Initializable, EventSubscriber {
-    private static final float ZOOM_FACTOR = 0.1f;
+    private static final double ZOOM_FACTOR = 0.1;
+    private static final double NO_ZOOM = 1.0;
+
+    private double currentZoom = NO_ZOOM;
     private BufferedImage currentImage;
     private File currentFile;
     private ImageService imageService;
 
     @FXML ImageView imageView;
+    @FXML ScrollPane scrollPane;
 
     // bind to disable button property
     private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
@@ -49,8 +54,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 .addSelectedFileListener((observable, oldValue, newValue) -> loadImage(newValue));
 
         imageService = MainModel.getInstance().getImageService();
-
-        //imageView.fitWidthProperty().bind(imageView.getScene())
     }
 
     private void loadImage(File file) {
@@ -61,6 +64,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             if(file != null) {
                 currentImage = ImageIO.read(currentFile);
                 image = SwingFXUtils.toFXImage(currentImage, null);
+
+                currentZoom = Math.min(scrollPane.getWidth() / image.getWidth(), NO_ZOOM);
+
+                imageView.fitWidthProperty().bind(scrollPane.widthProperty());
+                imageView.fitHeightProperty().bind(scrollPane.heightProperty());
             }
             imageView.imageProperty().setValue(image);
         } catch (IOException e) {
@@ -79,16 +87,22 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     @Subscribe
     public void zoomIn(ZoomInEvent e) {
-        System.out.println("ZOOM IN ACTION");
-//        imageView.setFitHeight(imageView.getFitHeight() / ZOOM_FACTOR);
-//        imageView.setFitWidth(imageView.getFitWidth() * ZOOM_FACTOR);
+        imageView.fitWidthProperty().unbind();
+        imageView.fitHeightProperty().unbind();
+
+        currentZoom = Math.min(currentZoom + ZOOM_FACTOR, NO_ZOOM);
+        imageView.setFitHeight(currentImage.getHeight() * currentZoom);
+        imageView.setFitWidth(currentImage.getWidth() * currentZoom);
     }
 
     @Subscribe
     public void zoomOut(ZoomOutEvent e) {
-        System.out.println("ZOOM OUT ACTION");
-//        imageView.setFitHeight(imageView.getFitHeight() * ZOOM_FACTOR);
-//        imageView.setFitWidth(imageView.getFitWidth() * ZOOM_FACTOR);
+        imageView.fitWidthProperty().unbind();
+        imageView.fitHeightProperty().unbind();
+
+        currentZoom = Math.max(currentZoom - ZOOM_FACTOR, ZOOM_FACTOR);
+        imageView.setFitHeight(currentImage.getHeight() * currentZoom);
+        imageView.setFitWidth(currentImage.getWidth() * currentZoom);
     }
 
     public void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
