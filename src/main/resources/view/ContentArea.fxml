@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.ToggleButton?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContentAreaController">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
@@ -37,52 +39,67 @@
 
             <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
 
-            <Button mnemonicParsing="false" onAction="#resize" disable="true">
-                <tooltip><Tooltip text="Scala" /></tooltip>
+            <ToggleButton text="Edit" disable="${controller.emptySelection}" fx:id="editButton" >
+                <tooltip><Tooltip text="Edit" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="COMPRESS" size="1.3em" />
+                    <FontAwesomeIcon iconName="PENCIL" size="1.3em" />
                 </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#blackWhite" disable="${controller.emptySelection}">
-                <tooltip><Tooltip text="Bianco/Nero" /></tooltip>
-                <graphic>
-                    <FontAwesomeIcon iconName="ADJUST" size="1.3em" />
-                </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#rotateLeft" disable="${controller.emptySelection}">
-                <tooltip><Tooltip text="Routa a sinstra" /></tooltip>
-                <graphic>
-                    <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
-                </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#rotateRight" disable="${controller.emptySelection}">
-                <tooltip><Tooltip text="Ruota a destra" /></tooltip>
-                <graphic>
-                    <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
-                </graphic>
-            </Button>
+            </ToggleButton>
 
-            <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
-
-            <Button mnemonicParsing="false" onAction="#resetChanges" disable="${controller.emptySelection}">
-                <tooltip><Tooltip text="Reset" /></tooltip>
-                <graphic>
-                    <FontAwesomeIcon iconName="ARROW_CIRCLE_O_LEFT" size="1.3em" />
-                </graphic>
-            </Button>
-            <Button mnemonicParsing="false" onAction="#saveChanges" disable="true">
-                <tooltip><Tooltip text="%button.save_as" /></tooltip>
-                <graphic>
-
-                    <FontAwesomeIcon iconName="SAVE" size="1.3em" />
-                </graphic>
-            </Button>
 
         </ToolBar>
 
-        <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" VBox.vgrow="SOMETIMES">
-            <ImageView fx:id="imageView" preserveRatio="true" />
-        </ScrollPane>
+        <HBox VBox.vgrow="SOMETIMES">
+            <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" HBox.hgrow="SOMETIMES">
+                <ImageView fx:id="imageView" preserveRatio="true" />
+            </ScrollPane>
+            <VBox fx:id="editPane" visible="${editButton.selected}" spacing="10" prefWidth="30">
+
+
+                <Button mnemonicParsing="false" onAction="#blackWhite" disable="${controller.emptySelection}">
+                    <tooltip><Tooltip text="Bianco/Nero" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ADJUST" size="1.3em" />
+                    </graphic>
+                </Button>
+
+                <Button mnemonicParsing="false" onAction="#resize" disable="true"
+                        GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <tooltip><Tooltip text="Scala" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="COMPRESS" size="1.3em" />
+                    </graphic>
+                </Button>
+
+                <Button mnemonicParsing="false" onAction="#rotateLeft" disable="${controller.emptySelection}">
+                    <tooltip><Tooltip text="Ruota a sinstra" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
+                    </graphic>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#rotateRight" disable="${controller.emptySelection}">
+                    <tooltip><Tooltip text="Ruota a destra" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
+                    </graphic>
+                </Button>
+
+                <Button mnemonicParsing="false" onAction="#resetChanges" disable="${controller.emptySelection}">
+                    <tooltip><Tooltip text="Reset" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ARROW_CIRCLE_O_LEFT" size="1.3em" />
+                    </graphic>
+                </Button>
+                <Button mnemonicParsing="false" onAction="#saveChanges" disable="true"
+                        GridPane.rowIndex="4" GridPane.columnIndex="2">
+                    <tooltip><Tooltip text="%button.save_as" /></tooltip>
+                    <graphic>
+
+                        <FontAwesomeIcon iconName="SAVE" size="1.3em" />
+                    </graphic>
+                </Button>
+            </VBox>
+        </HBox>
 
     </VBox>
 </AnchorPane>
