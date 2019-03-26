@@ -14,17 +14,24 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContentAreaController">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
+            <Button mnemonicParsing="false" onAction="#zoomReset" disable="${controller.emptySelection}" text="1:1" >
+                <tooltip><Tooltip text="Zoom 1:1" /></tooltip>
+            </Button>
+
             <Button mnemonicParsing="false" onAction="#zoomIn" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Zoom In" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="SEARCH_PLUS" size="1.5em" />
+                    <FontAwesomeIcon iconName="SEARCH_PLUS" size="1.3em" />
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#zoomOut" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Zoom Out" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="SEARCH_MINUS" size="1.5em" />
+                    <FontAwesomeIcon iconName="SEARCH_MINUS" size="1.3em" />
                 </graphic>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#zoomFit" disable="${controller.emptySelection}" text="Fit">
+                <tooltip><Tooltip text="Zoom Fit" /></tooltip>
             </Button>
 
 
@@ -33,25 +40,25 @@
             <Button mnemonicParsing="false" onAction="#resize" disable="true">
                 <tooltip><Tooltip text="Scala" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="COMPRESS" size="1.5em" />
+                    <FontAwesomeIcon iconName="COMPRESS" size="1.3em" />
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#blackWhite" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Bianco/Nero" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="ADJUST" size="1.5em" />
+                    <FontAwesomeIcon iconName="ADJUST" size="1.3em" />
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#rotateLeft" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Routa a sinstra" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.5em" />
+                    <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#rotateRight" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Ruota a destra" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.5em" />
+                    <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
                 </graphic>
             </Button>
 
@@ -60,13 +67,14 @@
             <Button mnemonicParsing="false" onAction="#resetChanges" disable="${controller.emptySelection}">
                 <tooltip><Tooltip text="Reset" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="ARROW_CIRCLE_LEFT" size="1.5em" />
+                    <FontAwesomeIcon iconName="ARROW_CIRCLE_O_LEFT" size="1.3em" />
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" onAction="#saveChanges" disable="true">
                 <tooltip><Tooltip text="%button.save_as" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="SAVE" size="1.5em" />
+
+                    <FontAwesomeIcon iconName="SAVE" size="1.3em" />
                 </graphic>
             </Button>
 

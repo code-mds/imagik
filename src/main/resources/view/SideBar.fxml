@@ -19,7 +19,7 @@
             <Button minWidth="-Infinity" onAction="#selectFolder" >
                 <tooltip><Tooltip text="Open Folder" /></tooltip>
                 <graphic>
-                    <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" size="1.5em" styleClass="toolbarButton"/>
+                    <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" size="1.3em" styleClass="toolbarButton"/>
                 </graphic>
             </Button>
 

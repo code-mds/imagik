@@ -64,11 +64,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             if(file != null) {
                 currentImage = ImageIO.read(currentFile);
                 image = SwingFXUtils.toFXImage(currentImage, null);
-
-                currentZoom = Math.min(scrollPane.getWidth() / image.getWidth(), NO_ZOOM);
-
-                imageView.fitWidthProperty().bind(scrollPane.widthProperty());
-                imageView.fitHeightProperty().bind(scrollPane.heightProperty());
+                zoomFit(new ZoomFitEvent());
             }
             imageView.imageProperty().setValue(image);
         } catch (IOException e) {
@@ -85,14 +81,43 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         zoomOut(new ZoomOutEvent());
     }
 
+    public void zoomReset(ActionEvent event) {
+        zoomReset(new ZoomResetEvent());
+    }
+    public void zoomFit(ActionEvent event) {
+        zoomFit(new ZoomFitEvent());
+    }
+
+    @Subscribe
+    public void zoomFit(ZoomFitEvent e) {
+        currentZoom = Math.min(scrollPane.getWidth() / currentImage.getWidth(), NO_ZOOM);
+
+        imageView.fitWidthProperty().bind(scrollPane.widthProperty());
+        imageView.fitHeightProperty().bind(scrollPane.heightProperty());
+    }
+
+    @Subscribe
+    public void zoomReset(ZoomResetEvent e) {
+        imageView.fitWidthProperty().unbind();
+        imageView.fitHeightProperty().unbind();
+
+        currentZoom = NO_ZOOM;
+        updateImageView();
+    }
+
+    private void updateImageView() {
+        imageView.setFitHeight(currentImage.getHeight() * currentZoom);
+        imageView.setFitWidth(currentImage.getWidth() * currentZoom);
+    }
+
+
     @Subscribe
     public void zoomIn(ZoomInEvent e) {
         imageView.fitWidthProperty().unbind();
         imageView.fitHeightProperty().unbind();
 
         currentZoom = Math.min(currentZoom + ZOOM_FACTOR, NO_ZOOM);
-        imageView.setFitHeight(currentImage.getHeight() * currentZoom);
-        imageView.setFitWidth(currentImage.getWidth() * currentZoom);
+        updateImageView();
     }
 
     @Subscribe
@@ -101,8 +126,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         imageView.fitHeightProperty().unbind();
 
         currentZoom = Math.max(currentZoom - ZOOM_FACTOR, ZOOM_FACTOR);
-        imageView.setFitHeight(currentImage.getHeight() * currentZoom);
-        imageView.setFitWidth(currentImage.getWidth() * currentZoom);
+        updateImageView();
     }
 
     public void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
