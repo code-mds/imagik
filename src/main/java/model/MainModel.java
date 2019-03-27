@@ -1,9 +1,6 @@
 package model;
 
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +11,8 @@ public class MainModel {
     // single instance
     private static MainModel instance;
 
+    private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
+    private BooleanProperty showEditPane = new SimpleBooleanProperty(false);
     private StringProperty filterProperty = new SimpleStringProperty();
     private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
     //private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
@@ -62,5 +61,14 @@ public class MainModel {
 
     public ObservableList<File> getSelectedFiles() {
         return selectedFiles;
+    }
+
+
+    public BooleanProperty emptySelectionProperty() {
+        return emptySelection;
+    }
+
+    public BooleanProperty showEditPaneProperty() {
+        return showEditPane;
     }
 }

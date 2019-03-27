@@ -2,10 +2,7 @@ package controller;
 
 import com.google.common.eventbus.Subscribe;
 import event.*;
-import ij.ImagePlus;
-import ij.process.ImageConverter;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -39,21 +36,30 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @FXML ScrollPane scrollPane;
 
     // bind to disable button property
-    private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
     public BooleanProperty emptySelectionProperty() {
-        return emptySelection;
+        return MainModel.getInstance().emptySelectionProperty();
     }
     public boolean getEmptySelection()
     {
-        return emptySelection.get();
+        return emptySelectionProperty().get();
+    }
+
+    public BooleanProperty showEditPaneProperty() {
+        return MainModel.getInstance().showEditPaneProperty();
+    }
+    public boolean getShowEditPane()
+    {
+        return showEditPaneProperty().get();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance()
                 .register(this);
-        MainModel.getInstance().getSelectedFiles().addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
 
+        MainModel.getInstance()
+                .getSelectedFiles()
+                .addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
 
         imageService = MainModel.getInstance().getImageService();
     }
@@ -66,8 +72,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }else{
             try {
                 Image image = null;
-                File currentFile =  selectedFiles.get(0);;
-                emptySelection.set(currentFile == null);
+                File currentFile =  selectedFiles.get(0);
+                emptySelectionProperty().set(currentFile == null);
                 currentImage = ImageIO.read(currentFile);
                 image = SwingFXUtils.toFXImage(currentImage, null);
                 zoomFit(new ZoomFitEvent());
@@ -79,21 +85,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     }
 
-    public void zoomIn(ActionEvent e) {
-        System.out.println("ACTION EVENT ZOOM IN");
-        zoomIn(new ZoomInEvent());
-    }
-
-    public void zoomOut(ActionEvent e) {
-        zoomOut(new ZoomOutEvent());
-    }
-
-    public void zoomReset(ActionEvent event) {
-        zoomReset(new ZoomResetEvent());
-    }
-    public void zoomFit(ActionEvent event) {
-        zoomFit(new ZoomFitEvent());
-    }
 
     @Subscribe
     public void zoomFit(ZoomFitEvent e) {

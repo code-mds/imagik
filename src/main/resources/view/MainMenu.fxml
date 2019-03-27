@@ -3,30 +3,71 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.MainMenuController"
-            prefHeight="18.0" prefWidth="600.0"
-            style="-fx-background-color: #BF3333; -fx-border-color: black;">
-    <MenuBar useSystemMenuBar="true"
-             AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-             AnchorPane.topAnchor="0.0">
-        <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Open" onAction="#openFolder"/>
-            <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
-            <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="%menu.view">
-            <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
-            <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="%menu.image">
-            <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#rotateLeft"/>
-            <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
-            <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
-        </Menu>
-        <Menu mnemonicParsing="false" text="%menu.help">
-            <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
-        </Menu>
-    </MenuBar>
+            prefHeight="18.0" prefWidth="600.0">
+    <ToolBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button minWidth="-Infinity" onAction="#selectFolder" >
+            <tooltip><Tooltip text="Open Folder" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" size="1.3em" styleClass="toolbarButton"/>
+            </graphic>
+        </Button>
+
+        <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+        <Button mnemonicParsing="false" onAction="#zoomReset" disable="${controller.emptySelection}" text="1:1" >
+            <tooltip><Tooltip text="Zoom 1:1" /></tooltip>
+        </Button>
+
+        <Button mnemonicParsing="false" onAction="#zoomIn" disable="${controller.emptySelection}">
+            <tooltip><Tooltip text="Zoom In" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="SEARCH_PLUS" size="1.3em" />
+            </graphic>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#zoomOut" disable="${controller.emptySelection}">
+            <tooltip><Tooltip text="Zoom Out" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="SEARCH_MINUS" size="1.3em" />
+            </graphic>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#zoomFit" disable="${controller.emptySelection}">
+            <tooltip><Tooltip text="Zoom Fit" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="EXPAND" size="1.3em" />
+            </graphic>
+        </Button>
+
+
+        <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+        <ToggleButton disable="${controller.emptySelection}" fx:id="editButton" >
+            <tooltip><Tooltip text="Edit" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="PENCIL" size="1.3em" />
+            </graphic>
+        </ToggleButton>
+
+        <MenuButton>
+            <tooltip><Tooltip text="Main Menu" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="BARS" size="1.3em" />
+            </graphic>
+            <items>
+                <MenuItem mnemonicParsing="false" text="Open" onAction="#selectFolder"/>
+                <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
+                <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
+                <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
+                <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
+                <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#rotateLeft"/>
+                <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
+                <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
+                <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
+            </items>
+        </MenuButton>
+
+    </ToolBar>
 </AnchorPane>
