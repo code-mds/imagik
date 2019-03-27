@@ -57,5 +57,6 @@ public class ImageService {
             currentImages.add(serviceSelected.apply(passedImages.get(i)));
         }
         return currentImages;
+
     }
 }
