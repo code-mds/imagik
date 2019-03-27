@@ -6,6 +6,7 @@ import com.drew.metadata.Directory;
 import com.drew.metadata.Metadata;
 import com.drew.metadata.Tag;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import model.MainModel;
 
 import java.io.*;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MetadataController implements Initializable {
@@ -25,20 +27,24 @@ public class MetadataController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         tableView.setItems(imageMetadataList);
-        MainModel.getInstance().addSelectedFileListener((observable, oldValue, newValue) -> loadMetadata(newValue));
+        MainModel.getInstance().getSelectedFiles().addListener((ListChangeListener.Change<? extends File> l)-> loadMetadata( MainModel.getInstance().getSelectedFiles()));
     }
 
-    private void loadMetadata(File input) {
+    private void loadMetadata(List<File> inputList) {
         try {
-            imageMetadataList.clear();
-
-            String name = "";
-            if(input != null) {
-                name = input.getName();
-                Metadata metadata = ImageMetadataReader.readMetadata(input);
-                updateMetadataList(metadata);
+            if(inputList.size()!=1){
+                imageMetadataList.clear();
+            } else{
+                imageMetadataList.clear();
+                String name = "";
+                if(inputList.get(0) != null) {
+                    name = inputList.get(0).getName();
+                    Metadata metadata = ImageMetadataReader.readMetadata(inputList.get(0));
+                    updateMetadataList(metadata);
+                }
+                fileName.textProperty().setValue(name);
             }
-            fileName.textProperty().setValue(name);
+
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();
         }

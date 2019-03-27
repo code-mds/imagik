@@ -6,8 +6,6 @@ import ij.process.ImageConverter;
 
 import javafx.scene.image.Image;
 
-
-
 import java.awt.image.BufferedImage;
 
 import java.io.File;

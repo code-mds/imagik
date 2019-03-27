@@ -6,6 +6,7 @@ import ij.ImagePlus;
 import ij.process.ImageConverter;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.awt.image.BufferedImage;
 
@@ -30,7 +32,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     private double currentZoom = NO_ZOOM;
     private BufferedImage currentImage;
-    private File currentFile;
+    private List<File> selectedFiles;
     private ImageService imageService;
 
     @FXML ImageView imageView;
@@ -50,26 +52,31 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance()
                 .register(this);
-        MainModel.getInstance()
-                .addSelectedFileListener((observable, oldValue, newValue) -> loadImage(newValue));
+        MainModel.getInstance().getSelectedFiles().addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
+
 
         imageService = MainModel.getInstance().getImageService();
     }
 
-    private void loadImage(File file) {
-        try {
-            Image image = null;
-            currentFile = file;
-            emptySelection.set(currentFile == null);
-            if(file != null) {
+    private void loadImage(List<File> selectedFiles) {
+        this.selectedFiles=selectedFiles;
+        if(selectedFiles.size()!=1){
+            // La selezione multipla non mostra nessuna immagine
+            imageView.imageProperty().setValue(null);
+        }else{
+            try {
+                Image image = null;
+                File currentFile =  selectedFiles.get(0);;
+                emptySelection.set(currentFile == null);
                 currentImage = ImageIO.read(currentFile);
                 image = SwingFXUtils.toFXImage(currentImage, null);
                 zoomFit(new ZoomFitEvent());
+                imageView.imageProperty().setValue(image);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            imageView.imageProperty().setValue(image);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
     }
 
     public void zoomIn(ActionEvent e) {
@@ -165,7 +172,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void resetChanges(ResetChangesEvent resetChangesEvent) {
         // TO DO private o public ?
-        loadImage(currentFile);
+        loadImage(selectedFiles);
     }
 
 }

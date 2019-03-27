@@ -1,12 +1,14 @@
 package controller;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.image.ImageView;
 import model.ImageService;
 import model.MainModel;
@@ -31,13 +33,16 @@ public class ThumbnailController implements Initializable {
         mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
         imageService = mainModel.getImageService();
-
+        thumbListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         thumbListView.setItems(filteredImageList);
-
         thumbListView.getSelectionModel()
+                .getSelectedItems()
+                .addListener((ListChangeListener.Change<? extends File> l) -> MainModel.getInstance().setSelectedFiles(l.getList()));
+
+        /*thumbListView.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> MainModel.getInstance().setSelectedFile(newValue));
-
+        */
         thumbListView.setCellFactory(param -> new ListCell<File>() {
             private ImageView imageView = new ImageView();
 
