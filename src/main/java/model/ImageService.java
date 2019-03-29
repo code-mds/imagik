@@ -5,11 +5,14 @@ import ij.ImagePlus;
 import ij.process.ImageConverter;
 
 import javafx.scene.image.Image;
+import org.apache.commons.io.FilenameUtils;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 
 import java.io.File;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -35,26 +38,29 @@ public class ImageService {
         }
         return image;
     }
-    public BufferedImage rotateLeft(BufferedImage currentImage) {
+    public static BufferedImage rotateLeft(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         return imageToEdit.getProcessor().rotateLeft().getBufferedImage();
     }
-    public BufferedImage rotateRight(BufferedImage currentImage){
+    public static BufferedImage rotateRight(BufferedImage currentImage){
         ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
         return imageToEdit.getProcessor().rotateRight().getBufferedImage();
     }
-    public BufferedImage greyScale(BufferedImage currentImage) {
+    public static BufferedImage greyScale(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
         ImageConverter imageToConvert = new ImageConverter(imageToEdit);
         imageToConvert.convertToGray32();
         return imageToEdit.getBufferedImage();
     }
-    public List<BufferedImage> serviceParser(List<BufferedImage> passedImages, Function<BufferedImage,BufferedImage> serviceSelected){
-        List<BufferedImage> currentImages = new ArrayList<BufferedImage>();
-        for(int i=0;i<passedImages.size();i++){
-            currentImages.add(serviceSelected.apply(passedImages.get(i)));
+    public void multiSelectionImageEditor(List<File> passedFiles, Function<BufferedImage,BufferedImage> serviceSelected){
+        for(int i=0;i<passedFiles.size();i++){
+            try {
+                File currentFile = passedFiles.get(i);
+                BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile));
+                ImageIO.write(currentImage,FilenameUtils.getExtension(currentFile.getName()),currentFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return currentImages;
-
     }
 }

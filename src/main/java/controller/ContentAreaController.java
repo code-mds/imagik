@@ -130,16 +130,29 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
     @Subscribe
     public void rotateLeft(RotateLeftEvent e){
-        currentImage = imageService.rotateLeft(currentImage);
-        imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        if(selectedFiles.size() == 1){
+            currentImage = imageService.rotateLeft(currentImage);
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
+            imageService.multiSelectionImageEditor(selectedFiles,ImageService::rotateLeft);
+        }else{
+            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
+        }
+
     }
+
     public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent());
     }
     @Subscribe
     public void rotateRight(RotateRightEvent e){
-        System.out.println("ROTATE RIGHT");
-        currentImage = imageService.rotateRight(currentImage);
-        imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        if(selectedFiles.size() == 1){
+            currentImage = imageService.rotateRight(currentImage);
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
+            imageService.multiSelectionImageEditor(selectedFiles,ImageService::rotateRight);
+        }else{
+            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
+        }
     }
     public void resize(ActionEvent e) {
     }
@@ -148,8 +161,14 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     @Subscribe
     public void blackWhite(BlackWhiteEvent e) {
-        currentImage = imageService.greyScale(currentImage);
-        imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        if(selectedFiles.size() == 1){
+            currentImage = imageService.greyScale(currentImage);
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
+            imageService.multiSelectionImageEditor(selectedFiles,ImageService::greyScale);
+        }else{
+            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
+        }
     }
 
     public void saveChanges(ActionEvent e) {
