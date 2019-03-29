@@ -15,6 +15,9 @@ import model.MainModel;
 
 import java.io.File;
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ThumbnailController implements Initializable {
@@ -26,6 +29,11 @@ public class ThumbnailController implements Initializable {
 
     private ImageService imageService;
     private MainModel mainModel;
+
+    private DateFormat dateFormatter = DateFormat.getDateTimeInstance(
+            DateFormat.SHORT,
+            DateFormat.SHORT,
+            Locale.getDefault());
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -43,7 +51,7 @@ public class ThumbnailController implements Initializable {
                 .selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> MainModel.getInstance().setSelectedFile(newValue));
         */
-        thumbListView.setCellFactory(param -> new ListCell<File>() {
+        thumbListView.setCellFactory(param -> new ListCell<>() {
             private ImageView imageView = new ImageView();
 
             @Override
@@ -57,15 +65,29 @@ public class ThumbnailController implements Initializable {
                     imageView.fitWidthProperty().setValue(THUMB_SIZE);
                     imageView.setImage(imageService.getThumbnail(file, THUMB_SIZE));
 
-                    setText(file.getName());
+                    String dateModified = dateFormatter.format(new Date(file.lastModified()));
+                    String text = String.format("%s\n%s\n%s",
+                            file.getName(),
+                            dateModified,
+                            humanReadableByteCount(file.length(), true));
+
+                    setText(text);
                     setGraphic(imageView);
                 }
             }
         });
     }
 
+    public static String humanReadableByteCount(long bytes, boolean si) {
+        int unit = si ? 1000 : 1024;
+        if (bytes < unit) return bytes + " B";
+        int exp = (int) (Math.log(bytes) / Math.log(unit));
+        String pre = (si ? "kMGTPE" : "KMGTPE").charAt(exp-1) + (si ? "" : "i");
+        return String.format("%.1f %sB", bytes / Math.pow(unit, exp), pre);
+    }
+
     private void filterList(String filter) {
-        filteredImageList.setPredicate(file -> file.getName().contains(filter));
+        filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter));
     }
 
     private boolean acceptExtension(String name) {
@@ -80,40 +102,4 @@ public class ThumbnailController implements Initializable {
         File[] files = dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
         imageList.setAll(files);
     }
-
-
-//    private Image getScaledImage(File file){
-//        try {
-//            BufferedImage img2;
-//
-//            BufferedImage sourceImage = ImageIO.read(file);
-//            int width = sourceImage.getWidth();
-//            int height = sourceImage.getHeight();
-//
-//            if(width>height){
-//                float extraSize = height-100;
-//                float percentHight = (extraSize/height)*100;
-//                float percentWidth = width - ((width/100)*percentHight);
-//                BufferedImage img = new BufferedImage((int)percentWidth, 100, BufferedImage.TYPE_INT_RGB);
-//                java.awt.Image scaledImage = sourceImage.getScaledInstance((int)percentWidth, 100, java.awt.Image.SCALE_SMOOTH);
-//                img.createGraphics().drawImage(scaledImage, 0, 0, null);
-//                img2 = img.getSubimage((int)((percentWidth-100)/2), 0, 100, 100);
-//
-//            }else{
-//                float extraSize=    width-100;
-//                float percentWidth = (extraSize/width)*100;
-//                float  percentHight = height - ((height/100)*percentWidth);
-//                BufferedImage img = new BufferedImage(100, (int)percentHight, BufferedImage.TYPE_INT_RGB);
-//                java.awt.Image scaledImage = sourceImage.getScaledInstance(100,(int)percentHight, java.awt.Image.SCALE_SMOOTH);
-//                img.createGraphics().drawImage(scaledImage, 0, 0, null);
-//                img2 = img.getSubimage(0, (int)((percentHight-100)/2), 100, 100);
-//            }
-//            Image image = SwingFXUtils.toFXImage(img2, null);
-//            return image;
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        return  null;
-//    }
 }

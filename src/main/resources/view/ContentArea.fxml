@@ -18,7 +18,7 @@
             <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" HBox.hgrow="SOMETIMES">
                 <ImageView fx:id="imageView" preserveRatio="true" />
             </ScrollPane>
-            <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" prefWidth="150">
+            <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" managed="${controller.showEditPane}" prefWidth="150">
                 <Button disable="${controller.emptySelection}" mnemonicParsing="false" onAction="#blackWhite" text="Bianco/Nero" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="Bianco/Nero" /></tooltip>
                     <graphic>
