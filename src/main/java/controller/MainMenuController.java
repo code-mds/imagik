@@ -67,4 +67,8 @@ public class MainMenuController implements Initializable, EventSubscriber {
     public void showAbout(ActionEvent e) {
         EventManager.getInstance().post(new ShowAboutEvent());
     }
+
+    public void blackWhite(ActionEvent actionEvent) {
+        EventManager.getInstance().post(new BlackWhiteEvent());
+    }
 }

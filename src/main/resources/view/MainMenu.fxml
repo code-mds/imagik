@@ -59,12 +59,19 @@
             <items>
                 <MenuItem mnemonicParsing="false" text="Open" onAction="#selectFolder"/>
                 <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
-                <MenuItem mnemonicParsing="false" text="Exit" onAction="#exit"/>
-                <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
-                <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
-                <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#rotateLeft"/>
-                <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
-                <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
+                <SeparatorMenuItem/>
+                <Menu text="Zoom">
+                    <MenuItem mnemonicParsing="false" text="Zoom Reset" onAction="#zoomReset"/>
+                    <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
+                    <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
+                    <MenuItem mnemonicParsing="false" text="Zoom Fit" onAction="#zoomFit"/>
+                </Menu>
+                <Menu text="Edit">
+                    <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#blackWhite"/>
+                    <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
+                    <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
+                </Menu>
+                <SeparatorMenuItem/>
                 <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
             </items>
         </MenuButton>
