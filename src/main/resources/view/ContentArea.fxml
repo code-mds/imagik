@@ -19,7 +19,7 @@
                 <ImageView fx:id="imageView" preserveRatio="true" />
             </ScrollPane>
             <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" managed="${controller.showEditPane}" prefWidth="150">
-                <Button disable="${controller.emptySelection}" mnemonicParsing="false" onAction="#blackWhite" text="%grayscale" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#blackWhite" text="%grayscale" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%grayscale" /></tooltip>
                     <graphic>
                         <FontAwesomeIcon iconName="ADJUST" size="1.3em" />
@@ -28,13 +28,13 @@
 
                 <Separator/>
 
-                <Button disable="${controller.emptySelection}" mnemonicParsing="false" onAction="#rotateLeft" text="%rotate_left" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateLeft" text="%rotate_left" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_left" /></tooltip>
                     <graphic>
                         <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
                     </graphic>
                 </Button>
-                <Button disable="${controller.emptySelection}" mnemonicParsing="false" onAction="#rotateRight" text="%rotate_right" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateRight" text="%rotate_right" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_right" /></tooltip>
                     <graphic>
                         <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
@@ -51,7 +51,7 @@
 
                 <Separator/>
 
-                <Button disable="${controller.emptySelection}" mnemonicParsing="false" onAction="#resetChanges" text="%reset" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resetChanges" text="%reset" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%reset" /></tooltip>
                     <graphic>
                         <FontAwesomeIcon iconName="ARROW_CIRCLE_O_LEFT" size="1.3em" />

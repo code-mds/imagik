@@ -17,21 +17,25 @@ public class MainMenuController implements Initializable, EventSubscriber {
     public ToggleButton editButton;
 
     // bind to disable button property
-    public BooleanProperty emptySelectionProperty() {
-        return MainModel.getInstance().emptySelectionProperty();
+    public BooleanProperty disableEditProperty() {
+        return MainModel.getInstance().disableEditProperty();
     }
-    public boolean getEmptySelection()
+    public boolean getDisableEdit()
     {
-        return emptySelectionProperty().get();
+        return disableEditProperty().get();
+    }
+
+    public BooleanProperty disableZoomProperty() {
+        return MainModel.getInstance().disableZoomProperty();
+    }
+    public boolean getDisableZoom()
+    {
+        return disableZoomProperty().get();
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editButton.selectedProperty().bindBidirectional(MainModel.getInstance().showEditPaneProperty());
-    }
-
-    public void exit(ActionEvent actionEvent) {
-        EventManager.getInstance().post(new ExitEvent());
     }
 
     public void selectFolder(ActionEvent e) {

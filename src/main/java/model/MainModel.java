@@ -11,8 +11,13 @@ public class MainModel {
     // single instance
     private static MainModel instance;
 
+
+    private BooleanProperty disableZoom = new SimpleBooleanProperty(true);
+    private BooleanProperty disableEdit = new SimpleBooleanProperty(true);
     private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
     private BooleanProperty showEditPane = new SimpleBooleanProperty(false);
+
+
     private StringProperty filterProperty = new SimpleStringProperty();
     private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
     //private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
@@ -63,6 +68,12 @@ public class MainModel {
         return selectedFiles;
     }
 
+    public BooleanProperty disableZoomProperty() {
+        return disableZoom;
+    }
+    public BooleanProperty disableEditProperty() {
+        return disableEdit;
+    }
 
     public BooleanProperty emptySelectionProperty() {
         return emptySelection;

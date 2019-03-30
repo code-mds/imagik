@@ -36,12 +36,16 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @FXML ScrollPane scrollPane;
 
     // bind to disable button property
-    public BooleanProperty emptySelectionProperty() {
-        return MainModel.getInstance().emptySelectionProperty();
+    public BooleanProperty disableEditProperty() {
+        return MainModel.getInstance().disableEditProperty();
     }
-    public boolean getEmptySelection()
+    public boolean getDisableEdit()
     {
-        return emptySelectionProperty().get();
+        return disableEditProperty().get();
+    }
+
+    public BooleanProperty disableZoomProperty() {
+        return MainModel.getInstance().disableZoomProperty();
     }
 
     public BooleanProperty showEditPaneProperty() {
@@ -66,13 +70,18 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     private void loadImage(List<File> selectedFiles) {
         this.selectedFiles=selectedFiles;
-        if(selectedFiles.size()!=1){
-            // La selezione multipla non mostra nessuna immagine
-            imageView.imageProperty().setValue(null);
-        }else{
+
+        if(selectedFiles.size() == 0){
+            disableZoomProperty().setValue(true);
+            disableEditProperty().setValue(true);
+        }
+        else if(selectedFiles.size()==1){
             try {
+                disableZoomProperty().setValue(false);
+                disableEditProperty().setValue(false);
+
                 File currentFile =  selectedFiles.get(0);
-                emptySelectionProperty().set(currentFile == null);
+                //emptySelectionProperty().set(currentFile == null);
                 currentImage = ImageIO.read(currentFile);
                 Image image = SwingFXUtils.toFXImage(currentImage, null);
                 zoomFit(new ZoomFitEvent());
@@ -80,6 +89,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }else{
+            disableZoomProperty().setValue(true);
+            disableEditProperty().setValue(false);
+            // La selezione multipla non mostra nessuna immagine
+            imageView.imageProperty().setValue(null);
         }
 
     }
