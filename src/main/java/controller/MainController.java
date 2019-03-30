@@ -1,20 +1,23 @@
 package controller;
 
 import com.google.common.eventbus.Subscribe;
-import event.EventManager;
-import event.ExitEvent;
-import event.EventSubscriber;
-import event.ShowAboutEvent;
+import event.*;
 import javafx.application.Platform;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import model.MainModel;
 
+import java.io.File;
 import java.net.URL;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable, EventSubscriber {
+    public Label currentFolder;
+    public Label totalFiles;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
@@ -41,5 +44,13 @@ public class MainController implements Initializable, EventSubscriber {
         alert.setContentText(content);
 
         alert.showAndWait();
+    }
+
+    @Subscribe
+    public void folderSelected(FolderSelectedEvent e) {
+        File folder = e.getFolder();
+
+        currentFolder.setText(e.getFolder().toString());
+        totalFiles.setText(String.format("%d files", Objects.requireNonNull(folder.list()).length));
     }
 }

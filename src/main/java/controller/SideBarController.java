@@ -2,17 +2,14 @@ package controller;
 
 import com.google.common.eventbus.Subscribe;
 import event.EventManager;
+import event.FolderSelectedEvent;
 import event.SelectFolderEvent;
 import event.EventSubscriber;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
-import javafx.stage.Stage;
 import javafx.stage.Window;
 import model.MainModel;
 
@@ -30,7 +27,6 @@ public class SideBarController implements Initializable, EventSubscriber {
         searchField.textProperty().addListener((obs, old, newVal) -> MainModel.getInstance().setFilter(newVal));
     }
 
-
     @Subscribe
     public void selectFolder(SelectFolderEvent e) {
         Window window = anchorPane.getScene().getWindow();
@@ -39,8 +35,7 @@ public class SideBarController implements Initializable, EventSubscriber {
         if(dir == null || !dir.isDirectory())
             return;
 
+        EventManager.getInstance().post(new FolderSelectedEvent(dir));
         MainModel.getInstance().setSelectedFolder(dir);
-
-        ((Stage)window).setTitle(dir.toString());
     }
 }
