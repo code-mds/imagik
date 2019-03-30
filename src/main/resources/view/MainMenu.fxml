@@ -44,12 +44,20 @@
 
         <Separator />
 
-        <ToggleButton disable="${controller.disableEdit}" fx:id="editButton" >
+        <ToggleButton fx:id="showMetadataButton" >
+            <tooltip><Tooltip text="%show_metadata" /></tooltip>
+            <graphic>
+                <FontAwesomeIcon iconName="CREDIT_CARD" size="1.3em" />
+            </graphic>
+        </ToggleButton>
+        <ToggleButton fx:id="editButton" >
             <tooltip><Tooltip text="%edit" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="PENCIL" size="1.3em" />
             </graphic>
         </ToggleButton>
+
+        <Separator />
 
         <MenuButton>
             <graphic>

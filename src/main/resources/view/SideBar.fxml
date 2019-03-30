@@ -11,9 +11,9 @@
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <TextField fx:id="searchField" promptText="%search" HBox.hgrow="SOMETIMES" />
 
-        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
-            <fx:include source="Thumbnail.fxml" />
-            <fx:include source="Metadata.fxml" />
+        <SplitPane fx:id="splitPane" dividerPositions="1" orientation="VERTICAL">
+            <fx:include source="Thumbnail.fxml" VBox.vgrow="SOMETIMES" />
+            <fx:include fx:id="metadataPane" source="Metadata.fxml" minHeight="0" />
         </SplitPane>
     </VBox>
 

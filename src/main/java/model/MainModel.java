@@ -16,7 +16,9 @@ public class MainModel {
 
     private BooleanProperty disableZoom = new SimpleBooleanProperty(true);
     private BooleanProperty disableEdit = new SimpleBooleanProperty(true);
+
     private BooleanProperty showEditPane = new SimpleBooleanProperty(false);
+    private BooleanProperty showMetadata = new SimpleBooleanProperty(false);
 
     private StringProperty filterProperty = new SimpleStringProperty();
     private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
@@ -68,6 +70,9 @@ public class MainModel {
 
     public BooleanProperty showEditPaneProperty() {
         return showEditPane;
+    }
+    public BooleanProperty showMetadataProperty() {
+        return showMetadata;
     }
 
     public String getLocalizedString(String key) {

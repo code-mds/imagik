@@ -14,6 +14,9 @@ import java.util.ResourceBundle;
 public class MainMenuController implements Initializable, EventSubscriber {
     @FXML
     public ToggleButton editButton;
+    @FXML
+    public ToggleButton showMetadataButton;
+
 
     // bind to disable button property
     public BooleanProperty disableEditProperty() {
@@ -35,6 +38,7 @@ public class MainMenuController implements Initializable, EventSubscriber {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editButton.selectedProperty().bindBidirectional(MainModel.getInstance().showEditPaneProperty());
+        showMetadataButton.selectedProperty().bindBidirectional(MainModel.getInstance().showMetadataProperty());
     }
 
     public void selectFolder(ActionEvent e) {
