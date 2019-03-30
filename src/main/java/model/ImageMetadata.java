@@ -3,7 +3,7 @@ package model;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ImageMetadata {
+public final class ImageMetadata {
     private final StringProperty type;
     private final StringProperty name;
     private final StringProperty value;

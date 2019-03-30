@@ -11,18 +11,17 @@ public class MainModel {
     // single instance
     private static MainModel instance;
 
+    private ImageService imageService = ImageService.build();
+    private ResourceService resourceService = new ResourceService();
 
     private BooleanProperty disableZoom = new SimpleBooleanProperty(true);
     private BooleanProperty disableEdit = new SimpleBooleanProperty(true);
-    private BooleanProperty emptySelection = new SimpleBooleanProperty(true);
     private BooleanProperty showEditPane = new SimpleBooleanProperty(false);
-
 
     private StringProperty filterProperty = new SimpleStringProperty();
     private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
-    //private ObjectProperty<File> selectedFileProperty = new SimpleObjectProperty<>();
-    private ImageService imageService = new ImageService();
     private ObservableList<File> selectedFiles = FXCollections.observableArrayList();
+
     private MainModel() { }
 
     public static MainModel getInstance() {
@@ -32,10 +31,6 @@ public class MainModel {
         return instance;
     }
 
-    /*public void addSelectedFileListener(ChangeListener<File> listener) {
-        instance.selectedFileProperty.addListener(listener);
-    }*/
-
     public void addSelectedFolderListener(ChangeListener<File> listener) {
         instance.selectedFolderProperty.addListener(listener);
     }
@@ -43,10 +38,6 @@ public class MainModel {
     public void addFilterListener(ChangeListener<String> listener) {
         instance.filterProperty.addListener(listener);
     }
-
-    /*public void setSelectedFile(File file) {
-        selectedFileProperty.set(file);
-    }*/
 
     public void setSelectedFolder(File file) {
         selectedFolderProperty.set(file);
@@ -75,11 +66,11 @@ public class MainModel {
         return disableEdit;
     }
 
-    public BooleanProperty emptySelectionProperty() {
-        return emptySelection;
-    }
-
     public BooleanProperty showEditPaneProperty() {
         return showEditPane;
+    }
+
+    public String getLocalizedString(String key) {
+        return resourceService.getLocalizedString(key);
     }
 }

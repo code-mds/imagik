@@ -1,5 +1,9 @@
 package controller;
 
+import com.google.common.eventbus.Subscribe;
+import event.EventManager;
+import event.EventSubscriber;
+import event.FilesChangedEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -20,7 +24,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class ThumbnailController implements Initializable {
+public class ThumbnailController implements Initializable, EventSubscriber {
     private final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final int THUMB_SIZE = 50;
     @FXML private ListView<File> thumbListView;
@@ -35,8 +39,19 @@ public class ThumbnailController implements Initializable {
             DateFormat.SHORT,
             Locale.getDefault());
 
+    @Subscribe
+    public void fileChanged(FilesChangedEvent e) {
+        for (File file : e.getFiles()) {
+            int oldPos = imageList.indexOf(file);
+            imageList.remove(oldPos);
+            imageList.add(oldPos, file);
+        }
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        EventManager.getInstance().register(this);
+
         mainModel = MainModel.getInstance();
         mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));

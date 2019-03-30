@@ -2,12 +2,16 @@ package controller;
 
 import com.google.common.eventbus.Subscribe;
 import event.*;
+import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.awt.image.BufferedImage;
 
@@ -80,8 +85,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 disableZoomProperty().setValue(false);
                 disableEditProperty().setValue(false);
 
-                File currentFile =  selectedFiles.get(0);
-                //emptySelectionProperty().set(currentFile == null);
+                File currentFile = selectedFiles.get(0);
                 currentImage = ImageIO.read(currentFile);
                 Image image = SwingFXUtils.toFXImage(currentImage, null);
                 zoomFit(new ZoomFitEvent());
@@ -145,25 +149,45 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     public void rotateLeft(RotateLeftEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = imageService.rotateLeft(currentImage);
+            currentImage = ImageService.rotateLeft(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
-            imageService.multiSelectionImageEditor(selectedFiles,ImageService::rotateLeft);
+        } else if(selectedFiles.size() > 1 && showBulkChangeDialog()){ //TODO chimare dialog per conferma
+            imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateLeft);
         }else{
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
 
     }
 
-    public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent());
+    boolean showBulkChangeDialog() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+
+        String title = MainModel.getInstance().getLocalizedString("bulk_dialog.title");
+        alert.setTitle(title);
+
+        String text = String.format(MainModel.getInstance().getLocalizedString("bulk_dialog.header"), selectedFiles.size());
+        alert.setHeaderText(text);
+
+        String content = MainModel.getInstance().getLocalizedString("bulk_dialog.content");
+        alert.setContentText(content);
+
+        ListView<File> list = new ListView<>();
+        list.setItems(MainModel.getInstance().getSelectedFiles());
+        alert.getDialogPane().setExpandableContent(list);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        return result.isPresent() && result.get() == ButtonType.OK;
     }
+
+    public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
+
     @Subscribe
     public void rotateRight(RotateRightEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = imageService.rotateRight(currentImage);
+            currentImage = ImageService.rotateRight(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
-            imageService.multiSelectionImageEditor(selectedFiles,ImageService::rotateRight);
+        } else if(selectedFiles.size() > 1 && showBulkChangeDialog()){ //TODO chimare dialog per conferma
+            imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateRight);
         }else{
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
