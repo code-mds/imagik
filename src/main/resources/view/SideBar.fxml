@@ -12,8 +12,8 @@
         <TextField fx:id="searchField" promptText="%search" HBox.hgrow="SOMETIMES" />
 
         <SplitPane fx:id="splitPane" dividerPositions="1" orientation="VERTICAL">
-            <fx:include source="Thumbnail.fxml" VBox.vgrow="SOMETIMES" />
-            <fx:include fx:id="metadataPane" source="Metadata.fxml" minHeight="0" />
+            <fx:include source="Thumbnail.fxml" SplitPane.resizableWithParent="true" />
+            <fx:include fx:id="metadataPane" source="Metadata.fxml" minHeight="0" SplitPane.resizableWithParent="false" />
         </SplitPane>
     </VBox>
 
