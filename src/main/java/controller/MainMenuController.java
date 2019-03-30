@@ -1,6 +1,5 @@
 package controller;
 
-import com.sun.tools.javac.Main;
 import event.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
