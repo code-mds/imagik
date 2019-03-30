@@ -13,7 +13,7 @@
 
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <ToolBar>
-            <Label text="Metadata: " minWidth="-Infinity" />
+            <Label text="%metadata" minWidth="-Infinity" />
             <Label fx:id="fileName"/>
         </ToolBar>
 

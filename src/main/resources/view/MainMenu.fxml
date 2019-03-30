@@ -10,7 +10,7 @@
             prefHeight="18.0" prefWidth="600.0">
     <ToolBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Button minWidth="-Infinity" onAction="#selectFolder" >
-            <tooltip><Tooltip text="Open Folder" /></tooltip>
+            <tooltip><Tooltip text="%open_folder" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" size="1.3em" styleClass="toolbarButton"/>
             </graphic>
@@ -19,60 +19,93 @@
         <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
 
         <Button mnemonicParsing="false" onAction="#zoomReset" disable="${controller.emptySelection}" text="1:1" >
-            <tooltip><Tooltip text="Zoom 1:1" /></tooltip>
+            <tooltip><Tooltip text="%zoom_1_1" /></tooltip>
         </Button>
 
         <Button mnemonicParsing="false" onAction="#zoomIn" disable="${controller.emptySelection}">
-            <tooltip><Tooltip text="Zoom In" /></tooltip>
+            <tooltip><Tooltip text="%zoom_in" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="SEARCH_PLUS" size="1.3em" />
             </graphic>
         </Button>
         <Button mnemonicParsing="false" onAction="#zoomOut" disable="${controller.emptySelection}">
-            <tooltip><Tooltip text="Zoom Out" /></tooltip>
+            <tooltip><Tooltip text="%zoom_out" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="SEARCH_MINUS" size="1.3em" />
             </graphic>
         </Button>
         <Button mnemonicParsing="false" onAction="#zoomFit" disable="${controller.emptySelection}">
-            <tooltip><Tooltip text="Zoom Fit" /></tooltip>
+            <tooltip><Tooltip text="%zoom_fit" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="EXPAND" size="1.3em" />
             </graphic>
         </Button>
 
-
-        <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
-
         <ToggleButton disable="${controller.emptySelection}" fx:id="editButton" >
-            <tooltip><Tooltip text="Edit" /></tooltip>
+            <tooltip><Tooltip text="%edit" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="PENCIL" size="1.3em" />
             </graphic>
         </ToggleButton>
 
         <MenuButton>
-            <tooltip><Tooltip text="Main Menu" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="BARS" size="1.3em" />
             </graphic>
             <items>
-                <MenuItem mnemonicParsing="false" text="Open" onAction="#selectFolder"/>
-                <MenuItem mnemonicParsing="false" text="Save" onAction="#saveChanges"/>
+                <MenuItem mnemonicParsing="false" text="%open_folder" onAction="#selectFolder">
+                    <graphic>
+                        <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" styleClass="toolbarButton"/>
+                    </graphic>
+                </MenuItem>
+
+                <MenuItem mnemonicParsing="false" text="%save_changes" onAction="#saveChanges">
+                    <graphic>
+                        <FontAwesomeIcon iconName="SAVE" />
+                    </graphic>
+                </MenuItem>
+
                 <SeparatorMenuItem/>
-                <Menu text="Zoom">
-                    <MenuItem mnemonicParsing="false" text="Zoom Reset" onAction="#zoomReset"/>
-                    <MenuItem mnemonicParsing="false" text="Zoom Out" onAction="#zoomOut"/>
-                    <MenuItem mnemonicParsing="false" text="Zoom In" onAction="#zoomIn"/>
-                    <MenuItem mnemonicParsing="false" text="Zoom Fit" onAction="#zoomFit"/>
+                <Menu text="%zoom">
+                    <MenuItem mnemonicParsing="false" text="%zoom_1_1" onAction="#zoomReset"/>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_out" onAction="#zoomOut">
+                        <graphic>
+                            <FontAwesomeIcon iconName="SEARCH_MINUS" />
+                        </graphic>
+                    </MenuItem>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_in" onAction="#zoomIn">
+                        <graphic>
+                            <FontAwesomeIcon iconName="SEARCH_PLUS" />
+                        </graphic>
+                    </MenuItem>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_fit" onAction="#zoomFit">
+                        <graphic>
+                            <FontAwesomeIcon iconName="EXPAND" />
+                        </graphic>
+                    </MenuItem>
                 </Menu>
-                <Menu text="Edit">
-                    <MenuItem mnemonicParsing="false" text="%menu.grayscale" onAction="#blackWhite"/>
-                    <MenuItem mnemonicParsing="false" text="%menu.rotate_left" onAction="#rotateLeft"/>
-                    <MenuItem mnemonicParsing="false" text="%menu.rotate_right" onAction="#rotateRight"/>
+                <Menu text="%edit">
+                    <MenuItem mnemonicParsing="false" text="%grayscale" onAction="#blackWhite">
+                        <graphic>
+                            <FontAwesomeIcon iconName="ADJUST" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%rotate_left" onAction="#rotateLeft">
+                        <graphic>
+                            <FontAwesomeIcon iconName="ROTATE_LEFT" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
+                        <graphic>
+                            <FontAwesomeIcon iconName="ROTATE_RIGHT" />
+                        </graphic>
+                    </MenuItem>
                 </Menu>
                 <SeparatorMenuItem/>
-                <MenuItem mnemonicParsing="false" text="About" onAction="#showAbout"/>
+                <MenuItem mnemonicParsing="false" text="%about" onAction="#showAbout"/>
             </items>
         </MenuButton>
 

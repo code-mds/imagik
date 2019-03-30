@@ -13,7 +13,7 @@
 
         <fx:include source="MainMenu.fxml"/>
 
-        <SplitPane dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
             <fx:include source="SideBar.fxml" SplitPane.resizableWithParent="true" />
             <fx:include source="ContentArea.fxml" SplitPane.resizableWithParent="true" />
         </SplitPane>
