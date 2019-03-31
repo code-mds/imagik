@@ -44,14 +44,14 @@
 
         <Separator />
 
-        <ToggleButton fx:id="showMetadataButton" >
-            <tooltip><Tooltip text="%show_metadata" /></tooltip>
-            <graphic>
-                <FontAwesomeIcon iconName="INFO" size="1.3em" />
-            </graphic>
-        </ToggleButton>
-        <Separator />
-        <ToggleButton fx:id="editButton" >
+<!--        <ToggleButton fx:id="showMetadataButton" >-->
+<!--            <tooltip><Tooltip text="%show_metadata" /></tooltip>-->
+<!--            <graphic>-->
+<!--                <FontAwesomeIcon iconName="INFO" size="1.3em" />-->
+<!--            </graphic>-->
+<!--        </ToggleButton>-->
+<!--        <Separator />-->
+        <ToggleButton fx:id="editButton">
             <tooltip><Tooltip text="%edit" /></tooltip>
             <graphic>
                 <FontAwesomeIcon iconName="PENCIL" size="1.3em" />
@@ -118,8 +118,25 @@
                         </graphic>
                     </MenuItem>
                 </Menu>
+
+                <Menu text="%view">
+                    <CheckMenuItem fx:id="showEditor" mnemonicParsing="false" text="%show_editor" >
+                        <graphic>
+                            <FontAwesomeIcon iconName="PENCIL" />
+                        </graphic>
+                    </CheckMenuItem>
+                    <CheckMenuItem fx:id="showMetadata" mnemonicParsing="false" text="%show_metadata" >
+                        <graphic>
+                            <FontAwesomeIcon iconName="INFO" />
+                        </graphic>
+                    </CheckMenuItem>
+                </Menu>
+
                 <SeparatorMenuItem/>
                 <MenuItem mnemonicParsing="false" text="%about" onAction="#showAbout">
+                    <graphic>
+                        <FontAwesomeIcon iconName="QUESTION" />
+                    </graphic>
                 </MenuItem>
             </items>
         </MenuButton>

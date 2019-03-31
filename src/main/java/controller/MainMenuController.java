@@ -5,6 +5,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ToggleButton;
 import model.MainModel;
 
@@ -12,13 +13,34 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable, EventSubscriber {
+    //@FXML
+    //public ToggleButton showMetadataButton;
+
     @FXML
     public ToggleButton editButton;
     @FXML
-    public ToggleButton showMetadataButton;
+    public CheckMenuItem showEditor;
 
+    @FXML
+    public CheckMenuItem showMetadata;
 
     // bind to disable button property
+    public BooleanProperty showEditPaneProperty()  {
+        return MainModel.getInstance().showEditPaneProperty();
+    }
+    public boolean getShowEditPane()
+    {
+        return showEditPaneProperty().get();
+    }
+
+    public BooleanProperty showMetadataProperty()  {
+        return MainModel.getInstance().showMetadataProperty();
+    }
+    public boolean getShowMetadata()
+    {
+        return showMetadataProperty().get();
+    }
+
     public BooleanProperty disableEditProperty() {
         return MainModel.getInstance().disableEditProperty();
     }
@@ -38,7 +60,8 @@ public class MainMenuController implements Initializable, EventSubscriber {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         editButton.selectedProperty().bindBidirectional(MainModel.getInstance().showEditPaneProperty());
-        showMetadataButton.selectedProperty().bindBidirectional(MainModel.getInstance().showMetadataProperty());
+        showEditor.selectedProperty().bindBidirectional(MainModel.getInstance().showEditPaneProperty());
+        showMetadata.selectedProperty().bindBidirectional(MainModel.getInstance().showMetadataProperty());
     }
 
     public void selectFolder(ActionEvent e) {

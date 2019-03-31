@@ -27,6 +27,6 @@ public class MainApp extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        //FontAwesomeIconName.COMMENT
+        //FontAwesomeIconName.QUESTION
     }
 }
