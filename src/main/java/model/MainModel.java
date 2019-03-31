@@ -4,6 +4,8 @@ import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import service.ImageService;
+import service.ResourceService;
 
 import java.io.File;
 

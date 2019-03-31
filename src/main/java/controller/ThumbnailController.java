@@ -14,7 +14,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.image.ImageView;
-import model.ImageService;
+import service.ImageService;
 import model.MainModel;
 
 import java.io.File;

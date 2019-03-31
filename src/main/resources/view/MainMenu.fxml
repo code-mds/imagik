@@ -117,6 +117,11 @@
                             <FontAwesomeIcon iconName="ROTATE_RIGHT" />
                         </graphic>
                     </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%resize" onAction="#resize">
+                        <graphic>
+                            <FontAwesomeIcon iconName="COMPRESS" />
+                        </graphic>
+                    </MenuItem>
                 </Menu>
 
                 <Menu text="%view">

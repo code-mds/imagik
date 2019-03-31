@@ -7,7 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import model.ImageService;
+import service.ImageService;
 import model.MainModel;
 
 import java.io.File;

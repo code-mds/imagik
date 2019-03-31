@@ -2,20 +2,16 @@ package controller;
 
 import com.google.common.eventbus.Subscribe;
 import event.*;
-import javafx.application.Application;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import model.ImageService;
+import service.ImageService;
 import model.MainModel;
 
 
@@ -24,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.awt.image.BufferedImage;
 
@@ -151,33 +146,15 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         if(selectedFiles.size() == 1){
             currentImage = ImageService.rotateLeft(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1 && showBulkChangeDialog()){ //TODO chimare dialog per conferma
-            imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateLeft);
+        } else if(selectedFiles.size() > 1){
+            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateLeft);
         }else{
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
 
     }
 
-    boolean showBulkChangeDialog() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-
-        String title = MainModel.getInstance().getLocalizedString("bulk_dialog.title");
-        alert.setTitle(title);
-
-        String text = String.format(MainModel.getInstance().getLocalizedString("bulk_dialog.header"), selectedFiles.size());
-        alert.setHeaderText(text);
-
-        String content = MainModel.getInstance().getLocalizedString("bulk_dialog.content");
-        alert.setContentText(content);
-
-        ListView<File> list = new ListView<>();
-        list.setItems(MainModel.getInstance().getSelectedFiles());
-        alert.getDialogPane().setExpandableContent(list);
-
-        Optional<ButtonType> result = alert.showAndWait();
-        return result.isPresent() && result.get() == ButtonType.OK;
-    }
 
     public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
 
@@ -186,13 +163,19 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         if(selectedFiles.size() == 1){
             currentImage = ImageService.rotateRight(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1 && showBulkChangeDialog()){ //TODO chimare dialog per conferma
-            imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateRight);
+        } else if(selectedFiles.size() > 1 ){
+            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                imageService.multiSelectionImageEditor(selectedFiles, ImageService::rotateRight);
         }else{
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
     }
-    public void resize(ActionEvent e) {
+    public void resize(ActionEvent e) { resize(new ResizeEvent()); }
+
+    @Subscribe
+    private void resize(ResizeEvent e) {
+        System.out.println("RESIZE");
+        ResizeDialog.show();
     }
 
     public void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }
@@ -202,8 +185,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         if(selectedFiles.size() == 1){
             currentImage = imageService.greyScale(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size()>1){ //TODO chimare dialog per conferma
-            imageService.multiSelectionImageEditor(selectedFiles,ImageService::greyScale);
+        } else if(selectedFiles.size()>1){
+            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                imageService.multiSelectionImageEditor(selectedFiles, ImageService::greyScale);
         }else{
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
@@ -217,8 +201,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     }
     @Subscribe
-    private void resetChanges(ResetChangesEvent resetChangesEvent) {
-        // TO DO private o public ?
+    private void resetChanges(ResetChangesEvent e) {
         loadImage(selectedFiles);
     }
 

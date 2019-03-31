@@ -41,7 +41,7 @@
                     </graphic>
                 </Button>
 
-                <Button disable="true" mnemonicParsing="false" onAction="#resize" text="%resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" text="%resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%resize" /></tooltip>
                     <graphic>
                         <FontAwesomeIcon iconName="COMPRESS" size="1.3em" />

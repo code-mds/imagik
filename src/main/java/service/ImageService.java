@@ -1,5 +1,5 @@
 
-package model;
+package service;
 
 import com.google.common.eventbus.Subscribe;
 import event.*;
@@ -28,7 +28,7 @@ public final class ImageService implements EventSubscriber {
     //TODO handle invalidation of edited images
     private final Map<File, Image> thumbnailCache = new HashMap<>();
 
-    static ImageService build() {
+    public static ImageService build() {
         ImageService imageService = new ImageService();
         EventManager.getInstance().register(imageService);
         return imageService;
