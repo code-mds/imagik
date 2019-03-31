@@ -23,6 +23,7 @@ import java.util.function.Function;
 
 
 public final class ImageService implements EventSubscriber {
+    private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
 
     //TODO handle invalidation of edited images
     private final Map<File, Image> thumbnailCache = new HashMap<>();
@@ -34,6 +35,10 @@ public final class ImageService implements EventSubscriber {
     }
 
     private ImageService() {}
+
+    public static File[] listImages(File dir) {
+        return dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
+    }
 
     @Subscribe
     public void fileChanged(FilesChangedEvent e) {
@@ -81,5 +86,13 @@ public final class ImageService implements EventSubscriber {
         }
 
         EventManager.getInstance().post(new FilesChangedEvent(passedFiles));
+    }
+
+    private static boolean acceptExtension(String name) {
+        for (String ext : EXTENSIONS) {
+            if(name.endsWith(ext))
+                return true;
+        }
+        return false;
     }
 }

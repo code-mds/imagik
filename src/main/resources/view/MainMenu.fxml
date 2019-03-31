@@ -47,9 +47,10 @@
         <ToggleButton fx:id="showMetadataButton" >
             <tooltip><Tooltip text="%show_metadata" /></tooltip>
             <graphic>
-                <FontAwesomeIcon iconName="CREDIT_CARD" size="1.3em" />
+                <FontAwesomeIcon iconName="INFO" size="1.3em" />
             </graphic>
         </ToggleButton>
+        <Separator />
         <ToggleButton fx:id="editButton" >
             <tooltip><Tooltip text="%edit" /></tooltip>
             <graphic>
@@ -119,9 +120,6 @@
                 </Menu>
                 <SeparatorMenuItem/>
                 <MenuItem mnemonicParsing="false" text="%about" onAction="#showAbout">
-                    <graphic>
-                        <FontAwesomeIcon iconName="INFO" />
-                    </graphic>
                 </MenuItem>
             </items>
         </MenuButton>

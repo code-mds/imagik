@@ -19,7 +19,7 @@
         <fx:include source="MainMenu.fxml"/>
 
         <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
-            <fx:include source="SideBar.fxml" SplitPane.resizableWithParent="true" />
+            <fx:include source="SideBar.fxml" SplitPane.resizableWithParent="false" />
             <fx:include source="ContentArea.fxml" SplitPane.resizableWithParent="true" />
         </SplitPane>
 

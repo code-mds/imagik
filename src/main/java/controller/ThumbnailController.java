@@ -25,7 +25,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ThumbnailController implements Initializable, EventSubscriber {
-    private final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final int THUMB_SIZE = 50;
     @FXML private ListView<File> thumbListView;
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
@@ -105,16 +104,8 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter));
     }
 
-    private boolean acceptExtension(String name) {
-        for (String ext : EXTENSIONS) {
-            if(name.endsWith(ext))
-                return true;
-        }
-        return false;
-    }
-
     private void listFiles(File dir) {
-        File[] files = dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
+        File[] files = ImageService.listImages(dir);
         imageList.setAll(files);
     }
 }

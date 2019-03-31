@@ -7,11 +7,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import model.ImageService;
 import model.MainModel;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable, EventSubscriber {
@@ -24,12 +24,12 @@ public class MainController implements Initializable, EventSubscriber {
     }
 
     @Subscribe
-    public void exit(ExitEvent e) {
+    private void exit(ExitEvent e) {
         Platform.exit();
     }
 
     @Subscribe
-    public void showAbout(ShowAboutEvent e) {
+    private void showAbout(ShowAboutEvent e) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
         String title = MainModel.getInstance().getLocalizedString("about_dialog.title");
@@ -47,10 +47,10 @@ public class MainController implements Initializable, EventSubscriber {
     }
 
     @Subscribe
-    public void folderSelected(FolderSelectedEvent e) {
+    private void folderSelected(FolderSelectedEvent e) {
         File folder = e.getFolder();
-
         currentFolder.setText(e.getFolder().toString());
-        totalFiles.setText(String.format("%d files", Objects.requireNonNull(folder.list()).length));
+        File[] files = ImageService.listImages(folder);
+        totalFiles.setText(String.format("%d files", files.length));
     }
 }
