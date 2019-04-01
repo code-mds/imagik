@@ -170,6 +170,39 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
     }
+
+    public void flipHorizontally(ActionEvent e) { flipHorizontally(new FlipHorizontallyEvent());
+    }
+    @Subscribe
+    public void flipHorizontally(FlipHorizontallyEvent e){
+        if(selectedFiles.size() == 1){
+            currentImage = ImageService.flipHorizontally(currentImage);
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        } else if(selectedFiles.size() > 1){
+            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                imageService.multiSelectionImageEditor(selectedFiles, ImageService::flipHorizontally);
+        }else{
+            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
+        }
+
+    }
+
+    public void flipVertically(ActionEvent e) { flipVertically(new FlipVerticallyEvent());
+    }
+    @Subscribe
+    public void flipVertically(FlipVerticallyEvent e){
+        if(selectedFiles.size() == 1){
+            currentImage = ImageService.flipVertically(currentImage);
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
+        } else if(selectedFiles.size() > 1){
+            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                imageService.multiSelectionImageEditor(selectedFiles, ImageService::flipVertically);
+        }else{
+            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
+        }
+
+    }
+
     public void resize(ActionEvent e) { resize(new ResizeEvent()); }
 
     @Subscribe

@@ -94,6 +94,14 @@ public class MainMenuController implements Initializable, EventSubscriber {
         EventManager.getInstance().post(new RotateRightEvent());
     }
 
+    public void flipHorizontally(ActionEvent e) {
+        EventManager.getInstance().post(new FlipHorizontallyEvent());
+    }
+
+    public void flipVertically(ActionEvent e) {
+        EventManager.getInstance().post(new FlipVerticallyEvent());
+    }
+
     public void showAbout(ActionEvent e) {
         EventManager.getInstance().post(new ShowAboutEvent());
     }

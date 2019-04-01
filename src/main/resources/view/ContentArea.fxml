@@ -40,6 +40,18 @@
                         <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
                     </graphic>
                 </Button>
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipHorizontally" text="%flip_horizontally" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                    <tooltip><Tooltip text="%flip_horizontally" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
+                    </graphic>
+                </Button>
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipVertically" text="%flip_vertically" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                    <tooltip><Tooltip text="%flip_vertically" /></tooltip>
+                    <graphic>
+                        <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
+                    </graphic>
+                </Button>
 
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" text="%resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%resize" /></tooltip>

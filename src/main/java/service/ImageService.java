@@ -6,6 +6,7 @@ import event.*;
 import ij.ImagePlus;
 import ij.process.ImageConverter;
 
+import ij.process.ImageProcessor;
 import javafx.scene.image.Image;
 import org.apache.commons.io.FilenameUtils;
 
@@ -66,6 +67,20 @@ public final class ImageService implements EventSubscriber {
     public static BufferedImage rotateRight(BufferedImage currentImage){
         ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
         return imageToEdit.getProcessor().rotateRight().getBufferedImage();
+    }
+
+    public static BufferedImage flipHorizontally(BufferedImage currentImage) {
+        ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
+        ImageProcessor currentImageProcessor = imageToEdit.getProcessor();
+        currentImageProcessor.flipHorizontal();
+        return currentImageProcessor.getBufferedImage();
+    }
+
+    public static BufferedImage flipVertically(BufferedImage currentImage) {
+        ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
+        ImageProcessor currentImageProcessor = imageToEdit.getProcessor();
+        currentImageProcessor.flipVertical();
+        return currentImageProcessor.getBufferedImage();
     }
 
     public static BufferedImage greyScale(BufferedImage currentImage) {

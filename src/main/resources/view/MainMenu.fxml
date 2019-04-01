@@ -108,11 +108,21 @@
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%rotate_left" onAction="#rotateLeft">
+                    <graphic>
+                        <FontAwesomeIcon iconName="ROTATE_LEFT" />
+                    </graphic>
+                </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
+                        <graphic>
+                            <FontAwesomeIcon iconName="ROTATE_RIGHT" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%flip_horizontally" onAction="#flipHorizontally">
                         <graphic>
                             <FontAwesomeIcon iconName="ROTATE_LEFT" />
                         </graphic>
                     </MenuItem>
-                    <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
+                    <MenuItem mnemonicParsing="false" text="%flip_vertically" onAction="#flipVertically">
                         <graphic>
                             <FontAwesomeIcon iconName="ROTATE_RIGHT" />
                         </graphic>
