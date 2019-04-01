@@ -11,6 +11,8 @@
 <?import javafx.scene.layout.VBox?>
 
 <?import javafx.scene.control.Separator?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ContentAreaController">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -22,7 +24,7 @@
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#blackWhite" text="%grayscale" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%grayscale" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ADJUST" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-invert-colors" />
                     </graphic>
                 </Button>
 
@@ -31,48 +33,47 @@
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateLeft" text="%rotate_left" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_left" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-rotate-left" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateRight" text="%rotate_right" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_right" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-rotate-right" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipHorizontally" text="%flip_horizontally" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%flip_horizontally" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ROTATE_LEFT" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-swap-horizontal" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipVertically" text="%flip_vertically" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%flip_vertically" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ROTATE_RIGHT" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-swap-vertical" />
                     </graphic>
                 </Button>
 
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" text="%resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%resize" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="COMPRESS" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-move-resize-variant" />
                     </graphic>
                 </Button>
-
 
                 <Separator/>
 
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resetChanges" text="%reset" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%reset" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="ARROW_CIRCLE_O_LEFT" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-undo" />
                     </graphic>
                 </Button>
                 <Button disable="true" mnemonicParsing="false" onAction="#saveChanges" text="%save_changes"  prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%save_changes" /></tooltip>
                     <graphic>
-                        <FontAwesomeIcon iconName="SAVE" size="1.3em" />
+                        <FontIcon iconLiteral="mdi-content-save" />
                     </graphic>
                 </Button>
                 <padding>
