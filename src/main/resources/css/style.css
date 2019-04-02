@@ -7,8 +7,21 @@
     -fx-icon-size: 20;
 }
 
+.toggle-button .ikonli-font-icon {
+    -fx-icon-size: 20;
+}
+
+.menu-icon {
+    -fx-icon-size: 20;
+    -fx-icon-code: fa-ellipsis-v;
+}
+
+.app-icon {
+    -fx-icon-code: fa-magic;
+}
+
 .save-icon {
-    -fx-icon-code: mdi-floppy;
+    -fx-icon-code: fa-save;
 }
 
 .reset-icon {
@@ -39,3 +52,39 @@
     -fx-icon-code: mdi-invert-colors;
 }
 
+.zoom-in-icon {
+    -fx-icon-code: fa-search-plus;
+}
+
+.zoom-out-icon {
+    -fx-icon-code: fa-search-minus;
+}
+
+.zoom-fit-icon {
+   -fx-icon-code: gmi-aspect-ratio;
+ }
+
+.zoom-1-1-icon {
+    -fx-icon-code: fa-expand;
+ }
+
+.metadata-icon {
+    -fx-icon-code: mdi-tag-text-outline;
+}
+
+.edit-icon {
+    -fx-icon-code: fa-pencil;
+}
+
+
+.search-icon {
+    -fx-icon-code: fa-search;
+}
+
+.about-icon {
+   -fx-icon-code: fa-question;
+}
+
+.folder-icon {
+   -fx-icon-code: fa-folder-open-o;
+}
