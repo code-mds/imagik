@@ -4,6 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="controller.MainMenuController"
@@ -67,13 +68,13 @@
             <items>
                 <MenuItem mnemonicParsing="false" text="%open_folder" onAction="#selectFolder">
                     <graphic>
-                        <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" styleClass="toolbarButton"/>
+                        <FontAwesomeIcon iconName="FOLDER_OPEN_ALT" />
                     </graphic>
                 </MenuItem>
 
                 <MenuItem mnemonicParsing="false" text="%save_changes" onAction="#saveChanges"  disable="${controller.disableEdit}">
                     <graphic>
-                        <FontAwesomeIcon iconName="SAVE" />
+                        <FontIcon styleClass="save-icon"/>
                     </graphic>
                 </MenuItem>
 
@@ -104,47 +105,39 @@
                 <Menu text="%edit" disable="${controller.disableEdit}">
                     <MenuItem mnemonicParsing="false" text="%grayscale" onAction="#blackWhite">
                         <graphic>
-                            <FontAwesomeIcon iconName="ADJUST" />
+                            <FontIcon styleClass="grayscale" />
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%rotate_left" onAction="#rotateLeft">
                     <graphic>
-                        <FontAwesomeIcon iconName="ROTATE_LEFT" />
+                        <FontIcon styleClass="rotate-left-icon" />
                     </graphic>
                 </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
                         <graphic>
-                            <FontAwesomeIcon iconName="ROTATE_RIGHT" />
+                            <FontIcon styleClass="rotate-right-icon" />
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%flip_horizontally" onAction="#flipHorizontally">
                         <graphic>
-                            <FontAwesomeIcon iconName="ROTATE_LEFT" />
+                            <FontIcon styleClass="flip-horizontal-icon" />
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%flip_vertically" onAction="#flipVertically">
                         <graphic>
-                            <FontAwesomeIcon iconName="ROTATE_RIGHT" />
+                            <FontIcon styleClass="flip-vertical-icon" />
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%resize" onAction="#resize">
                         <graphic>
-                            <FontAwesomeIcon iconName="COMPRESS" />
+                            <FontIcon styleClass="resize-icon" />
                         </graphic>
                     </MenuItem>
                 </Menu>
 
                 <Menu text="%view">
-                    <CheckMenuItem fx:id="showEditor" mnemonicParsing="false" text="%show_editor" >
-                        <graphic>
-                            <FontAwesomeIcon iconName="PENCIL" />
-                        </graphic>
-                    </CheckMenuItem>
-                    <CheckMenuItem fx:id="showMetadata" mnemonicParsing="false" text="%show_metadata" >
-                        <graphic>
-                            <FontAwesomeIcon iconName="INFO" />
-                        </graphic>
-                    </CheckMenuItem>
+                    <CheckMenuItem fx:id="showEditor" mnemonicParsing="false" text="%show_editor" />
+                    <CheckMenuItem fx:id="showMetadata" mnemonicParsing="false" text="%show_metadata" />
                 </Menu>
 
                 <SeparatorMenuItem/>

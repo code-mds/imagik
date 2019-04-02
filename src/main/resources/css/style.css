@@ -1,3 +1,41 @@
-.ikonli-font-icon {
+.editor {
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: lightgray;
+}
+
+.button .ikonli-font-icon {
     -fx-icon-size: 20;
 }
+
+.save-icon {
+    -fx-icon-code: mdi-floppy;
+}
+
+.reset-icon {
+    -fx-icon-code: mdi-undo;
+}
+
+.resize-icon {
+    -fx-icon-code: mdi-move-resize-variant;
+}
+
+.flip-vertical-icon {
+    -fx-icon-code: mdi-swap-vertical;
+}
+
+.flip-horizontal-icon {
+    -fx-icon-code: mdi-swap-horizontal;
+}
+
+.rotate-right-icon {
+    -fx-icon-code: mdi-rotate-right;
+}
+
+.rotate-left-icon {
+    -fx-icon-code: mdi-rotate-left;
+}
+
+.grayscale-icon {
+    -fx-icon-code: mdi-invert-colors;
+}
+

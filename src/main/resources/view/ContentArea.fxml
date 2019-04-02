@@ -19,11 +19,11 @@
             <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" HBox.hgrow="SOMETIMES">
                 <ImageView fx:id="imageView" preserveRatio="true" />
             </ScrollPane>
-            <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" managed="${controller.showEditPane}" prefWidth="50">
+            <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" managed="${controller.showEditPane}" prefWidth="40" styleClass="editor">
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#blackWhite" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%grayscale" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-invert-colors" />
+                        <FontIcon styleClass="grayscale-icon" />
                     </graphic>
                 </Button>
 
@@ -32,32 +32,32 @@
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateLeft" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_left" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-rotate-left" />
+                        <FontIcon styleClass="rotate-left-icon" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateRight" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%rotate_right" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-rotate-right" />
+                        <FontIcon styleClass="rotate-right-icon" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipHorizontally" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%flip_horizontally" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-swap-horizontal" />
+                        <FontIcon styleClass="flip-horizontal-icon" />
                     </graphic>
                 </Button>
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipVertically" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%flip_vertically" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-swap-vertical" />
+                        <FontIcon styleClass="flip-vertical-icon" />
                     </graphic>
                 </Button>
 
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%resize" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-move-resize-variant" />
+                        <FontIcon styleClass="resize-icon" />
                     </graphic>
                 </Button>
 
@@ -66,13 +66,13 @@
                 <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resetChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%reset" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-undo" />
+                        <FontIcon styleClass="reset-icon" />
                     </graphic>
                 </Button>
                 <Button disable="true" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%save_changes" /></tooltip>
                     <graphic>
-                        <FontIcon iconLiteral="mdi-content-save" />
+                        <FontIcon styleClass="save-icon" />
                     </graphic>
                 </Button>
                 <padding>
