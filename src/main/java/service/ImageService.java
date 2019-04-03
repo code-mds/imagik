@@ -90,7 +90,7 @@ public final class ImageService implements EventSubscriber {
         return imageToEdit.getBufferedImage();
     }
 
-    public void multiSelectionImageEditor(List<File> passedFiles, Function<BufferedImage,BufferedImage> serviceSelected){
+    public void multiSelectionImageEdit(List<File> passedFiles, Function<BufferedImage,BufferedImage> serviceSelected){
         for (File currentFile : passedFiles) {
             try {
                 BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile));
