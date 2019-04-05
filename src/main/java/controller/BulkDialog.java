@@ -9,8 +9,8 @@ import model.MainModel;
 import java.io.File;
 import java.util.Optional;
 
-public final class BulkDialog {
-    public static boolean show(ObservableList<File> selectedFiles) {
+final class BulkDialog {
+    static boolean show(ObservableList<File> selectedFiles) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
         String title = MainModel.getInstance().getLocalizedString("bulk_dialog.title");

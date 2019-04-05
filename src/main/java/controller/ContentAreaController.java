@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import service.ImageService;
 import model.MainModel;
 
@@ -32,8 +33,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private List<File> selectedFiles;
     private ImageService imageService;
 
-    @FXML ImageView imageView;
-    @FXML ScrollPane scrollPane;
+    @FXML private ImageView imageView;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox editPane;
 
     // bind to disable button property
     public BooleanProperty disableEditProperty() {
@@ -86,6 +88,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         setBackgroundOnCondition("/background/home_2.jpg");
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void folderSelected(FolderSelectedEvent e) {
         setBackgroundNoSelection();
@@ -123,16 +126,18 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void zoomFit(ZoomFitEvent e) {
+    private void zoomFit(ZoomFitEvent e) {
         currentZoom = Math.min(scrollPane.getWidth() / currentImage.getWidth(), NO_ZOOM);
 
         imageView.fitWidthProperty().bind(scrollPane.widthProperty());
         imageView.fitHeightProperty().bind(scrollPane.heightProperty());
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void zoomReset(ZoomResetEvent e) {
+    private void zoomReset(ZoomResetEvent e) {
         imageView.fitWidthProperty().unbind();
         imageView.fitHeightProperty().unbind();
 
@@ -146,8 +151,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void zoomIn(ZoomInEvent e) {
+    private void zoomIn(ZoomInEvent e) {
         imageView.fitWidthProperty().unbind();
         imageView.fitHeightProperty().unbind();
 
@@ -155,8 +161,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         updateImageView();
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void zoomOut(ZoomOutEvent e) {
+    private void zoomOut(ZoomOutEvent e) {
         imageView.fitWidthProperty().unbind();
         imageView.fitHeightProperty().unbind();
 
@@ -166,70 +173,67 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     public void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
     }
+
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void rotateLeft(RotateLeftEvent e){
+    private void rotateLeft(RotateLeftEvent e){
         if(selectedFiles.size() == 1){
             currentImage = ImageService.rotateLeft(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::rotateLeft);
-        }else{
-            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
-
     }
 
 
     public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void rotateRight(RotateRightEvent e){
+    private void rotateRight(RotateRightEvent e){
         if(selectedFiles.size() == 1){
             currentImage = ImageService.rotateRight(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1 ){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::rotateRight);
-        }else{
-            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
     }
 
     public void flipHorizontally(ActionEvent e) { flipHorizontally(new FlipHorizontallyEvent());
     }
+
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void flipHorizontally(FlipHorizontallyEvent e){
+    private void flipHorizontally(FlipHorizontallyEvent e){
         if(selectedFiles.size() == 1){
             currentImage = ImageService.flipHorizontally(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::flipHorizontally);
-        }else{
-            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
-
     }
 
     public void flipVertically(ActionEvent e) { flipVertically(new FlipVerticallyEvent());
     }
+
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void flipVertically(FlipVerticallyEvent e){
+    private void flipVertically(FlipVerticallyEvent e){
         if(selectedFiles.size() == 1){
             currentImage = ImageService.flipVertically(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::flipVertically);
-        }else{
-            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
-
     }
 
     public void resize(ActionEvent e) { resize(new ResizeEvent()); }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void resize(ResizeEvent e) {
         System.out.println("RESIZE");
@@ -238,16 +242,15 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     public void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void blackWhite(BlackWhiteEvent e) {
+    private void blackWhite(BlackWhiteEvent e) {
         if(selectedFiles.size() == 1){
-            currentImage = imageService.greyScale(currentImage);
+            currentImage = ImageService.greyScale(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size()>1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::greyScale);
-        }else{
-            return; // TODO chiamare dialog per segnalare evetuale eccezione ?
         }
     }
 
@@ -256,8 +259,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     public void resetChanges(ActionEvent e) {
         resetChanges(new ResetChangesEvent());
-
     }
+
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void resetChanges(ResetChangesEvent e) {
         loadImage(selectedFiles);

@@ -4,15 +4,15 @@
 }
 
 .button .ikonli-font-icon {
-    -fx-icon-size: 20;
+    -fx-icon-size: 20px;
 }
 
 .toggle-button .ikonli-font-icon {
-    -fx-icon-size: 20;
+    -fx-icon-size: 20px;
 }
 
 .menu-icon {
-    -fx-icon-size: 20;
+    -fx-icon-size: 20px;
     -fx-icon-code: fa-ellipsis-v;
 }
 

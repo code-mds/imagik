@@ -25,21 +25,18 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ThumbnailController implements Initializable, EventSubscriber {
-    private final int THUMB_SIZE = 50;
+    private final static int THUMB_SIZE = 50;
     @FXML private ListView<File> thumbListView;
     private final ObservableList<File> imageList = FXCollections.observableArrayList();
     private final FilteredList<File> filteredImageList = new FilteredList<>(imageList);
+    private final DateFormat dateFormatter = DateFormat.getDateTimeInstance(
+                    DateFormat.SHORT,
+                    DateFormat.SHORT,
+                    Locale.getDefault());
 
-    private ImageService imageService;
-    private MainModel mainModel;
-
-    private DateFormat dateFormatter = DateFormat.getDateTimeInstance(
-            DateFormat.SHORT,
-            DateFormat.SHORT,
-            Locale.getDefault());
-
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void fileChanged(FilesChangedEvent e) {
+    private void fileChanged(FilesChangedEvent e) {
         for (File file : e.getFiles()) {
             int oldPos = imageList.indexOf(file);
             imageList.remove(oldPos);
@@ -51,22 +48,18 @@ public class ThumbnailController implements Initializable, EventSubscriber {
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
 
-        mainModel = MainModel.getInstance();
+        MainModel mainModel = MainModel.getInstance();
         mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
-        imageService = mainModel.getImageService();
+        ImageService imageService = mainModel.getImageService();
         thumbListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         thumbListView.setItems(filteredImageList);
         thumbListView.getSelectionModel()
                 .getSelectedItems()
                 .addListener((ListChangeListener.Change<? extends File> l) -> MainModel.getInstance().setSelectedFiles(l.getList()));
 
-        /*thumbListView.getSelectionModel()
-                .selectedItemProperty()
-                .addListener((observable, oldValue, newValue) -> MainModel.getInstance().setSelectedFile(newValue));
-        */
         thumbListView.setCellFactory(param -> new ListCell<>() {
-            private ImageView imageView = new ImageView();
+            private final ImageView imageView = new ImageView();
 
             @Override
             public void updateItem(File file, boolean empty) {
@@ -92,7 +85,7 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         });
     }
 
-    public static String humanReadableByteCount(long bytes, boolean si) {
+    private static String humanReadableByteCount(long bytes, boolean si) {
         int unit = si ? 1000 : 1024;
         if (bytes < unit) return bytes + " B";
         int exp = (int) (Math.log(bytes) / Math.log(unit));

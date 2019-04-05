@@ -5,19 +5,14 @@ import com.google.common.eventbus.Subscribe;
 import event.*;
 import ij.ImagePlus;
 import ij.process.ImageConverter;
-
 import ij.process.ImageProcessor;
 import javafx.scene.image.Image;
 import org.apache.commons.io.FilenameUtils;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-
 import java.io.File;
-
 import java.io.IOException;
 import java.util.HashMap;
-
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -41,8 +36,9 @@ public final class ImageService implements EventSubscriber {
         return dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void fileChanged(FilesChangedEvent e) {
+    private void fileChanged(FilesChangedEvent e) {
         for (File file : e.getFiles())
             thumbnailCache.remove(file);
     }

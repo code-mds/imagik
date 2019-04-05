@@ -13,18 +13,18 @@ public class MainModel {
     // single instance
     private static MainModel instance;
 
-    private ImageService imageService = ImageService.build();
-    private ResourceService resourceService = new ResourceService();
+    private final ImageService imageService = ImageService.build();
+    private final ResourceService resourceService = new ResourceService();
 
-    private BooleanProperty disableZoom = new SimpleBooleanProperty(true);
-    private BooleanProperty disableEdit = new SimpleBooleanProperty(true);
+    private final BooleanProperty disableZoom = new SimpleBooleanProperty(true);
+    private final BooleanProperty disableEdit = new SimpleBooleanProperty(true);
 
-    private BooleanProperty showEditPane = new SimpleBooleanProperty(false);
-    private BooleanProperty showMetadata = new SimpleBooleanProperty(false);
+    private final BooleanProperty showEditPane = new SimpleBooleanProperty(false);
+    private final BooleanProperty showMetadata = new SimpleBooleanProperty(false);
 
-    private StringProperty filterProperty = new SimpleStringProperty();
-    private ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
-    private ObservableList<File> selectedFiles = FXCollections.observableArrayList();
+    private final StringProperty filterProperty = new SimpleStringProperty();
+    private final ObjectProperty<File> selectedFolderProperty = new SimpleObjectProperty<>();
+    private final ObservableList<File> selectedFiles = FXCollections.observableArrayList();
 
     private MainModel() { }
 

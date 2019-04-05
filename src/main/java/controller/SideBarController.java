@@ -19,8 +19,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SideBarController implements Initializable, EventSubscriber {
-    @FXML public AnchorPane metadataPane;
-    @FXML public SplitPane splitPane;
+    private final static double SPLIT_POS_METADATA_VISIBLE = 0.5;
+    private final static double SPLIT_POS_METADATA_HIDDEN = 1.0;
+
+    @FXML private AnchorPane metadataPane;
+    @FXML private SplitPane splitPane;
     @FXML private TextField searchField;
 
     @Override
@@ -31,12 +34,13 @@ public class SideBarController implements Initializable, EventSubscriber {
     }
 
     private void updateSplitPosition(Boolean showMetadata) {
-        double newSize = showMetadata ? 0.5d : 1.0d;
+        double newSize = showMetadata ? SPLIT_POS_METADATA_VISIBLE : SPLIT_POS_METADATA_HIDDEN;
         splitPane.setDividerPosition(0, newSize);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
-    public void selectFolder(SelectFolderEvent e) {
+    private void selectFolder(SelectFolderEvent e) {
         Window window = metadataPane.getScene().getWindow();
         DirectoryChooser directoryChooser = new DirectoryChooser();
         File dir = directoryChooser.showDialog(window);

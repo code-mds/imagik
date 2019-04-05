@@ -3,6 +3,7 @@ package controller;
 import com.google.common.eventbus.Subscribe;
 import event.*;
 import javafx.application.Platform;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -15,19 +16,21 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable, EventSubscriber {
-    public Label currentFolder;
-    public Label totalFiles;
+    @FXML private Label currentFolder;
+    @FXML private Label totalFiles;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void exit(ExitEvent e) {
         Platform.exit();
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void showAbout(ShowAboutEvent e) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -46,6 +49,7 @@ public class MainController implements Initializable, EventSubscriber {
         alert.showAndWait();
     }
 
+    @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void folderSelected(FolderSelectedEvent e) {
         File folder = e.getFolder();

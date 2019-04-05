@@ -1,14 +1,14 @@
 package event;
 
-import com.google.common.eventbus.EventBus;
-
 public class EventManager {
     private static EventManager eventManager;
 
-    private EventBus bus;
+    @SuppressWarnings("UnstableApiUsage")
+    private final com.google.common.eventbus.EventBus bus;
 
+    @SuppressWarnings("UnstableApiUsage")
     private EventManager() {
-        bus = new EventBus();
+        bus = new com.google.common.eventbus.EventBus();
     }
 
     public static EventManager getInstance() {

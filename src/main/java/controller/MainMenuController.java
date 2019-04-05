@@ -13,16 +13,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainMenuController implements Initializable, EventSubscriber {
-    //@FXML
-    //public ToggleButton showMetadataButton;
-
-    @FXML
-    public ToggleButton editButton;
-    @FXML
-    public CheckMenuItem showEditor;
-
-    @FXML
-    public CheckMenuItem showMetadata;
+    @FXML private ToggleButton editButton;
+    @FXML private CheckMenuItem showEditor;
+    @FXML private CheckMenuItem showMetadata;
 
     // bind to disable button property
     public BooleanProperty showEditPaneProperty()  {
@@ -44,8 +37,7 @@ public class MainMenuController implements Initializable, EventSubscriber {
     public BooleanProperty disableEditProperty() {
         return MainModel.getInstance().disableEditProperty();
     }
-    public boolean getDisableEdit()
-    {
+    public boolean getDisableEdit() {
         return disableEditProperty().get();
     }
 
@@ -72,11 +64,11 @@ public class MainMenuController implements Initializable, EventSubscriber {
         EventManager.getInstance().post(new SaveChangesEvent());
     }
 
-    public void zoomReset(ActionEvent event) {
+    public void zoomReset(ActionEvent e) {
         EventManager.getInstance().post(new ZoomResetEvent());
     }
 
-    public void zoomFit(ActionEvent event) {
+    public void zoomFit(ActionEvent e) {
         EventManager.getInstance().post(new ZoomFitEvent());
     }
 

@@ -1,4 +1,4 @@
 package event;
 
-public interface EventBase {
+interface EventBase {
 }
