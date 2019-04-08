@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>supsi.ch</groupId>
+    <groupId>ch.imagik</groupId>
     <artifactId>imagik</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -42,7 +42,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>MainApp</mainClass>
+                    <mainClass>ch.imagik.MainApp</mainClass>
                 </configuration>
             </plugin>
 
@@ -61,7 +61,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>Main</mainClass>
+                            <mainClass>ch.imagik.Main</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

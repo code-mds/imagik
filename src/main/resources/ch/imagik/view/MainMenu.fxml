@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="ch.imagik.controller.MainMenuController"
+            prefHeight="18.0" prefWidth="600.0">
+    <ToolBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <Button minWidth="-Infinity" onAction="#selectFolder" >
+            <tooltip><Tooltip text="%open_folder" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="folder-icon" />
+            </graphic>
+        </Button>
+
+
+        <Pane prefWidth="20.0" HBox.hgrow="SOMETIMES" />
+
+        <Button mnemonicParsing="false" onAction="#zoomReset" disable="${controller.disableZoom}" >
+            <tooltip><Tooltip text="%zoom_1_1" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="zoom-1-1-icon" />
+            </graphic>
+        </Button>
+
+        <Button mnemonicParsing="false" onAction="#zoomIn" disable="${controller.disableZoom}">
+            <tooltip><Tooltip text="%zoom_in" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="zoom-in-icon" />
+            </graphic>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#zoomOut" disable="${controller.disableZoom}">
+            <tooltip><Tooltip text="%zoom_out" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="zoom-out-icon" />
+            </graphic>
+        </Button>
+        <Button mnemonicParsing="false" onAction="#zoomFit" disable="${controller.disableZoom}">
+            <tooltip><Tooltip text="%zoom_fit" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="zoom-fit-icon" />
+            </graphic>
+        </Button>
+
+        <Separator />
+
+<!--        <ToggleButton fx:id="showMetadataButton" >-->
+<!--            <tooltip><Tooltip text="%show_metadata" /></tooltip>-->
+<!--            <graphic>-->
+<!--                <FontAwesomeIcon iconName="INFO" size="1.3em" />-->
+<!--            </graphic>-->
+<!--        </ToggleButton>-->
+<!--        <Separator />-->
+        <ToggleButton fx:id="editButton">
+            <tooltip><Tooltip text="%edit" /></tooltip>
+            <graphic>
+                <FontIcon styleClass="edit-icon" />
+            </graphic>
+        </ToggleButton>
+
+        <Separator />
+
+        <MenuButton>
+            <graphic>
+                <FontIcon styleClass="menu-icon" />
+            </graphic>
+            <items>
+                <MenuItem mnemonicParsing="false" text="%open_folder" onAction="#selectFolder">
+                    <graphic>
+                        <FontIcon styleClass="folder-icon"/>
+                    </graphic>
+                </MenuItem>
+
+                <MenuItem mnemonicParsing="false" text="%save_changes" onAction="#saveChanges"  disable="${controller.disableEdit}">
+                    <graphic>
+                        <FontIcon styleClass="save-icon"/>
+                    </graphic>
+                </MenuItem>
+
+                <SeparatorMenuItem/>
+
+                <Menu text="%zoom" disable="${controller.disableZoom}">
+                    <MenuItem mnemonicParsing="false" text="%zoom_1_1" onAction="#zoomReset">
+                        <graphic>
+                            <FontIcon styleClass="zoom-1-1-icon" />
+                        </graphic>
+                    </MenuItem>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_out" onAction="#zoomOut">
+                        <graphic>
+                            <FontIcon styleClass="zoom-out-icon" />
+                        </graphic>
+                    </MenuItem>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_in" onAction="#zoomIn">
+                        <graphic>
+                            <FontIcon styleClass="zoom-in-icon" />
+                        </graphic>
+                    </MenuItem>
+
+                    <MenuItem mnemonicParsing="false" text="%zoom_fit" onAction="#zoomFit">
+                        <graphic>
+                            <FontIcon styleClass="zoom-fit-icon" />
+                        </graphic>
+                    </MenuItem>
+                </Menu>
+
+                <Menu text="%edit" disable="${controller.disableEdit}">
+                    <MenuItem mnemonicParsing="false" text="%grayscale" onAction="#blackWhite">
+                        <graphic>
+                            <FontIcon styleClass="grayscale-icon" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%rotate_left" onAction="#rotateLeft">
+                        <graphic>
+                            <FontIcon styleClass="rotate-left-icon" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
+                        <graphic>
+                            <FontIcon styleClass="rotate-right-icon" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%flip_horizontally" onAction="#flipHorizontally">
+                        <graphic>
+                            <FontIcon styleClass="flip-horizontal-icon" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%flip_vertically" onAction="#flipVertically">
+                        <graphic>
+                            <FontIcon styleClass="flip-vertical-icon" />
+                        </graphic>
+                    </MenuItem>
+                    <MenuItem mnemonicParsing="false" text="%resize" onAction="#resize">
+                        <graphic>
+                            <FontIcon styleClass="resize-icon" />
+                        </graphic>
+                    </MenuItem>
+                </Menu>
+
+                <Menu text="%view">
+                    <CheckMenuItem fx:id="showEditor" mnemonicParsing="false" text="%show_editor" />
+                    <CheckMenuItem fx:id="showMetadata" mnemonicParsing="false" text="%show_metadata" />
+                </Menu>
+
+                <SeparatorMenuItem/>
+                <MenuItem mnemonicParsing="false" text="%about" onAction="#showAbout">
+                    <graphic>
+                        <FontIcon styleClass="about-icon" />
+                    </graphic>
+                </MenuItem>
+            </items>
+        </MenuButton>
+
+    </ToolBar>
+</AnchorPane>
