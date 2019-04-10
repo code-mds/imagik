@@ -82,6 +82,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
     private void setBackgroundNoFolder() {
         setBackgroundOnCondition("/ch/imagik/background/home_1.jpg");
+
     }
 
     private void setBackgroundNoSelection() {
