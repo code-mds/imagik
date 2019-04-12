@@ -238,7 +238,12 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void resize(ResizeEvent e) {
         System.out.println("RESIZE");
-        ResizeDialog.show();
+        if(selectedFiles.size()>1){
+            ResizeDialog.show(1,1,true);
+        }else if(selectedFiles.size()==1){
+            ResizeDialog.show(currentImage.getWidth(),currentImage.getHeight(),false);
+        }
+
     }
 
     public void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }

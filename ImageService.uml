@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ch.imagik.service.ImageService</OriginalElement>
+  <nodes>
+    <node x="0.0" y="0.0">ch.imagik.model.MainModel</node>
+    <node x="5.0" y="432.0">ch.imagik.controller.ContentAreaController</node>
+    <node x="330.0" y="357.0">ch.imagik.service.ImageService</node>
+    <node x="397.0" y="74.0">ch.imagik.controller.ThumbnailController</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.service.ImageService">
+      <point x="0.0" y="5.214144515592125" />
+      <point x="0.0" y="5.214144515592096" />
+    </edge>
+    <edge source="ch.imagik.model.MainModel" target="ch.imagik.service.ImageService">
+      <point x="0.0" y="6.2989876660881805" />
+      <point x="-8.220883263888197" y="0.0" />
+    </edge>
+    <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.model.MainModel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.model.MainModel">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.service.ImageService">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.7055884843353091" x="343.8639223213911" y="447.2063114320416" />
+  <SelectedNodes>
+    <node>ch.imagik.model.MainModel</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Inner Classes</Category>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+

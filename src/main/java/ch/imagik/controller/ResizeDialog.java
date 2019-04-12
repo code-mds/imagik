@@ -9,13 +9,16 @@ import ch.imagik.model.ResizeInfo;
 import java.util.Optional;
 
 public final class ResizeDialog {
-    public static Optional<ResizeInfo> show() {
+    public static Optional<ResizeInfo> show(int originalWidth, int originalHeight, boolean isMultiple) {
+        double aspectRatio = (double)originalWidth/originalHeight;
+        //System.out.println("Aspect Ratio dell'immagne: "+aspectRatio);
         Dialog<ResizeInfo> dialog = new Dialog<>();
-        String title = MainModel.getInstance().getLocalizedString("resize_dialog.title");
-        dialog.setTitle(title);
+        String label;
+        label = MainModel.getInstance().getLocalizedString("resize_dialog.title");
+        dialog.setTitle(label);
 
-        String text = MainModel.getInstance().getLocalizedString("resize_dialog.header");
-        dialog.setHeaderText(text);
+        label = MainModel.getInstance().getLocalizedString("resize_dialog.header");
+        dialog.setHeaderText(label);
 
         // Set the button types.
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -24,20 +27,53 @@ public final class ResizeDialog {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
+        label = MainModel.getInstance().getLocalizedString("resize_dialog.percentage");
+        RadioButton percentageSelector = new RadioButton(label);
+        percentageSelector.selectedProperty().setValue(true);
+        if(isMultiple){
+            grid.add(new Label(label),0,0);
+        }
+        Spinner<Integer> percentageValue = new Spinner<>(1,200,100);
+        label = MainModel.getInstance().getLocalizedString("resize_dialog.pixel");
+        RadioButton pixelSelector = new RadioButton(label);
+        Spinner<Integer> widthField= new Spinner<>(1, originalWidth*3, originalWidth);
+        Spinner<Integer> heightField= new Spinner<>(1, originalHeight*3, originalHeight);
+        grid.add(new Label("1 - 200"),0,1);
+        grid.add(percentageValue,1,1);
+        CheckBox keepRatio = new CheckBox();
+        if(!isMultiple){
+            pixelSelector.selectedProperty().setValue(false);
+            ToggleGroup radioGroup = new ToggleGroup();
+            pixelSelector.setToggleGroup(radioGroup);
+            percentageSelector.setToggleGroup(radioGroup);
+            keepRatio.selectedProperty().setValue(true);
+            heightField.disableProperty().bind(percentageSelector.selectedProperty());
+            widthField.disableProperty().bind(percentageSelector.selectedProperty());
+            keepRatio.disableProperty().bind(percentageSelector.selectedProperty());
+            percentageValue.disableProperty().bind(pixelSelector.selectedProperty());
+            grid.add(percentageSelector,1,0);
+            grid.add(pixelSelector,1,2);
+            grid.add(new Label("Keep Ratio:"), 0, 3);
+            grid.add(keepRatio, 1, 3);
+            grid.add(new Label("Width:"), 0, 4);
+            grid.add(widthField, 1, 4);
+            grid.add(new Label("Height:"), 0, 5);
+            grid.add(heightField, 1, 5);
 
-        Spinner<Integer> widthField = new Spinner<>(1, 10, 2);
-        Spinner<Integer> heightField = new Spinner<>(1, 10, 2);
+        }
+        heightField.valueProperty().addListener((obs, old, newVal) -> widthField.getValueFactory().setValue(((int) Math.round(newVal*aspectRatio))));
 
-        grid.add(new Label("Width:"), 0, 0);
-        grid.add(widthField, 1, 0);
-        grid.add(new Label("Height:"), 0, 1);
-        grid.add(heightField, 1, 1);
+        widthField.valueProperty().addListener((obs, old, newVal) -> heightField.getValueFactory().setValue((int)Math.round(newVal/aspectRatio)));
 
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ButtonType.OK) {
-                return new ResizeInfo(widthField.getValue(), heightField.getValue());
+                if(percentageSelector.isArmed())
+                    return  new ResizeInfo(percentageValue.getValue());
+                if(pixelSelector.isArmed()){
+                    return new ResizeInfo(widthField.getValue(), heightField.getValue());
+                }
             }
             return null;
         });
