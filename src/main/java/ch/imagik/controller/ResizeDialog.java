@@ -61,9 +61,17 @@ public final class ResizeDialog {
             grid.add(heightField, 1, 5);
 
         }
-        heightField.valueProperty().addListener((obs, old, newVal) -> widthField.getValueFactory().setValue(((int) Math.round(newVal*aspectRatio))));
+        heightField.valueProperty().addListener((obs, old, newVal) -> {
+            if (keepRatio.isSelected()) {
+                widthField.getValueFactory().setValue((int)Math.round(newVal * aspectRatio));
+            }
+        });
 
-        widthField.valueProperty().addListener((obs, old, newVal) -> heightField.getValueFactory().setValue((int)Math.round(newVal/aspectRatio)));
+        widthField.valueProperty().addListener((obs, old, newVal) ->{
+            if (keepRatio.isSelected()) {
+                heightField.getValueFactory().setValue((int)Math.round(newVal/aspectRatio));
+            }
+        });
 
         dialog.getDialogPane().setContent(grid);
 

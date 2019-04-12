@@ -21,4 +21,11 @@ public class ResizeInfo {
     public double getWidth() {
         return width;
     }
+
+    public Integer getPercentage() {
+        return percentage;
+    }
+    public boolean isPercentage(){
+        return percentage>0;
+    }
 }
