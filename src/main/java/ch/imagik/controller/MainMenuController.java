@@ -17,15 +17,6 @@ public class MainMenuController implements Initializable, EventSubscriber {
     @FXML private CheckMenuItem showEditor;
     @FXML private CheckMenuItem showMetadata;
 
-    // bind to disable button property
-    public BooleanProperty showEditPaneProperty()  {
-        return MainModel.getInstance().showEditPaneProperty();
-    }
-    public boolean getShowEditPane()
-    {
-        return showEditPaneProperty().get();
-    }
-
     public BooleanProperty showMetadataProperty()  {
         return MainModel.getInstance().showMetadataProperty();
     }
@@ -56,51 +47,51 @@ public class MainMenuController implements Initializable, EventSubscriber {
         showMetadata.selectedProperty().bindBidirectional(MainModel.getInstance().showMetadataProperty());
     }
 
-    public void selectFolder(ActionEvent e) {
+    @FXML private void selectFolder(ActionEvent e) {
         EventManager.getInstance().post(new SelectFolderEvent());
     }
 
-    public void saveChanges(ActionEvent e) {
+    @FXML private void saveChanges(ActionEvent e) {
         EventManager.getInstance().post(new SaveChangesEvent());
     }
 
-    public void zoomReset(ActionEvent e) {
+    @FXML private void zoomReset(ActionEvent e) {
         EventManager.getInstance().post(new ZoomResetEvent());
     }
 
-    public void zoomFit(ActionEvent e) {
+    @FXML private void zoomFit(ActionEvent e) {
         EventManager.getInstance().post(new ZoomFitEvent());
     }
 
-    public void zoomIn(ActionEvent e) { EventManager.getInstance().post(new ZoomInEvent()); }
+    @FXML private void zoomIn(ActionEvent e) { EventManager.getInstance().post(new ZoomInEvent()); }
 
-    public void zoomOut(ActionEvent e)  {
+    @FXML private void zoomOut(ActionEvent e)  {
         EventManager.getInstance().post(new ZoomOutEvent());
     }
 
-    public void rotateLeft(ActionEvent e) {
+    @FXML private void rotateLeft(ActionEvent e) {
         EventManager.getInstance().post(new RotateLeftEvent());
     }
 
-    public void rotateRight(ActionEvent e) {
+    @FXML private void rotateRight(ActionEvent e) {
         EventManager.getInstance().post(new RotateRightEvent());
     }
 
-    public void flipHorizontally(ActionEvent e) {
+    @FXML private void flipHorizontally(ActionEvent e) {
         EventManager.getInstance().post(new FlipHorizontallyEvent());
     }
 
-    public void flipVertically(ActionEvent e) {
+    @FXML private void flipVertically(ActionEvent e) {
         EventManager.getInstance().post(new FlipVerticallyEvent());
     }
 
-    public void showAbout(ActionEvent e) {
+    @FXML private void showAbout(ActionEvent e) {
         EventManager.getInstance().post(new ShowAboutEvent());
     }
 
-    public void blackWhite(ActionEvent e) {
+    @FXML private void blackWhite(ActionEvent e) {
         EventManager.getInstance().post(new BlackWhiteEvent());
     }
 
-    public void resize(ActionEvent e) { EventManager.getInstance().post(new ResizeEvent()); }
+    @FXML private void resize(ActionEvent e) { EventManager.getInstance().post(new ResizeEvent()); }
 }

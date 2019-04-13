@@ -1,4 +1,4 @@
-package ch.imagik.controller;
+package ch.imagik.dialog;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
@@ -9,8 +9,8 @@ import ch.imagik.model.MainModel;
 import java.io.File;
 import java.util.Optional;
 
-final class BulkDialog {
-    static boolean show(ObservableList<File> selectedFiles) {
+public final class BulkDialog {
+    public static boolean show(ObservableList<File> selectedFiles) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
 
         String title = MainModel.getInstance().getLocalizedString("bulk_dialog.title");

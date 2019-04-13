@@ -3,187 +3,71 @@
   <ID>JAVA</ID>
   <OriginalElement>ch.imagik.model.ImageMetadata</OriginalElement>
   <nodes>
-    <node x="966.2" y="290.0">ch.imagik.controller.MainController</node>
-    <node x="611.5947916666667" y="90.0">ch.imagik.service.ResourceService</node>
-    <node x="651.2" y="290.0">ch.imagik.controller.BulkDialog</node>
-    <node x="5.2000000000000455" y="290.0">ch.imagik.controller.MetadataController</node>
-    <node x="11.0" y="535.0">ch.imagik.Main</node>
-    <node x="325.48932291666665" y="170.0">ch.imagik.model.ResizeInfo</node>
-    <node x="338.19999999999993" y="290.0">ch.imagik.controller.ResizeDialog</node>
-    <node x="0.0" y="455.0">ch.imagik.MainApp</node>
-    <node x="829.4916666666667" y="0.0">ch.imagik.event.EventSubscriber</node>
-    <node x="659.3953125" y="170.0">ch.imagik.model.MainModel</node>
-    <node x="775.0947916666667" y="380.0">ch.imagik.controller.ContentAreaController</node>
-    <node x="0.0" y="170.0">ch.imagik.model.ImageMetadata</node>
-    <node x="882.6453125" y="90.0">ch.imagik.service.ImageService</node>
-    <node x="177.19999999999993" y="290.0">ch.imagik.controller.SideBarController</node>
-    <node x="475.2" y="290.0">ch.imagik.controller.MainMenuController</node>
-    <node x="778.2" y="290.0">ch.imagik.controller.ThumbnailController</node>
+    <node x="569.0" y="268.0">ch.imagik.controller.MainController</node>
+    <node x="424.3603333333334" y="86.0">ch.imagik.service.ResourceService</node>
+    <node x="0.0" y="268.0">ch.imagik.controller.MetadataController</node>
+    <node x="10.5" y="415.0">ch.imagik.Main</node>
+    <node x="140.0" y="339.0">ch.imagik.model.ResizeInfo</node>
+    <node x="671.0833333333334" y="0.0">ch.imagik.event.EventSubscriber</node>
+    <node x="0.0" y="339.0">ch.imagik.MainApp</node>
+    <node x="495.875" y="172.0">ch.imagik.model.MainModel</node>
+    <node x="0.2999999999999545" y="172.0">ch.imagik.model.ImageMetadata</node>
+    <node x="733.0" y="268.0">ch.imagik.controller.ContentAreaController</node>
+    <node x="719.3333333333333" y="86.0">ch.imagik.service.ImageService</node>
+    <node x="384.0" y="268.0">ch.imagik.controller.SideBarController</node>
+    <node x="946.0" y="268.0">ch.imagik.controller.ThumbnailController</node>
+    <node x="192.0" y="268.0">ch.imagik.controller.MainMenuController</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.controller.BulkDialog">
-      <point x="-41.75" y="-15.0" />
-      <point x="816.8447916666667" y="350.0" />
-      <point x="704.2" y="350.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.MainMenuController" target="ch.imagik.model.MainModel">
-      <point x="39.0" y="-15.0" />
-      <point x="592.2" y="260.0" />
-      <point x="706.6453125" y="260.0" />
-      <point x="-6.75" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.MainController" target="ch.imagik.model.MainModel">
-      <point x="-42.33333333333334" y="-15.0" />
-      <point x="987.3666666666667" y="250.0" />
-      <point x="760.6453125" y="250.0" />
-      <point x="47.25" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.MainController" target="ch.imagik.service.ImageService">
-      <point x="0.0" y="-15.0" />
-      <point x="1029.7" y="270.0" />
-      <point x="1045.3666666666668" y="270.0" />
-      <point x="1045.3666666666668" y="150.0" />
-      <point x="991.7286458333333" y="150.0" />
-      <point x="49.583333333333314" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ResizeDialog" target="ch.imagik.model.MainModel">
-      <point x="39.0" y="-15.0" />
-      <point x="435.69999999999993" y="250.0" />
-      <point x="693.1453125" y="250.0" />
-      <point x="-20.25" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.Main" target="ch.imagik.MainApp">
-      <point x="0.0" y="-15.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
     <edge source="ch.imagik.controller.MainController" target="ch.imagik.event.EventSubscriber">
-      <point x="42.333333333333314" y="-15.0" />
-      <point x="1072.0333333333333" y="270.0" />
-      <point x="1061.6559895833334" y="270.0" />
-      <point x="1061.6559895833334" y="60.0" />
-      <point x="928.4916666666667" y="60.0" />
-      <point x="33.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.SideBarController" target="ch.imagik.model.MainModel">
-      <point x="35.25" y="-15.0" />
-      <point x="282.94999999999993" y="240.0" />
-      <point x="679.6453125" y="240.0" />
-      <point x="-33.75" y="15.0" />
+      <point x="0.0" y="-13.0" />
+      <point x="641.0" y="248.0" />
+      <point x="658.6300000000001" y="248.0" />
+      <point x="658.6300000000001" y="66.0" />
+      <point x="734.0" y="66.0" />
+      <point x="-12.583333333333314" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.SideBarController" target="ch.imagik.event.EventSubscriber">
-      <point x="-35.25" y="-15.0" />
-      <point x="212.45000000000005" y="50.0" />
-      <point x="840.4916666666667" y="50.0" />
-      <point x="-55.0" y="15.0" />
+      <point x="-41.25" y="-13.0" />
+      <point x="425.25" y="218.0" />
+      <point x="402.35416666666674" y="218.0" />
+      <point x="402.35416666666674" y="56.0" />
+      <point x="708.8333333333334" y="56.0" />
+      <point x="-37.75" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.event.EventSubscriber">
-      <point x="0.0" y="-15.0" />
-      <point x="856.2" y="270.0" />
-      <point x="860.4916666666667" y="270.0" />
-      <point x="860.4916666666667" y="70.0" />
-      <point x="884.4916666666667" y="70.0" />
-      <point x="-11.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.BulkDialog" target="ch.imagik.model.MainModel">
-      <point x="0.0" y="-15.0" />
-      <point x="704.2" y="270.0" />
-      <point x="720.1453125" y="270.0" />
-      <point x="6.75" y="15.0" />
+      <point x="59.66666666666663" y="-13.0" />
+      <point x="1095.1666666666665" y="248.0" />
+      <point x="1062.2341666666666" y="248.0" />
+      <point x="1062.2341666666666" y="46.0" />
+      <point x="809.5" y="46.0" />
+      <point x="62.916666666666686" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.MainMenuController" target="ch.imagik.event.EventSubscriber">
-      <point x="-39.0" y="-15.0" />
-      <point x="514.1999999999999" y="60.0" />
-      <point x="862.4916666666667" y="60.0" />
-      <point x="-33.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ResizeDialog" target="ch.imagik.model.ResizeInfo">
-      <point x="0.0" y="-15.0" />
-      <point x="396.69999999999993" y="220.0" />
-      <point x="401.98932291666665" y="220.0" />
-      <point x="25.5" y="15.0" />
+      <point x="-43.0" y="-13.0" />
+      <point x="235.0" y="46.0" />
+      <point x="683.6666666666666" y="46.0" />
+      <point x="-62.916666666666686" y="13.0" />
     </edge>
     <edge source="ch.imagik.service.ImageService" target="ch.imagik.event.EventSubscriber">
-      <point x="0.0" y="-15.0" />
-      <point x="942.1453125" y="70.0" />
-      <point x="906.4916666666667" y="70.0" />
-      <point x="11.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.MetadataController" target="ch.imagik.model.MainModel">
-      <point x="60.799999999999955" y="-15.0" />
-      <point x="142.0" y="230.0" />
-      <point x="666.1453125" y="230.0" />
-      <point x="-47.25" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.service.ImageService">
-      <point x="13.916666666666686" y="-15.0" />
-      <point x="872.5114583333333" y="340.0" />
-      <point x="944.7" y="340.0" />
-      <point x="944.7" y="140.0" />
-      <point x="952.0619791666667" y="140.0" />
-      <point x="9.916666666666686" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.model.MainModel">
-      <point x="-52.0" y="-15.0" />
-      <point x="804.2" y="260.0" />
-      <point x="747.1453125" y="260.0" />
-      <point x="33.75" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.controller.ResizeDialog">
-      <point x="-69.58333333333331" y="-15.0" />
-      <point x="789.0114583333333" y="360.0" />
-      <point x="396.69999999999993" y="360.0" />
-      <point x="0.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.service.ImageService">
-      <point x="52.0" y="-15.0" />
-      <point x="908.2" y="270.0" />
-      <point x="922.0971354166667" y="270.0" />
-      <point x="922.0971354166667" y="150.0" />
-      <point x="932.2286458333333" y="150.0" />
-      <point x="-9.916666666666657" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.model.MainModel">
-      <point x="-13.916666666666657" y="-15.0" />
-      <point x="844.6781249999999" y="340.0" />
-      <point x="767.7" y="340.0" />
-      <point x="767.7" y="270.0" />
-      <point x="733.6453125" y="270.0" />
-      <point x="20.25" y="15.0" />
+      <point x="0.0" y="-13.0" />
+      <point x="784.3333333333333" y="66.0" />
+      <point x="759.1666666666667" y="66.0" />
+      <point x="12.583333333333371" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.event.EventSubscriber">
-      <point x="69.58333333333331" y="-15.0" />
-      <point x="928.1781249999999" y="360.0" />
-      <point x="1103.7" y="360.0" />
-      <point x="1103.7" y="50.0" />
-      <point x="950.4916666666667" y="50.0" />
-      <point x="55.0" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.model.MainModel" target="ch.imagik.service.ImageService">
-      <point x="40.5" y="-15.0" />
-      <point x="753.8953125" y="150.0" />
-      <point x="912.3953125" y="150.0" />
-      <point x="-29.75" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.model.MainModel" target="ch.imagik.service.ResourceService">
-      <point x="-13.5" y="-15.0" />
-      <point x="699.8953125" y="150.0" />
-      <point x="711.3447916666667" y="150.0" />
-      <point x="33.25" y="15.0" />
-    </edge>
-    <edge source="ch.imagik.controller.MetadataController" target="ch.imagik.model.ImageMetadata">
-      <point x="30.40000000000009" y="-15.0" />
-      <point x="111.60000000000014" y="270.0" />
-      <point x="115.5" y="270.0" />
-      <point x="49.5" y="15.0" />
+      <point x="72.37499999999997" y="-13.0" />
+      <point x="901.875" y="248.0" />
+      <point x="1035.7916666666667" y="248.0" />
+      <point x="1035.7916666666667" y="56.0" />
+      <point x="784.3333333333334" y="56.0" />
+      <point x="37.75" y="13.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.8" x="435.6428571428571" y="183.83333333333323" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="562.5" y="220.5" />
   <SelectedNodes />
-  <Categories>
-    <Category>Inner Classes</Category>
-  </Categories>
+  <Categories />
   <SCOPE>Project Files</SCOPE>
   <VISIBILITY>public</VISIBILITY>
 </Diagram>

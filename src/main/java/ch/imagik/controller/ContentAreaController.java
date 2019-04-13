@@ -1,5 +1,7 @@
 package ch.imagik.controller;
 
+import ch.imagik.dialog.BulkDialog;
+import ch.imagik.dialog.ResizeDialog;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import javafx.beans.property.BooleanProperty;
@@ -80,9 +82,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
         zoomFit(new ZoomFitEvent());
     }
+
     private void setBackgroundNoFolder() {
         setBackgroundOnCondition("/ch/imagik/background/home_1.jpg");
-
     }
 
     private void setBackgroundNoSelection() {
@@ -172,7 +174,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         updateImageView();
     }
 
-    public void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
+    @FXML private void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -188,7 +190,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
 
-    public void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
+    @FXML private void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -202,7 +204,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    public void flipHorizontally(ActionEvent e) { flipHorizontally(new FlipHorizontallyEvent());
+    @FXML private void flipHorizontally(ActionEvent e) { flipHorizontally(new FlipHorizontallyEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -217,7 +219,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    public void flipVertically(ActionEvent e) { flipVertically(new FlipVerticallyEvent());
+    @FXML private void flipVertically(ActionEvent e) { flipVertically(new FlipVerticallyEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -232,7 +234,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    public void resize(ActionEvent e) { resize(new ResizeEvent()); }
+    @FXML private void resize(ActionEvent e) { resize(new ResizeEvent()); }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -246,7 +248,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     }
 
-    public void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }
+    @FXML private void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -260,10 +262,10 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    public void saveChanges(ActionEvent e) {
+    @FXML private void saveChanges(ActionEvent e) {
     }
 
-    public void resetChanges(ActionEvent e) {
+    @FXML private void resetChanges(ActionEvent e) {
         resetChanges(new ResetChangesEvent());
     }
 

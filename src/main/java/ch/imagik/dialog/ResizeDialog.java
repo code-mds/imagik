@@ -1,4 +1,4 @@
-package ch.imagik.controller;
+package ch.imagik.dialog;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
