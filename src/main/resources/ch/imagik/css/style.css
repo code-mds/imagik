@@ -76,9 +76,20 @@
     -fx-icon-code: fa-pencil;
 }
 
+.clear-search-icon {
+    -fx-icon-code: mdi-eraser;
+}
+.clear-search {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+}
 
 .search-icon {
     -fx-icon-code: fa-search;
+}
+
+.search-field {
+    -fx-padding: 6 6 6 6;
 }
 
 .about-icon {
@@ -88,3 +99,4 @@
 .folder-icon {
    -fx-icon-code: fa-folder-open-o;
 }
+

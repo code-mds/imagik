@@ -13,6 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import ch.imagik.model.MainModel;
+import org.controlsfx.control.textfield.CustomTextField;
 
 import java.io.File;
 import java.net.URL;
@@ -24,7 +25,7 @@ public class SideBarController implements Initializable, EventSubscriber {
 
     @FXML private AnchorPane metadataPane;
     @FXML private SplitPane splitPane;
-    @FXML private TextField searchField;
+    @FXML private CustomTextField searchField;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
