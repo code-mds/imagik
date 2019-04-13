@@ -86,6 +86,7 @@
 
 .search-icon {
     -fx-icon-code: fa-search;
+    -fx-icon-color: gray;
 }
 
 .search-field {
