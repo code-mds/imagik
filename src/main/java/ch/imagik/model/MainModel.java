@@ -1,6 +1,7 @@
 package ch.imagik.model;
 
 import ch.imagik.event.*;
+import ch.imagik.service.LogService;
 import com.google.common.eventbus.Subscribe;
 import javafx.beans.property.*;
 import javafx.beans.value.ChangeListener;
@@ -16,6 +17,7 @@ public class MainModel implements EventSubscriber {
     // single instance
     private static MainModel instance;
 
+    private final LogService logService = LogService.build(System.out);
     private final ImageService imageService = ImageService.build();
     private final ResourceService resourceService = new ResourceService();
 

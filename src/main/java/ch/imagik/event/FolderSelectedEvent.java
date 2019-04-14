@@ -10,4 +10,9 @@ public class FolderSelectedEvent implements EventBase {
     public Folder getFolder() {
         return folder;
     }
+
+    @Override
+    public String toString() {
+        return String.format("FolderSelected|%s", folder);
+    }
 }

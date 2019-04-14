@@ -1,4 +1,4 @@
 package ch.imagik.event;
 
-interface EventBase {
+public interface EventBase {
 }
