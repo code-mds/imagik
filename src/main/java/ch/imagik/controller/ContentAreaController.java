@@ -2,8 +2,11 @@ package ch.imagik.controller;
 
 import ch.imagik.dialog.BulkDialog;
 import ch.imagik.dialog.ResizeDialog;
+import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
+import ij.gui.SaveChangesDialog;
+import ij.io.SaveDialog;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
@@ -16,6 +19,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
+import javafx.stage.DirectoryChooser;
+import javafx.stage.FileChooser;
+import javafx.stage.Window;
+import org.apache.commons.io.FilenameUtils;
 
 
 import javax.imageio.ImageIO;
@@ -263,6 +270,38 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
     @FXML private void saveChanges(ActionEvent e) {
+        EventManager.getInstance().post(new SaveChangesEvent());
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void saveChanges(SaveChangesEvent e) {
+        saveImage(selectedFiles);
+    }
+
+    private void saveImage(List<File> selectedFiles) {
+        if(selectedFiles.size() == 1){
+            Window window = editPane.getScene().getWindow();
+            FileChooser fileChooser = new FileChooser();
+
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png", "*.gif");
+            fileChooser.getExtensionFilters().add(extFilter);
+
+            File file = fileChooser.showSaveDialog(window);
+            if(file == null)
+                return;
+
+            try {
+                ImageIO.write(currentImage, FilenameUtils.getExtension(file.getName()), file);
+
+                // SAVE AS IN SAME DIRECTORY, NEED TO REFRESH THUMB CONTENT
+                if(!file.equals(selectedFiles.get(0)) && file.getParent().equals(selectedFiles.get(0).getParent())) {
+                    EventManager.getInstance().post(new FolderRefreshEvent(new Folder(file.getParentFile())));
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML private void resetChanges(ActionEvent e) {

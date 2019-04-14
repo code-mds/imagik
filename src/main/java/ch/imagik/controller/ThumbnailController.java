@@ -1,5 +1,7 @@
 package ch.imagik.controller;
 
+import ch.imagik.event.FolderRefreshEvent;
+import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.EventManager;
 import ch.imagik.event.EventSubscriber;
@@ -20,9 +22,7 @@ import ch.imagik.model.MainModel;
 import java.io.File;
 import java.net.URL;
 import java.text.DateFormat;
-import java.util.Date;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ThumbnailController implements Initializable, EventSubscriber {
     private final static int THUMB_SIZE = 50;
@@ -49,7 +49,9 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         EventManager.getInstance().register(this);
 
         MainModel mainModel = MainModel.getInstance();
+
         mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
+
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
         ImageService imageService = mainModel.getImageService();
         thumbListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
@@ -97,8 +99,18 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter));
     }
 
-    private void listFiles(File dir) {
+    private void listFiles(Folder dir) {
         File[] files = ImageService.listImages(dir);
         imageList.setAll(files);
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void folderRefresh(FolderRefreshEvent e) {
+        File[] files = ImageService.listImages(e.getFolder());
+        for (File f : files) {
+            if(!imageList.contains(f))
+                imageList.add(f);
+        }
     }
 }

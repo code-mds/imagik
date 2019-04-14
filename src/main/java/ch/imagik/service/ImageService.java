@@ -1,6 +1,7 @@
 
 package ch.imagik.service;
 
+import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import ij.ImagePlus;
@@ -20,8 +21,6 @@ import java.util.function.Function;
 
 public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
-
-    //TODO handle invalidation of edited images
     private final Map<File, Image> thumbnailCache = new HashMap<>();
 
     public static ImageService build() {
@@ -32,8 +31,8 @@ public final class ImageService implements EventSubscriber {
 
     private ImageService() {}
 
-    public static File[] listImages(File dir) {
-        return dir.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
+    public static File[] listImages(Folder folder) {
+        return folder == null ? new File[0] : folder.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
     }
 
     @SuppressWarnings("UnstableApiUsage")

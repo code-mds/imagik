@@ -3,69 +3,65 @@
   <ID>JAVA</ID>
   <OriginalElement>ch.imagik.model.ImageMetadata</OriginalElement>
   <nodes>
-    <node x="569.0" y="268.0">ch.imagik.controller.MainController</node>
-    <node x="424.3603333333334" y="86.0">ch.imagik.service.ResourceService</node>
-    <node x="0.0" y="268.0">ch.imagik.controller.MetadataController</node>
-    <node x="10.5" y="415.0">ch.imagik.Main</node>
-    <node x="140.0" y="339.0">ch.imagik.model.ResizeInfo</node>
-    <node x="671.0833333333334" y="0.0">ch.imagik.event.EventSubscriber</node>
-    <node x="0.0" y="339.0">ch.imagik.MainApp</node>
-    <node x="495.875" y="172.0">ch.imagik.model.MainModel</node>
-    <node x="0.2999999999999545" y="172.0">ch.imagik.model.ImageMetadata</node>
-    <node x="733.0" y="268.0">ch.imagik.controller.ContentAreaController</node>
-    <node x="719.3333333333333" y="86.0">ch.imagik.service.ImageService</node>
-    <node x="384.0" y="268.0">ch.imagik.controller.SideBarController</node>
-    <node x="946.0" y="268.0">ch.imagik.controller.ThumbnailController</node>
-    <node x="192.0" y="268.0">ch.imagik.controller.MainMenuController</node>
+    <node x="217.0" y="157.0">ch.imagik.service.ResourceService</node>
+    <node x="0.0" y="86.0">ch.imagik.controller.MainController</node>
+    <node x="0.0" y="157.0">ch.imagik.controller.MetadataController</node>
+    <node x="896.0" y="157.0">ch.imagik.Main</node>
+    <node x="595.0" y="157.0">ch.imagik.model.ResizeInfo</node>
+    <node x="756.0" y="157.0">ch.imagik.MainApp</node>
+    <node x="558.5" y="0.0">ch.imagik.event.EventSubscriber</node>
+    <node x="1103.0" y="86.0">ch.imagik.model.MainModel</node>
+    <node x="356.0" y="86.0">ch.imagik.controller.ContentAreaController</node>
+    <node x="413.0" y="157.0">ch.imagik.model.ImageMetadata</node>
+    <node x="569.0" y="86.0">ch.imagik.service.ImageService</node>
+    <node x="918.0" y="86.0">ch.imagik.controller.SideBarController</node>
+    <node x="164.0" y="86.0">ch.imagik.controller.MainMenuController</node>
+    <node x="719.0" y="86.0">ch.imagik.controller.ThumbnailController</node>
   </nodes>
   <notes />
   <edges>
+    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.event.EventSubscriber">
+      <point x="0.0" y="-13.0" />
+      <point x="452.5" y="66.0" />
+      <point x="612.4285714285714" y="66.0" />
+      <point x="-21.571428571428555" y="13.0" />
+    </edge>
     <edge source="ch.imagik.controller.MainController" target="ch.imagik.event.EventSubscriber">
       <point x="0.0" y="-13.0" />
-      <point x="641.0" y="248.0" />
-      <point x="658.6300000000001" y="248.0" />
-      <point x="658.6300000000001" y="66.0" />
-      <point x="734.0" y="66.0" />
-      <point x="-12.583333333333314" y="13.0" />
+      <point x="72.0" y="46.0" />
+      <point x="569.2857142857142" y="46.0" />
+      <point x="-64.71428571428578" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.SideBarController" target="ch.imagik.event.EventSubscriber">
-      <point x="-41.25" y="-13.0" />
-      <point x="425.25" y="218.0" />
-      <point x="402.35416666666674" y="218.0" />
-      <point x="402.35416666666674" y="56.0" />
-      <point x="708.8333333333334" y="56.0" />
-      <point x="-37.75" y="13.0" />
+      <point x="0.0" y="-13.0" />
+      <point x="1000.5" y="56.0" />
+      <point x="677.1428571428571" y="56.0" />
+      <point x="43.14285714285711" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.ThumbnailController" target="ch.imagik.event.EventSubscriber">
-      <point x="59.66666666666663" y="-13.0" />
-      <point x="1095.1666666666665" y="248.0" />
-      <point x="1062.2341666666666" y="248.0" />
-      <point x="1062.2341666666666" y="46.0" />
-      <point x="809.5" y="46.0" />
-      <point x="62.916666666666686" y="13.0" />
+      <point x="0.0" y="-13.0" />
+      <point x="808.5" y="66.0" />
+      <point x="655.5714285714286" y="66.0" />
+      <point x="21.571428571428555" y="13.0" />
     </edge>
     <edge source="ch.imagik.controller.MainMenuController" target="ch.imagik.event.EventSubscriber">
-      <point x="-43.0" y="-13.0" />
-      <point x="235.0" y="46.0" />
-      <point x="683.6666666666666" y="46.0" />
-      <point x="-62.916666666666686" y="13.0" />
+      <point x="0.0" y="-13.0" />
+      <point x="250.0" y="56.0" />
+      <point x="590.8571428571429" y="56.0" />
+      <point x="-43.14285714285711" y="13.0" />
+    </edge>
+    <edge source="ch.imagik.model.MainModel" target="ch.imagik.event.EventSubscriber">
+      <point x="0.0" y="-13.0" />
+      <point x="1157.5" y="46.0" />
+      <point x="698.7142857142857" y="46.0" />
+      <point x="64.71428571428567" y="13.0" />
     </edge>
     <edge source="ch.imagik.service.ImageService" target="ch.imagik.event.EventSubscriber">
       <point x="0.0" y="-13.0" />
-      <point x="784.3333333333333" y="66.0" />
-      <point x="759.1666666666667" y="66.0" />
-      <point x="12.583333333333371" y="13.0" />
-    </edge>
-    <edge source="ch.imagik.controller.ContentAreaController" target="ch.imagik.event.EventSubscriber">
-      <point x="72.37499999999997" y="-13.0" />
-      <point x="901.875" y="248.0" />
-      <point x="1035.7916666666667" y="248.0" />
-      <point x="1035.7916666666667" y="56.0" />
-      <point x="784.3333333333334" y="56.0" />
-      <point x="37.75" y="13.0" />
+      <point x="0.0" y="13.0" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="562.5" y="220.5" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="790.5" y="443.0" />
   <SelectedNodes />
   <Categories />
   <SCOPE>Project Files</SCOPE>

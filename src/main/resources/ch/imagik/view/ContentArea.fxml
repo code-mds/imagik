@@ -69,7 +69,7 @@
                         <FontIcon styleClass="reset-icon" />
                     </graphic>
                 </Button>
-                <Button disable="true" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                     <tooltip><Tooltip text="%save_changes" /></tooltip>
                     <graphic>
                         <FontIcon styleClass="save-icon" />

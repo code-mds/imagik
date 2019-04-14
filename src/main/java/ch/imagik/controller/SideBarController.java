@@ -1,5 +1,6 @@
 package ch.imagik.controller;
 
+import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.EventManager;
 import ch.imagik.event.FolderSelectedEvent;
@@ -8,7 +9,6 @@ import ch.imagik.event.EventSubscriber;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
@@ -48,7 +48,8 @@ public class SideBarController implements Initializable, EventSubscriber {
         if(dir == null || !dir.isDirectory())
             return;
 
-        EventManager.getInstance().post(new FolderSelectedEvent(dir));
-        MainModel.getInstance().setSelectedFolder(dir);
+        Folder folder = new Folder(dir);
+        EventManager.getInstance().post(new FolderSelectedEvent(folder));
+        MainModel.getInstance().setSelectedFolder(folder);
     }
 }

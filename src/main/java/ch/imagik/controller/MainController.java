@@ -1,5 +1,6 @@
 package ch.imagik.controller;
 
+import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import javafx.application.Platform;
@@ -52,8 +53,19 @@ public class MainController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void folderSelected(FolderSelectedEvent e) {
-        File folder = e.getFolder();
-        currentFolder.setText(e.getFolder().toString());
+        Folder folder = e.getFolder();
+        updateStatusBar(folder);
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void folderRefresh(FolderRefreshEvent e) {
+        Folder folder = e.getFolder();
+        updateStatusBar(folder);
+    }
+
+    private void updateStatusBar(Folder folder) {
+        currentFolder.setText(folder.toString());
         File[] files = ImageService.listImages(folder);
         totalFiles.setText(String.format("%d files", files.length));
     }
