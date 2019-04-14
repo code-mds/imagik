@@ -41,16 +41,8 @@ public class MainModel implements EventSubscriber {
         return instance;
     }
 
-    public void addSelectedFolderListener(ChangeListener<Folder> listener) {
-        instance.selectedFolderProperty.addListener(listener);
-    }
-
     public void addFilterListener(ChangeListener<String> listener) {
         instance.filterProperty.addListener(listener);
-    }
-
-    public void setSelectedFolder(Folder folder) {
-        selectedFolderProperty.set(folder);
     }
 
     public void setFilter(String filter) {
@@ -90,6 +82,6 @@ public class MainModel implements EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void folderSelected(FolderSelectedEvent e) {
-        setSelectedFolder(e.getFolder());
+        selectedFolderProperty.set(e.getFolder());
     }
 }

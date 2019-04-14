@@ -1,11 +1,8 @@
 package ch.imagik.controller;
 
-import ch.imagik.event.FolderRefreshEvent;
+import ch.imagik.event.*;
 import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
-import ch.imagik.event.EventManager;
-import ch.imagik.event.EventSubscriber;
-import ch.imagik.event.FilesChangedEvent;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -34,23 +31,11 @@ public class ThumbnailController implements Initializable, EventSubscriber {
                     DateFormat.SHORT,
                     Locale.getDefault());
 
-    @SuppressWarnings("UnstableApiUsage")
-    @Subscribe
-    private void fileChanged(FilesChangedEvent e) {
-        for (File file : e.getFiles()) {
-            int oldPos = imageList.indexOf(file);
-            imageList.remove(oldPos);
-            imageList.add(oldPos, file);
-        }
-    }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
 
         MainModel mainModel = MainModel.getInstance();
-
-        mainModel.addSelectedFolderListener((observable, oldValue, newValue) -> listFiles(newValue));
 
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
         ImageService imageService = mainModel.getImageService();
@@ -99,7 +84,7 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter));
     }
 
-    private void listFiles(Folder dir) {
+    private void populateImageList(Folder dir) {
         File[] files = ImageService.listImages(dir);
         imageList.setAll(files);
     }
@@ -111,6 +96,22 @@ public class ThumbnailController implements Initializable, EventSubscriber {
         for (File f : files) {
             if(!imageList.contains(f))
                 imageList.add(f);
+        }
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void folderSelected(FolderSelectedEvent e) {
+        populateImageList(e.getFolder());
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void fileChanged(FilesChangedEvent e) {
+        for (File file : e.getFiles()) {
+            int oldPos = imageList.indexOf(file);
+            imageList.remove(oldPos);
+            imageList.add(oldPos, file);
         }
     }
 }

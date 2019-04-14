@@ -48,8 +48,6 @@ public class SideBarController implements Initializable, EventSubscriber {
         if(dir == null || !dir.isDirectory())
             return;
 
-        Folder folder = new Folder(dir);
-        EventManager.getInstance().post(new FolderSelectedEvent(folder));
-        MainModel.getInstance().setSelectedFolder(folder);
+        EventManager.getInstance().post(new FolderSelectedEvent(new Folder(dir)));
     }
 }

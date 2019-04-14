@@ -69,8 +69,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        EventManager.getInstance()
-                .register(this);
+        EventManager.getInstance().register(this);
 
         MainModel.getInstance()
                 .getSelectedFiles()
@@ -284,7 +283,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             Window window = editPane.getScene().getWindow();
             FileChooser fileChooser = new FileChooser();
 
-            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Images", "*.jpg", "*.jpeg", "*.png", "*.gif");
+            FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Images",
+                    "*.jpg", "*.jpeg", "*.png", "*.gif");
             fileChooser.getExtensionFilters().add(extFilter);
 
             File file = fileChooser.showSaveDialog(window);
