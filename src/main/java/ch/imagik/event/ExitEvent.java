@@ -1,4 +1,4 @@
 package ch.imagik.event;
 
-public class ExitEvent implements EventBase {
+public class ExitEvent implements EventBase, EventLoggable {
 }

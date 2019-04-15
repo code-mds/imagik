@@ -1,4 +1,4 @@
 package ch.imagik.event;
 
-public class ResetChangesEvent implements EventBase {
+public class ResetChangesEvent implements EventBase, EventLoggable {
 }

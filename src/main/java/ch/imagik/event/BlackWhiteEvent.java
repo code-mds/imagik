@@ -1,4 +1,4 @@
 package ch.imagik.event;
 
-public class BlackWhiteEvent implements EventBase {
+public class BlackWhiteEvent implements EventBase, EventLoggable {
 }

@@ -79,6 +79,17 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         setBackgroundNoFolder();
     }
 
+    @FXML private void rotateLeft(ActionEvent e) { EventManager.getInstance().post(new RotateLeftEvent()); }
+    @FXML private void rotateRight(ActionEvent e) { EventManager.getInstance().post(new RotateRightEvent()); }
+    @FXML private void flipHorizontally(ActionEvent e) { EventManager.getInstance().post(new FlipHorizontallyEvent()); }
+    @FXML private void flipVertically(ActionEvent e) { EventManager.getInstance().post(new FlipVerticallyEvent()); }
+    @FXML private void resize(ActionEvent e) { EventManager.getInstance().post(new ResizeEvent()); }
+    @FXML private void blackWhite(ActionEvent e) { EventManager.getInstance().post(new BlackWhiteEvent()); }
+    @FXML private void saveChanges(ActionEvent e) { EventManager.getInstance().post(new SaveChangesEvent()); }
+    @FXML private void resetChanges(ActionEvent e) {
+        EventManager.getInstance().post(new ResetChangesEvent());
+    }
+
     private void setBackgroundOnCondition(String url) {
         try {
             currentImage=ImageIO.read(this.getClass().getResource(url));
@@ -180,8 +191,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         updateImageView();
     }
 
-    @FXML private void rotateLeft(ActionEvent e) { rotateLeft(new RotateLeftEvent());
-    }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -196,7 +205,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
 
-    @FXML private void rotateRight(ActionEvent e) { rotateRight(new RotateRightEvent()); }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -208,9 +216,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::rotateRight);
         }
-    }
-
-    @FXML private void flipHorizontally(ActionEvent e) { flipHorizontally(new FlipHorizontallyEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -225,8 +230,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    @FXML private void flipVertically(ActionEvent e) { flipVertically(new FlipVerticallyEvent());
-    }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -240,8 +243,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
-    @FXML private void resize(ActionEvent e) { resize(new ResizeEvent()); }
-
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void resize(ResizeEvent e) {
@@ -254,7 +255,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
     }
 
-    @FXML private void blackWhite(ActionEvent e) { blackWhite(new BlackWhiteEvent()); }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -266,10 +266,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 imageService.multiSelectionImageEdit(selectedFiles, ImageService::greyScale);
         }
-    }
-
-    @FXML private void saveChanges(ActionEvent e) {
-        EventManager.getInstance().post(new SaveChangesEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -302,10 +298,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 e.printStackTrace();
             }
         }
-    }
-
-    @FXML private void resetChanges(ActionEvent e) {
-        resetChanges(new ResetChangesEvent());
     }
 
     @SuppressWarnings("UnstableApiUsage")
