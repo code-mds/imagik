@@ -4,13 +4,15 @@
   <OriginalElement>ch.imagik.service.ImageService</OriginalElement>
   <nodes>
     <node x="0.0" y="0.0">ch.imagik.model.MainModel</node>
-    <node x="0.0" y="626.0">ch.imagik.controller.ContentAreaController</node>
-    <node x="0.0" y="357.0">ch.imagik.service.ImageService</node>
-    <node x="348.0" y="626.0">ch.imagik.controller.ThumbnailController</node>
+    <node x="0.0" y="741.0">ch.imagik.service.processor.RotateRightProcessor</node>
+    <node x="0.0" y="538.0">ch.imagik.controller.ContentAreaController</node>
+    <node x="0.0" y="313.0">ch.imagik.service.ImageService</node>
+    <node x="348.0" y="538.0">ch.imagik.service.processor.RotateLeftProcessor</node>
+    <node x="334.0" y="741.0">ch.imagik.controller.ThumbnailController</node>
   </nodes>
   <notes />
   <edges />
-  <settings layout="Hierarchic Group" zoom="0.7055884843353091" x="790.4999999999999" y="443.0" />
+  <settings layout="Hierarchic Group" zoom="0.7055884843353091" x="790.0" y="443.0" />
   <SelectedNodes>
     <node>ch.imagik.model.MainModel</node>
   </SelectedNodes>

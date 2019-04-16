@@ -23,7 +23,7 @@ public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final Map<File, Image> thumbnailCache = new HashMap<>();
 
-    public static ImageService build() {
+    public static ImageService  build() {
         ImageService imageService = new ImageService();
         EventManager.getInstance().register(imageService);
         return imageService;
@@ -52,16 +52,6 @@ public final class ImageService implements EventSubscriber {
             image = thumbnailCache.get(file);
         }
         return image;
-    }
-
-    public static BufferedImage rotateLeft(BufferedImage currentImage) {
-        ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
-        return imageToEdit.getProcessor().rotateLeft().getBufferedImage();
-    }
-
-    public static BufferedImage rotateRight(BufferedImage currentImage){
-        ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
-        return imageToEdit.getProcessor().rotateRight().getBufferedImage();
     }
 
     public static BufferedImage flipHorizontally(BufferedImage currentImage) {

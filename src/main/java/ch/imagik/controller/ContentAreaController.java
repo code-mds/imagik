@@ -3,6 +3,8 @@ package ch.imagik.controller;
 import ch.imagik.dialog.BulkDialog;
 import ch.imagik.dialog.ResizeDialog;
 import ch.imagik.model.Folder;
+import ch.imagik.service.processor.RotateLeftProcessor;
+import ch.imagik.service.processor.RotateRightProcessor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import ij.gui.SaveChangesDialog;
@@ -196,11 +198,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void rotateLeft(RotateLeftEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = ImageService.rotateLeft(currentImage);
+            currentImage = RotateLeftProcessor.process(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, ImageService::rotateLeft);
+                imageService.multiSelectionImageEdit(selectedFiles, RotateLeftProcessor::process);
         }
     }
 
@@ -210,11 +212,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void rotateRight(RotateRightEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = ImageService.rotateRight(currentImage);
+            currentImage = RotateRightProcessor.process(currentImage);
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1 ){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, ImageService::rotateRight);
+                imageService.multiSelectionImageEdit(selectedFiles, RotateRightProcessor::process);
         }
     }
 
