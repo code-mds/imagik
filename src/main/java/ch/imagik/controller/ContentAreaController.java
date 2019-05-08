@@ -198,11 +198,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void rotateLeft(RotateLeftEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = RotateLeftProcessor.process(currentImage);
+            currentImage = new RotateLeftProcessor(currentImage).process();
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
         } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, RotateLeftProcessor::process);
+                new RotateLeftProcessor(selectedFiles).multiProcess();
         }
     }
 
@@ -212,11 +212,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void rotateRight(RotateRightEvent e){
         if(selectedFiles.size() == 1){
-            currentImage = RotateRightProcessor.process(currentImage);
+            currentImage = new RotateRightProcessor(currentImage).process();
             imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1 ){
+        } else if(selectedFiles.size() > 1){
             if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, RotateRightProcessor::process);
+                new RotateRightProcessor(selectedFiles).multiProcess();
         }
     }
 

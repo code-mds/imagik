@@ -2,6 +2,7 @@
 package ch.imagik.service;
 
 import ch.imagik.model.Folder;
+import ch.imagik.model.ResizeInfo;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import ij.ImagePlus;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 
@@ -79,6 +81,19 @@ public final class ImageService implements EventSubscriber {
         for (File currentFile : passedFiles) {
             try {
                 BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile));
+                ImageIO.write(currentImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        EventManager.getInstance().post(new FilesChangedEvent(passedFiles));
+    }
+
+    public void multiSelectionImageEdit(List<File> passedFiles, BiFunction<BufferedImage, ResizeInfo,BufferedImage> serviceSelected, ResizeInfo info){
+        for (File currentFile : passedFiles) {
+            try {
+                BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile),info);
                 ImageIO.write(currentImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
             } catch (IOException e) {
                 e.printStackTrace();

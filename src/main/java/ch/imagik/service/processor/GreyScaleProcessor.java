@@ -1,23 +1,27 @@
 package ch.imagik.service.processor;
 
 import ij.ImagePlus;
+import ij.process.ImageConverter;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
 
-public class RotateRightProcessor extends Processor {
+public class GreyScaleProcessor extends Processor {
 
-    public RotateRightProcessor(BufferedImage currentImage) {
+    public GreyScaleProcessor(BufferedImage currentImage) {
         this.currentImage=currentImage;
     }
 
-    public RotateRightProcessor(List<File> passedFiles) {
+    public GreyScaleProcessor(List<File> passedFiles) {
         this.passedFiles=passedFiles;
     }
 
     @Override
     public BufferedImage process() {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
-        return imageToEdit.getProcessor().rotateRight().getBufferedImage();
+        ImageConverter imageToConvert = new ImageConverter(imageToEdit);
+        imageToConvert.convertToGray32();
+        return imageToEdit.getBufferedImage();
     }
 }
