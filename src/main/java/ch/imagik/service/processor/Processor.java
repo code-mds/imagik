@@ -9,11 +9,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 public abstract class Processor {
     protected BufferedImage currentImage;
     protected List<File> passedFiles;
-    abstract BufferedImage process();
+
+
+    Processor(Map<String,Object> parameters){
+        currentImage=(BufferedImage)parameters.get("currentImage");
+        passedFiles=(List<File>)parameters.get("passedFiles");
+    }
+
+    public abstract BufferedImage process();
     public void multiProcess() {
         for (File currentFile : passedFiles) {
             try {

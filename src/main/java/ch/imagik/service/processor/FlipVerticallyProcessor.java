@@ -6,15 +6,12 @@ import ij.process.ImageProcessor;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class FlipVerticallyProcessor extends Processor {
 
-    public FlipVerticallyProcessor(BufferedImage currentImage) {
-        this.currentImage=currentImage;
-    }
-
-    public FlipVerticallyProcessor(List<File> passedFiles) {
-        this.passedFiles=passedFiles;
+    public FlipVerticallyProcessor(Map<String,Object> parameters) {
+        super(parameters);
     }
 
     @Override

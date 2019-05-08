@@ -3,12 +3,11 @@ package ch.imagik.controller;
 import ch.imagik.dialog.BulkDialog;
 import ch.imagik.dialog.ResizeDialog;
 import ch.imagik.model.Folder;
+import ch.imagik.model.ResizeInfo;
 import ch.imagik.service.processor.RotateLeftProcessor;
 import ch.imagik.service.processor.RotateRightProcessor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
-import ij.gui.SaveChangesDialog;
-import ij.io.SaveDialog;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
 import javafx.embed.swing.SwingFXUtils;
@@ -21,7 +20,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
-import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 import org.apache.commons.io.FilenameUtils;
@@ -31,7 +29,9 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.awt.image.BufferedImage;
 
@@ -197,57 +197,47 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void rotateLeft(RotateLeftEvent e){
-        if(selectedFiles.size() == 1){
-            currentImage = new RotateLeftProcessor(currentImage).process();
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1){
-            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                new RotateLeftProcessor(selectedFiles).multiProcess();
-        }
+        String processToCall = "ch.imagik.service.processor.RotateLeftProcessor";
+        applyFilter(processToCall);
     }
 
+    private void applyFilter(String processToCall) {
+        if (selectedFiles.size() == 1) {
+            currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage));
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
+        } else if (selectedFiles.size() > 1) {
+            if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles));
+        }
+    }
 
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void rotateRight(RotateRightEvent e){
-        if(selectedFiles.size() == 1){
-            currentImage = new RotateRightProcessor(currentImage).process();
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1){
-            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                new RotateRightProcessor(selectedFiles).multiProcess();
-        }
+        String processToCall = "ch.imagik.service.processor.RotateRightProcessor";
+        applyFilter(processToCall);
     }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void flipHorizontally(FlipHorizontallyEvent e){
-        if(selectedFiles.size() == 1){
-            currentImage = ImageService.flipHorizontally(currentImage);
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1){
-            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, ImageService::flipHorizontally);
-        }
+        String processToCall = "ch.imagik.service.processor.FlipHorizontallyProcessor";
+        applyFilter(processToCall);
     }
 
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void flipVertically(FlipVerticallyEvent e){
-        if(selectedFiles.size() == 1){
-            currentImage = ImageService.flipVertically(currentImage);
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size() > 1){
-            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, ImageService::flipVertically);
-        }
+        String processToCall = "ch.imagik.service.processor.FlipVerticallyProcessor";
+        applyFilter(processToCall);
     }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void resize(ResizeEvent e) {
+        ResizeInfo resizeInfo;
         System.out.println("RESIZE");
         if(selectedFiles.size()>1){
             ResizeDialog.show(1,1,true);
@@ -261,13 +251,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void blackWhite(BlackWhiteEvent e) {
-        if(selectedFiles.size() == 1){
-            currentImage = ImageService.greyScale(currentImage);
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage,null));
-        } else if(selectedFiles.size()>1){
-            if(BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                imageService.multiSelectionImageEdit(selectedFiles, ImageService::greyScale);
-        }
+        String processToCall = "ch.imagik.service.processor.GreyScaleProcessor";
+        applyFilter(processToCall);
     }
 
     @SuppressWarnings("UnstableApiUsage")

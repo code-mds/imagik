@@ -3,6 +3,7 @@ package ch.imagik.service;
 
 import ch.imagik.model.Folder;
 import ch.imagik.model.ResizeInfo;
+import ch.imagik.service.processor.Processor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import ij.ImagePlus;
@@ -14,12 +15,13 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-
 
 public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
@@ -75,6 +77,21 @@ public final class ImageService implements EventSubscriber {
         ImageConverter imageToConvert = new ImageConverter(imageToEdit);
         imageToConvert.convertToGray32();
         return imageToEdit.getBufferedImage();
+    }
+    public static BufferedImage applyFilter(String filterName, Map<String, Object> parameters) {
+        try {
+            Class<Processor> processorClass = (Class<Processor>)Class.forName(filterName);
+            Constructor<Processor> processorConstructor = processorClass.getConstructor(Map.class);
+            Processor processor = processorConstructor.newInstance(parameters);
+            if(parameters.containsKey("currentImage")) {
+                return processor.process();
+            }else{
+                processor.multiProcess();
+            }
+        } catch (ClassNotFoundException | NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public void multiSelectionImageEdit(List<File> passedFiles, Function<BufferedImage,BufferedImage> serviceSelected){

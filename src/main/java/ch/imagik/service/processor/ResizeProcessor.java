@@ -5,21 +5,20 @@ import ch.imagik.model.ResizeInfo;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class ResizeProcessor extends Processor {
     private ResizeInfo info;
 
-    public ResizeProcessor(BufferedImage currentImage,ResizeInfo info) {
-        this.currentImage=currentImage;
-        this.info=info;
-    }
-    public ResizeProcessor(List<File> passedFiles,ResizeInfo info) {
-        this.passedFiles=passedFiles;
-        this.info=info;
+    public ResizeProcessor(Map<String,Object> parameters) {
+        super(parameters);
+        this.info = (ResizeInfo)parameters.get("resizeInfo");
     }
 
+
+
     @Override
-    BufferedImage process() {
+    public BufferedImage process() {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         if(info.isPercentage()){
             return  imageToEdit.getProcessor().resize(imageToEdit.getWidth()*info.getPercentage()).getBufferedImage();

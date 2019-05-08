@@ -4,15 +4,12 @@ import ij.ImagePlus;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class RotateLeftProcessor extends Processor {
 
-    public RotateLeftProcessor(BufferedImage currentImage) {
-        this.currentImage=currentImage;
-    }
-
-    public RotateLeftProcessor(List<File> passedFiles) {
-        this.passedFiles=passedFiles;
+    public RotateLeftProcessor(Map<String,Object> parameters) {
+        super(parameters);
     }
 
     @Override

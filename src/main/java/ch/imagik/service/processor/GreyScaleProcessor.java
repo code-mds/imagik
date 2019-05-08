@@ -6,15 +6,12 @@ import ij.process.ImageConverter;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 public class GreyScaleProcessor extends Processor {
 
-    public GreyScaleProcessor(BufferedImage currentImage) {
-        this.currentImage=currentImage;
-    }
-
-    public GreyScaleProcessor(List<File> passedFiles) {
-        this.passedFiles=passedFiles;
+    public GreyScaleProcessor(Map<String,Object> parameters) {
+        super(parameters);
     }
 
     @Override
