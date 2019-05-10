@@ -21,7 +21,9 @@ public class ResizeProcessor extends Processor {
     public BufferedImage process() {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         if(info.isPercentage()){
-            return  imageToEdit.getProcessor().resize(imageToEdit.getWidth()*info.getPercentage()).getBufferedImage();
+            int calculatedWidth=(int)(imageToEdit.getWidth()*info.getPercentage());
+            System.out.println("Calculated Width = "+calculatedWidth);
+            return  imageToEdit.getProcessor().resize(calculatedWidth).getBufferedImage();
         }else{
             return imageToEdit.getProcessor().resize(info.getWidth(),info.getHeight(),true).getBufferedImage();
         }

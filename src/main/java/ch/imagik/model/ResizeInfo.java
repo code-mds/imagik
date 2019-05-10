@@ -3,16 +3,16 @@ package ch.imagik.model;
 public class ResizeInfo {
     private final int width;
     private final int height;
-    private final Integer percentage;
+    private final double percentage;
     public ResizeInfo(Integer percentage) {
         this.width = 0;
         this.height = 0;
-        this.percentage = percentage;
+        this.percentage = percentage/100.0;
     }
     public ResizeInfo(int width, int height) {
         this.width = width;
         this.height = height;
-        this.percentage = 0;
+        this.percentage = 0.0;
     }
     public int getHeight() {
         return height;
@@ -22,7 +22,7 @@ public class ResizeInfo {
         return width;
     }
 
-    public Integer getPercentage() {
+    public double getPercentage() {
         return percentage;
     }
     public boolean isPercentage(){

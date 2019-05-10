@@ -76,13 +76,19 @@ public final class ResizeDialog {
         dialog.getDialogPane().setContent(grid);
 
         dialog.setResultConverter(dialogButton -> {
+            System.out.println("Stato del percentageSelector = "+percentageSelector.isSelected());
+            System.out.println("Stato del pixelSelector = "+pixelSelector.isSelected());
             if (dialogButton == ButtonType.OK) {
-                if(percentageSelector.isArmed())
-                    return  new ResizeInfo(percentageValue.getValue());
-                if(pixelSelector.isArmed()){
+                if(percentageSelector.isSelected()) {
+                    System.out.println("Stato del percentageSelector = " + percentageSelector.isSelected());
+                    return new ResizeInfo(percentageValue.getValue());
+                }
+                if(pixelSelector.isSelected()){
+                    System.out.println("Stato del pixelSelector = "+pixelSelector.isSelected());
                     return new ResizeInfo(widthField.getValue(), heightField.getValue());
                 }
             }
+
             return null;
         });
 

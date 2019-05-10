@@ -29,10 +29,7 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.awt.image.BufferedImage;
 
 public class ContentAreaController implements Initializable, EventSubscriber {
@@ -211,6 +208,15 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
     }
 
+    private void applyFilter(String processToCall,ResizeInfo resizeInfo) {
+        if (selectedFiles.size() == 1) {
+            currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage, "resizeInfo", resizeInfo));
+            imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
+        } else if (selectedFiles.size() > 1) {
+            if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
+                ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles, "resizeInfo", resizeInfo));
+        }
+    }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
@@ -237,14 +243,16 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void resize(ResizeEvent e) {
-        ResizeInfo resizeInfo;
+        String processToCall = "ch.imagik.service.processor.ResizeProcessor";
+        Optional<ResizeInfo> optionalData;
         System.out.println("RESIZE");
         if(selectedFiles.size()>1){
-            ResizeDialog.show(1,1,true);
-        }else if(selectedFiles.size()==1){
-            ResizeDialog.show(currentImage.getWidth(),currentImage.getHeight(),false);
+            optionalData = ResizeDialog.show(1, 1, true);
+        }else{
+            optionalData = ResizeDialog.show(currentImage.getWidth(),currentImage.getHeight(),false);
         }
-
+        ResizeInfo resizeInfo = optionalData.get();
+        applyFilter(processToCall,resizeInfo);
     }
 
 

@@ -58,26 +58,6 @@ public final class ImageService implements EventSubscriber {
         return image;
     }
 
-    public static BufferedImage flipHorizontally(BufferedImage currentImage) {
-        ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
-        ImageProcessor currentImageProcessor = imageToEdit.getProcessor();
-        currentImageProcessor.flipHorizontal();
-        return currentImageProcessor.getBufferedImage();
-    }
-
-    public static BufferedImage flipVertically(BufferedImage currentImage) {
-        ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
-        ImageProcessor currentImageProcessor = imageToEdit.getProcessor();
-        currentImageProcessor.flipVertical();
-        return currentImageProcessor.getBufferedImage();
-    }
-
-    public static BufferedImage greyScale(BufferedImage currentImage) {
-        ImagePlus imageToEdit = new ImagePlus("editing image",currentImage);
-        ImageConverter imageToConvert = new ImageConverter(imageToEdit);
-        imageToConvert.convertToGray32();
-        return imageToEdit.getBufferedImage();
-    }
     public static BufferedImage applyFilter(String filterName, Map<String, Object> parameters) {
         try {
             Class<Processor> processorClass = (Class<Processor>)Class.forName(filterName);
@@ -92,32 +72,6 @@ public final class ImageService implements EventSubscriber {
             e.printStackTrace();
         }
         return null;
-    }
-
-    public void multiSelectionImageEdit(List<File> passedFiles, Function<BufferedImage,BufferedImage> serviceSelected){
-        for (File currentFile : passedFiles) {
-            try {
-                BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile));
-                ImageIO.write(currentImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        EventManager.getInstance().post(new FilesChangedEvent(passedFiles));
-    }
-
-    public void multiSelectionImageEdit(List<File> passedFiles, BiFunction<BufferedImage, ResizeInfo,BufferedImage> serviceSelected, ResizeInfo info){
-        for (File currentFile : passedFiles) {
-            try {
-                BufferedImage currentImage = serviceSelected.apply(ImageIO.read(currentFile),info);
-                ImageIO.write(currentImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        EventManager.getInstance().post(new FilesChangedEvent(passedFiles));
     }
 
     private static boolean acceptExtension(String name) {
