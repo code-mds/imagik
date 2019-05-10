@@ -251,8 +251,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }else{
             optionalData = ResizeDialog.show(currentImage.getWidth(),currentImage.getHeight(),false);
         }
-        ResizeInfo resizeInfo = optionalData.get();
-        applyFilter(processToCall,resizeInfo);
+        if(optionalData.isPresent()) {
+            applyFilter(processToCall, optionalData.get());
+        }
     }
 
 

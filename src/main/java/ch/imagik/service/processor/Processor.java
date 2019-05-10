@@ -18,7 +18,7 @@ public abstract class Processor {
 
     Processor(Map<String,Object> parameters){
         currentImage=(BufferedImage)parameters.get("currentImage");
-        passedFiles=(List<File>)parameters.get("passedFiles");
+        passedFiles=(List<File>)parameters.get("selectedFiles");
     }
 
     public abstract BufferedImage process();
