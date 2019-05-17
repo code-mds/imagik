@@ -1,6 +1,7 @@
 package ch.imagik.model;
 
 import ch.imagik.event.*;
+import ch.imagik.service.ConfigService;
 import ch.imagik.service.LogService;
 import com.google.common.eventbus.Subscribe;
 import javafx.beans.property.*;
@@ -9,15 +10,22 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ch.imagik.service.ImageService;
 import ch.imagik.service.ResourceService;
+import javafx.collections.ObservableListBase;
 
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class MainModel implements EventSubscriber {
     // single instance
     private static MainModel instance;
 
-    private final LogService logService = LogService.build(System.out);
+    private final ConfigService configService = new ConfigService();
+    private final LogService logService = LogService.build(configService.getEntry(ConfigService.KEY_LOG));
     private final ImageService imageService = ImageService.build();
     private final ResourceService resourceService = new ResourceService();
 
@@ -31,12 +39,9 @@ public class MainModel implements EventSubscriber {
     private final ObjectProperty<Folder> selectedFolderProperty = new SimpleObjectProperty<>();
     private final ObservableList<File> selectedFiles = FXCollections.observableArrayList();
 
-    private MainModel() { }
-
     public static MainModel getInstance() {
         if(instance == null) {
             instance = new MainModel();
-
             EventManager.getInstance().register(instance);
         }
 
@@ -49,6 +54,10 @@ public class MainModel implements EventSubscriber {
 
     public void setFilter(String filter) {
         filterProperty.setValue(filter);
+    }
+
+    public ConfigService getConfigService() {
+        return configService;
     }
 
     public ImageService getImageService() {

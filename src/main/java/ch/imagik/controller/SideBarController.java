@@ -1,6 +1,7 @@
 package ch.imagik.controller;
 
 import ch.imagik.model.Folder;
+import ch.imagik.service.ConfigService;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.EventManager;
 import ch.imagik.event.FolderSelectedEvent;
@@ -48,6 +49,7 @@ public class SideBarController implements Initializable, EventSubscriber {
         if(dir == null || !dir.isDirectory())
             return;
 
+        MainModel.getInstance().getConfigService().setEntry(ConfigService.KEY_LAST_FOLDER, dir.getAbsolutePath());
         EventManager.getInstance().post(new FolderSelectedEvent(new Folder(dir)));
     }
 }

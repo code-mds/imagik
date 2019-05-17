@@ -1,6 +1,7 @@
 package ch.imagik.controller;
 
 import ch.imagik.event.*;
+import ch.imagik.model.Folder;
 import javafx.beans.property.BooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +10,7 @@ import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.ToggleButton;
 import ch.imagik.model.MainModel;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 

@@ -2,6 +2,8 @@ package ch.imagik.service;
 
 import ch.imagik.event.*;
 import com.google.common.eventbus.Subscribe;
+
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public final class LogService implements EventSubscriber {
@@ -11,8 +13,15 @@ public final class LogService implements EventSubscriber {
         this.output = outputStream;
     }
 
-    public static LogService build(PrintStream out) {
-        LogService logService = new LogService(out);
+    public static LogService build(String path) {
+        PrintStream stream;
+        try {
+            stream = new PrintStream(path);
+        } catch (Exception e) {
+            stream = System.out;
+        }
+
+        LogService logService = new LogService(stream);
         EventManager.getInstance().register(logService);
         return logService;
     }
