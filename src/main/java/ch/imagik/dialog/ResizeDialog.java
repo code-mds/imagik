@@ -1,14 +1,22 @@
 package ch.imagik.dialog;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import ch.imagik.model.MainModel;
 import ch.imagik.model.ResizeInfo;
 
+import java.sql.SQLOutput;
 import java.util.Optional;
 
 public final class ResizeDialog {
+    private static void spinnerManipulator(Spinner<Integer> currentSpinner,SpinnerValueFactory<Integer> currentFactory){
+        currentSpinner.setEditable(true);
+        TextFormatter percentageFormatter = new TextFormatter(currentFactory.getConverter(), currentFactory.getValue());
+        currentSpinner.getEditor().setTextFormatter(percentageFormatter);
+        currentFactory.valueProperty().bindBidirectional(percentageFormatter.valueProperty());
+    }
     public static Optional<ResizeInfo> show(int originalWidth, int originalHeight, boolean isMultiple) {
         double aspectRatio = (double)originalWidth/originalHeight;
         //System.out.println("Aspect Ratio dell'immagne: "+aspectRatio);
@@ -27,17 +35,24 @@ public final class ResizeDialog {
         grid.setHgap(10);
         grid.setVgap(10);
         grid.setPadding(new Insets(20, 150, 10, 10));
+        System.out.println("Numero colonne: "+grid.getColumnCount());
         label = MainModel.getInstance().getLocalizedString("resize_dialog.percentage");
         RadioButton percentageSelector = new RadioButton(label);
         percentageSelector.selectedProperty().setValue(true);
         if(isMultiple){
             grid.add(new Label(label),0,0);
         }
-        Spinner<Integer> percentageValue = new Spinner<>(1,200,100);
+        SpinnerValueFactory<Integer> percentageFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 100);
+        Spinner<Integer> percentageValue = new Spinner<Integer>(percentageFactory);
+        spinnerManipulator(percentageValue,percentageFactory);
         label = MainModel.getInstance().getLocalizedString("resize_dialog.pixel");
         RadioButton pixelSelector = new RadioButton(label);
-        Spinner<Integer> widthField= new Spinner<>(1, originalWidth*3, originalWidth);
-        Spinner<Integer> heightField= new Spinner<>(1, originalHeight*3, originalHeight);
+        SpinnerValueFactory<Integer> widthFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalWidth*3, originalWidth);
+        Spinner<Integer> widthField= new Spinner<>(widthFieldFactory);
+        spinnerManipulator(widthField,widthFieldFactory);
+        SpinnerValueFactory<Integer> heightFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalHeight*3, originalHeight);
+        Spinner<Integer> heightField= new Spinner<>(heightFieldFactory);
+        spinnerManipulator(heightField,heightFieldFactory);
         grid.add(new Label("1 - 200"),0,1);
         grid.add(percentageValue,1,1);
         CheckBox keepRatio = new CheckBox();
@@ -53,14 +68,18 @@ public final class ResizeDialog {
             percentageValue.disableProperty().bind(pixelSelector.selectedProperty());
             grid.add(percentageSelector,1,0);
             grid.add(pixelSelector,1,2);
-            grid.add(new Label("Keep Ratio:"), 0, 3);
+            label = MainModel.getInstance().getLocalizedString("resize_dialog.keepRatio");
+            grid.add(new Label(label), 0, 3);
             grid.add(keepRatio, 1, 3);
-            grid.add(new Label("Width:"), 0, 4);
+            label = MainModel.getInstance().getLocalizedString("resize_dialog.width");
+            grid.add(new Label(label), 0, 4);
             grid.add(widthField, 1, 4);
-            grid.add(new Label("Height:"), 0, 5);
+            label = MainModel.getInstance().getLocalizedString("resize_dialog.height");
+            grid.add(new Label(label), 0, 5);
             grid.add(heightField, 1, 5);
 
         }
+        System.out.println("Numero colonne: "+grid.getColumnCount());
         heightField.valueProperty().addListener((obs, old, newVal) -> {
             if (keepRatio.isSelected()) {
                 widthField.getValueFactory().setValue((int)Math.round(newVal * aspectRatio));
