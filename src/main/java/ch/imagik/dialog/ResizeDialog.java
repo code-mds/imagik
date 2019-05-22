@@ -1,8 +1,11 @@
 package ch.imagik.dialog;
 
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import ch.imagik.model.MainModel;
 import ch.imagik.model.ResizeInfo;
@@ -13,12 +16,12 @@ import java.util.Optional;
 public final class ResizeDialog {
     private static void spinnerManipulator(Spinner<Integer> currentSpinner,SpinnerValueFactory<Integer> currentFactory){
         currentSpinner.setEditable(true);
-        TextFormatter percentageFormatter = new TextFormatter(currentFactory.getConverter(), currentFactory.getValue());
-        currentSpinner.getEditor().setTextFormatter(percentageFormatter);
-        currentFactory.valueProperty().bindBidirectional(percentageFormatter.valueProperty());
+        TextFormatter<Integer> spinnerTextFormatter = new TextFormatter<Integer>(currentFactory.getConverter(), currentFactory.getValue());
+        currentSpinner.getEditor().setTextFormatter(spinnerTextFormatter);
+        currentFactory.valueProperty().bindBidirectional(spinnerTextFormatter.valueProperty());
     }
     public static Optional<ResizeInfo> show(int originalWidth, int originalHeight, boolean isMultiple) {
-        double aspectRatio = (double)originalWidth/originalHeight;
+        double aspectRatio = (double) originalWidth / originalHeight;
         //System.out.println("Aspect Ratio dell'immagne: "+aspectRatio);
         Dialog<ResizeInfo> dialog = new Dialog<>();
         String label;
@@ -32,31 +35,30 @@ public final class ResizeDialog {
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
 
         GridPane grid = new GridPane();
-        grid.setHgap(10);
-        grid.setVgap(10);
-        grid.setPadding(new Insets(20, 150, 10, 10));
-        System.out.println("Numero colonne: "+grid.getColumnCount());
+        grid.setHgap(18);
+        grid.setVgap(12);
+        System.out.println("Numero colonne: " + grid.getColumnCount());
         label = MainModel.getInstance().getLocalizedString("resize_dialog.percentage");
         RadioButton percentageSelector = new RadioButton(label);
         percentageSelector.selectedProperty().setValue(true);
-        if(isMultiple){
-            grid.add(new Label(label),0,0);
+        if (isMultiple) {
+            grid.add((new Label(label)), 0, 0);
         }
         SpinnerValueFactory<Integer> percentageFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 100);
         Spinner<Integer> percentageValue = new Spinner<Integer>(percentageFactory);
-        spinnerManipulator(percentageValue,percentageFactory);
+        spinnerManipulator(percentageValue, percentageFactory);
         label = MainModel.getInstance().getLocalizedString("resize_dialog.pixel");
         RadioButton pixelSelector = new RadioButton(label);
-        SpinnerValueFactory<Integer> widthFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalWidth*3, originalWidth);
-        Spinner<Integer> widthField= new Spinner<>(widthFieldFactory);
-        spinnerManipulator(widthField,widthFieldFactory);
-        SpinnerValueFactory<Integer> heightFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalHeight*3, originalHeight);
-        Spinner<Integer> heightField= new Spinner<>(heightFieldFactory);
-        spinnerManipulator(heightField,heightFieldFactory);
-        grid.add(new Label("1 - 200"),0,1);
-        grid.add(percentageValue,1,1);
+        SpinnerValueFactory<Integer> widthFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalWidth * 3, originalWidth);
+        Spinner<Integer> widthField = new Spinner<>(widthFieldFactory);
+        spinnerManipulator(widthField, widthFieldFactory);
+        SpinnerValueFactory<Integer> heightFieldFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, originalHeight * 3, originalHeight);
+        Spinner<Integer> heightField = new Spinner<>(heightFieldFactory);
+        spinnerManipulator(heightField, heightFieldFactory);
+        grid.add(new Label("1 - 200"), 0, 1);
+        grid.add(percentageValue, 1, 1);
         CheckBox keepRatio = new CheckBox();
-        if(!isMultiple){
+        if (!isMultiple) {
             pixelSelector.selectedProperty().setValue(false);
             ToggleGroup radioGroup = new ToggleGroup();
             pixelSelector.setToggleGroup(radioGroup);
@@ -66,8 +68,8 @@ public final class ResizeDialog {
             widthField.disableProperty().bind(percentageSelector.selectedProperty());
             keepRatio.disableProperty().bind(percentageSelector.selectedProperty());
             percentageValue.disableProperty().bind(pixelSelector.selectedProperty());
-            grid.add(percentageSelector,1,0);
-            grid.add(pixelSelector,1,2);
+            grid.add(percentageSelector, 1, 0);
+            grid.add(pixelSelector, 1, 2);
             label = MainModel.getInstance().getLocalizedString("resize_dialog.keepRatio");
             grid.add(new Label(label), 0, 3);
             grid.add(keepRatio, 1, 3);
@@ -77,18 +79,24 @@ public final class ResizeDialog {
             label = MainModel.getInstance().getLocalizedString("resize_dialog.height");
             grid.add(new Label(label), 0, 5);
             grid.add(heightField, 1, 5);
-
         }
-        System.out.println("Numero colonne: "+grid.getColumnCount());
+        for (Node n : grid.getChildren()) {
+            Integer col = GridPane.getColumnIndex(n);
+            int colNumber = col == null ? 0 : col.intValue();
+            if (colNumber == 0) {
+                GridPane.setHalignment(n, HPos.RIGHT);
+            }
+        }
+
         heightField.valueProperty().addListener((obs, old, newVal) -> {
             if (keepRatio.isSelected()) {
-                widthField.getValueFactory().setValue((int)Math.round(newVal * aspectRatio));
+                widthField.getValueFactory().setValue((int) Math.round(newVal * aspectRatio));
             }
         });
 
-        widthField.valueProperty().addListener((obs, old, newVal) ->{
+        widthField.valueProperty().addListener((obs, old, newVal) -> {
             if (keepRatio.isSelected()) {
-                heightField.getValueFactory().setValue((int)Math.round(newVal/aspectRatio));
+                heightField.getValueFactory().setValue((int) Math.round(newVal / aspectRatio));
             }
         });
 
@@ -96,17 +104,21 @@ public final class ResizeDialog {
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ButtonType.OK) {
-                if(percentageSelector.isSelected()) {
+                if (percentageSelector.isSelected()) {
                     return new ResizeInfo(percentageValue.getValue());
                 }
-                if(pixelSelector.isSelected()){
+                if (pixelSelector.isSelected()) {
                     return new ResizeInfo(widthField.getValue(), heightField.getValue());
                 }
             }
 
             return null;
         });
-
-        return dialog.showAndWait();
+        try {
+            return dialog.showAndWait();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }
