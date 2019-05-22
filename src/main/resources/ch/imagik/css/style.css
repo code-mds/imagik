@@ -101,3 +101,6 @@
    -fx-icon-code: fa-folder-open-o;
 }
 
+.bold-label{
+    -fx-font-weight: bold;
+}
