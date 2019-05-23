@@ -3,19 +3,15 @@ package ch.imagik.service.processor;
 import ij.ImagePlus;
 import ch.imagik.model.ResizeInfo;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.List;
 import java.util.Map;
 
 public class ResizeProcessor extends Processor {
-    private ResizeInfo info;
+    private final ResizeInfo info;
 
     public ResizeProcessor(Map<String,Object> parameters) {
         super(parameters);
         this.info = (ResizeInfo)parameters.get("resizeInfo");
     }
-
-
 
     @Override
     public BufferedImage process() {

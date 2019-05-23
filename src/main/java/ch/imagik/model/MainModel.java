@@ -10,15 +10,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import ch.imagik.service.ImageService;
 import ch.imagik.service.ResourceService;
-import javafx.collections.ObservableListBase;
-
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Properties;
 
 public class MainModel implements EventSubscriber {
     // single instance

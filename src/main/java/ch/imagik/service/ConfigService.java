@@ -1,21 +1,17 @@
 package ch.imagik.service;
 
-import ch.imagik.event.EventManager;
-import ch.imagik.event.FolderSelectedEvent;
-import ch.imagik.model.Folder;
-
 import java.io.*;
 import java.util.Properties;
 
 public class ConfigService {
-    public static String KEY_LAST_FOLDER = "last_folder";
-    public static String KEY_LOG = "log";
+    public static final String KEY_LAST_FOLDER = "last_folder";
+    public static final String KEY_LOG = "log";
 
-    private String userHome = System.getProperty("user.home");
-    private String imagikBaseFolder = userHome + "/.imagik/";
-    private String imagikConfig = imagikBaseFolder + "imagik.properties";
-    private String imagikLog = imagikBaseFolder + "imagik.log";
-    private Properties properties = new Properties();
+    private final String userHome = System.getProperty("user.home");
+    private final String imagikBaseFolder = userHome + "/.imagik/";
+    private final String imagikConfig = imagikBaseFolder + "imagik.properties";
+    private final String imagikLog = imagikBaseFolder + "imagik.log";
+    private final Properties properties = new Properties();
 
     public ConfigService() {
         initHomeFolder();

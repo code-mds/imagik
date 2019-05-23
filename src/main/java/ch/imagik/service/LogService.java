@@ -3,7 +3,6 @@ package ch.imagik.service;
 import ch.imagik.event.*;
 import com.google.common.eventbus.Subscribe;
 
-import java.io.FileNotFoundException;
 import java.io.PrintStream;
 
 public final class LogService implements EventSubscriber {

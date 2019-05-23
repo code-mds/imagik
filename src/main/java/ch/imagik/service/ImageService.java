@@ -2,26 +2,16 @@
 package ch.imagik.service;
 
 import ch.imagik.model.Folder;
-import ch.imagik.model.ResizeInfo;
 import ch.imagik.service.processor.Processor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
-import ij.ImagePlus;
-import ij.process.ImageConverter;
-import ij.process.ImageProcessor;
 import javafx.scene.image.Image;
-import org.apache.commons.io.FilenameUtils;
-import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};

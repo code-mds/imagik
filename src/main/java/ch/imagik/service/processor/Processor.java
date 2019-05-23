@@ -13,7 +13,7 @@ import java.util.Map;
 
 public abstract class Processor {
     protected BufferedImage currentImage;
-    protected List<File> passedFiles;
+    protected final List<File> passedFiles;
 
 
     Processor(Map<String,Object> parameters){

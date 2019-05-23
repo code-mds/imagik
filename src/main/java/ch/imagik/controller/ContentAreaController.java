@@ -4,8 +4,6 @@ import ch.imagik.dialog.BulkDialog;
 import ch.imagik.dialog.ResizeDialog;
 import ch.imagik.model.Folder;
 import ch.imagik.model.ResizeInfo;
-import ch.imagik.service.processor.RotateLeftProcessor;
-import ch.imagik.service.processor.RotateRightProcessor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import javafx.beans.property.BooleanProperty;
@@ -39,7 +37,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private double currentZoom = NO_ZOOM;
     private BufferedImage currentImage;
     private List<File> selectedFiles;
-    private ImageService imageService;
 
     @FXML private ImageView imageView;
     @FXML private ScrollPane scrollPane;
@@ -74,7 +71,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 .getSelectedFiles()
                 .addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
 
-        imageService = MainModel.getInstance().getImageService();
         setBackgroundNoFolder();
     }
 
@@ -251,9 +247,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }else{
             optionalData = ResizeDialog.show(currentImage.getWidth(),currentImage.getHeight(),false);
         }
-        if(optionalData.isPresent()) {
-            applyFilter(processToCall, optionalData.get());
-        }
+        optionalData.ifPresent(resizeInfo -> applyFilter(processToCall, resizeInfo));
     }
 
 

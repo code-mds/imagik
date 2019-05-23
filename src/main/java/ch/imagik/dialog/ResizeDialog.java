@@ -15,10 +15,11 @@ import java.util.Optional;
 public final class ResizeDialog {
     private static void spinnerManipulator(Spinner<Integer> currentSpinner,SpinnerValueFactory<Integer> currentFactory){
         currentSpinner.setEditable(true);
-        TextFormatter<Integer> spinnerTextFormatter = new TextFormatter<Integer>(currentFactory.getConverter(), currentFactory.getValue());
+        TextFormatter<Integer> spinnerTextFormatter = new TextFormatter<>(currentFactory.getConverter(), currentFactory.getValue());
         currentSpinner.getEditor().setTextFormatter(spinnerTextFormatter);
         currentFactory.valueProperty().bindBidirectional(spinnerTextFormatter.valueProperty());
     }
+
     public static Optional<ResizeInfo> show(int originalWidth, int originalHeight, boolean isMultiple) {
         double aspectRatio = (double) originalWidth / originalHeight;
         Dialog<ResizeInfo> dialog = new Dialog<>();
@@ -35,14 +36,17 @@ public final class ResizeDialog {
         GridPane gridTop = new GridPane();
         gridTop.setHgap(12);
         gridTop.setVgap(6);
-        gridTop.getColumnConstraints().add(0,new ColumnConstraints(60.0,60.0,60.0));
+        gridTop.getColumnConstraints().add(0,new ColumnConstraints(130.0,60.0,60.0));
         gridTop.setPadding(new Insets(0,0,0,0));
+
         GridPane gridDown = new GridPane();
         gridDown.setHgap(12);
         gridDown.setVgap(6);
-        gridDown.getColumnConstraints().add(0,new ColumnConstraints(60.0,60.0,60.0));
+        gridDown.getColumnConstraints().add(0,new ColumnConstraints(130.0,60.0,60.0));
         gridDown.setPadding(new Insets(0,0,0,0));
+
         label = MainModel.getInstance().getLocalizedString("resize_dialog.percentage");
+
         RadioButton percentageSelector = new RadioButton(label);
         percentageSelector.setStyle("-fx-font-weight: bold");
         percentageSelector.getStyleClass().add("bold-label");
@@ -51,9 +55,10 @@ public final class ResizeDialog {
             gridTop.add((new Label(label)), 0, 0);
         }
         SpinnerValueFactory<Integer> percentageFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 200, 100);
-        Spinner<Integer> percentageValue = new Spinner<Integer>(percentageFactory);
+        Spinner<Integer> percentageValue = new Spinner<>(percentageFactory);
         spinnerManipulator(percentageValue, percentageFactory);
         label = MainModel.getInstance().getLocalizedString("resize_dialog.pixel");
+
         RadioButton pixelSelector = new RadioButton(label);
         pixelSelector.setStyle("-fx-font-weight: bold");
         //pixelSelector.getStyleClass().add("bold-label");
@@ -65,6 +70,7 @@ public final class ResizeDialog {
         spinnerManipulator(heightField, heightFieldFactory);
         gridTop.add(new Label("1 - 200"), 0, 1);
         gridTop.add(percentageValue, 1, 1);
+
         CheckBox keepRatio = new CheckBox();
         if (!isMultiple) {
             pixelSelector.selectedProperty().setValue(false);
@@ -88,20 +94,8 @@ public final class ResizeDialog {
             gridDown.add(new Label(label), 0, 3);
             gridDown.add(heightField, 1, 3);
         }
-        for (Node n : gridTop.getChildren()) {
-            Integer col = GridPane.getColumnIndex(n);
-            int colNumber = col == null ? 0 : col.intValue();
-            if (colNumber == 0) {
-                GridPane.setHalignment(n, HPos.RIGHT);
-            }
-        }
-        for (Node n : gridDown.getChildren()) {
-            Integer col = GridPane.getColumnIndex(n);
-            int colNumber = col == null ? 0 : col.intValue();
-            if (colNumber == 0) {
-                GridPane.setHalignment(n, HPos.RIGHT);
-            }
-        }
+        setRightAlignment(gridTop);
+        setRightAlignment(gridDown);
         VBox masterContainer = new VBox();
         masterContainer.setPadding(new Insets(18,18,18,18));
         masterContainer.setSpacing(18.0);
@@ -137,7 +131,17 @@ public final class ResizeDialog {
             return dialog.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return Optional.empty();
+        }
+    }
+
+    private static void setRightAlignment(GridPane grid) {
+        for (Node n : grid.getChildren()) {
+            Integer col = GridPane.getColumnIndex(n);
+            int colNumber = col == null ? 0 : col.intValue();
+            if (colNumber == 0) {
+                GridPane.setHalignment(n, HPos.RIGHT);
+            }
         }
     }
 }
