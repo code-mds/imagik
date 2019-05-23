@@ -12,6 +12,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -33,6 +34,9 @@ import java.awt.image.BufferedImage;
 public class ContentAreaController implements Initializable, EventSubscriber {
     private static final double ZOOM_FACTOR = 0.1;
     private static final double NO_ZOOM = 1.0;
+
+    @FXML private Node welcomePane1;
+    @FXML private Node welcomePane2;
 
     private double currentZoom = NO_ZOOM;
     private BufferedImage currentImage;
@@ -96,11 +100,15 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
     private void setBackgroundNoFolder() {
-        setBackgroundOnCondition("/ch/imagik/background/home_1.jpg");
+        welcomePane1.visibleProperty().setValue(true);
+        //setBackgroundOnCondition("/ch/imagik/background/home_1.jpg");
     }
 
     private void setBackgroundNoSelection() {
-        setBackgroundOnCondition("/ch/imagik/background/home_2.jpg");
+
+        welcomePane1.visibleProperty().setValue(false);
+        welcomePane2.visibleProperty().setValue(true);
+        //setBackgroundOnCondition("/ch/imagik/background/home_2.jpg");
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -110,6 +118,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
     private void loadImage(List<File> selectedFiles) {
+        welcomePane2.visibleProperty().setValue(false);
+
         this.selectedFiles=selectedFiles;
 
         if(selectedFiles.size() == 0){

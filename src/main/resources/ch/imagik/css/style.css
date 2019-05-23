@@ -104,3 +104,8 @@
 .bold-label{
     -fx-font-weight: bold;
 }
+
+.welcome-label {
+    -fx-font-weight: bold;
+    -fx-font-size: 2em;
+}
