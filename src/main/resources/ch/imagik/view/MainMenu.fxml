@@ -54,7 +54,7 @@
 <!--            </graphic>-->
 <!--        </ToggleButton>-->
 <!--        <Separator />-->
-        <ToggleButton fx:id="editButton">
+        <ToggleButton fx:id="editButton" disable="${controller.disableEdit}">
             <tooltip><Tooltip text="%edit" /></tooltip>
             <graphic>
                 <FontIcon styleClass="edit-icon" />
@@ -141,7 +141,7 @@
                     </MenuItem>
                 </Menu>
 
-                <Menu text="%view">
+                <Menu text="%view" disable="${controller.disableEdit}">
                     <CheckMenuItem fx:id="showEditor" mnemonicParsing="false" text="%show_editor" />
                     <CheckMenuItem fx:id="showMetadata" mnemonicParsing="false" text="%show_metadata" />
                 </Menu>
