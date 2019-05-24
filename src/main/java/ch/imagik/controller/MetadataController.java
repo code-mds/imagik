@@ -27,24 +27,26 @@ public class MetadataController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         tableView.setItems(imageMetadataList);
-        MainModel.getInstance().getSelectedFiles().addListener((ListChangeListener.Change<? extends File> l)-> loadMetadata( MainModel.getInstance().getSelectedFiles()));
+        MainModel.getInstance().getSelectedFiles()
+                .addListener((ListChangeListener.Change<? extends File> l)-> loadMetadata( MainModel.getInstance().getSelectedFiles()));
     }
 
     private void loadMetadata(List<File> inputList) {
         try {
-            if(inputList.size()!=1){
-                imageMetadataList.clear();
-            } else{
-                imageMetadataList.clear();
-                String name = "";
-                if(inputList.get(0) != null) {
-                    name = inputList.get(0).getName();
-                    Metadata metadata = ImageMetadataReader.readMetadata(inputList.get(0));
+            String name = "";
+            imageMetadataList.clear();
+
+            // show metadata only if a single file is selected
+            // otherwise clear only the metadata pane
+            if(inputList.size() == 1) {
+                File file = inputList.get(0);
+                if(file != null) {
+                    name = file.getName();
+                    Metadata metadata = ImageMetadataReader.readMetadata(file);
                     updateMetadataList(metadata);
                 }
-                fileName.textProperty().setValue(name);
             }
-
+            fileName.textProperty().setValue(name);
         } catch (ImageProcessingException | IOException e) {
             e.printStackTrace();
         }
