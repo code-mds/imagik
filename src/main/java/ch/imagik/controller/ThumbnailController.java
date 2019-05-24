@@ -110,8 +110,7 @@ public class ThumbnailController implements Initializable, EventSubscriber {
     private void fileChanged(FilesChangedEvent e) {
         for (File file : e.getFiles()) {
             int oldPos = imageList.indexOf(file);
-            imageList.remove(oldPos);
-            imageList.add(oldPos, file);
+            imageList.set(oldPos, file);
         }
     }
 }
