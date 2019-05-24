@@ -35,7 +35,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private static final double ZOOM_FACTOR = 0.1;
     private static final double NO_ZOOM = 1.0;
 
-    @FXML private Node welcomePane1;
     @FXML private Node welcomePane2;
 
     private double currentZoom = NO_ZOOM;
@@ -74,8 +73,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         MainModel.getInstance()
                 .getSelectedFiles()
                 .addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
-
-        setBackgroundNoFolder();
     }
 
     @FXML private void rotateLeft(ActionEvent e) { EventManager.getInstance().post(new RotateLeftEvent()); }
@@ -97,18 +94,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         }
         imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
         zoomFit(new ZoomFitEvent());
-    }
-
-    private void setBackgroundNoFolder() {
-        welcomePane1.visibleProperty().setValue(true);
-        //setBackgroundOnCondition("/ch/imagik/background/home_1.jpg");
-    }
-
-    private void setBackgroundNoSelection() {
-
-        welcomePane1.visibleProperty().setValue(false);
-        welcomePane2.visibleProperty().setValue(true);
-        //setBackgroundOnCondition("/ch/imagik/background/home_2.jpg");
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -148,6 +133,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             imageView.imageProperty().setValue(null);
         }
 
+    }
+
+    private void setBackgroundNoSelection() {
+        welcomePane2.visibleProperty().setValue(true);
+        //setBackgroundOnCondition("/ch/imagik/background/home_2.jpg");
     }
 
 

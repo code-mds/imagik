@@ -6,8 +6,10 @@ import ch.imagik.event.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.image.ImageView;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
@@ -17,8 +19,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable, EventSubscriber {
+    @FXML private SplitPane splitPane;
     @FXML private Label currentFolder;
     @FXML private Label totalFiles;
+    @FXML private Node welcomePane1;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,6 +57,9 @@ public class MainController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void folderSelected(FolderSelectedEvent e) {
+        welcomePane1.visibleProperty().setValue(false);
+        splitPane.visibleProperty().setValue(true);
+
         Folder folder = e.getFolder();
         updateStatusBar(folder);
     }

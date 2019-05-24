@@ -84,14 +84,7 @@
                     </padding>
                 </VBox>
             </HBox>
-            <GridPane alignment="CENTER" fx:id="welcomePane1" visible="false" >
-                <Label text="%welcome_1" styleClass="welcome-label" contentDisplay="RIGHT">
-                    <graphic>
-                        <FontIcon styleClass="folder-icon"/>
-                    </graphic>
-                </Label>
-                <Label text="%welcome_2" styleClass="welcome-label" GridPane.rowIndex="1" />
-            </GridPane>
+
 
             <GridPane  alignment="CENTER" fx:id="welcomePane2" visible="false" >
                 <Label text="%welcome_3" styleClass="welcome-label" />
