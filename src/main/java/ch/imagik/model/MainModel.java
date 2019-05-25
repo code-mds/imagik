@@ -17,8 +17,9 @@ public class MainModel implements EventSubscriber {
     private static MainModel instance;
 
     private final ConfigService configService = new ConfigService();
-    private final LogService logService = LogService.build(configService.getEntry(ConfigService.KEY_LOG));
+    private final LogService logService = LogService.build(configService.getConfigEntry(ConfigService.KEY_LOG));
     private final ImageService imageService = ImageService.build();
+
     private final ResourceService resourceService = new ResourceService();
 
     private final BooleanProperty disableZoom = new SimpleBooleanProperty(true);
@@ -55,6 +56,11 @@ public class MainModel implements EventSubscriber {
     public ImageService getImageService() {
         return imageService;
     }
+
+    public ResourceService getResourceService() {
+        return resourceService;
+    }
+
 
     public void setSelectedFiles(ObservableList<? extends File> list) {
         selectedFiles.setAll(list);

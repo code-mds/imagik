@@ -6,6 +6,7 @@ import java.util.Properties;
 public class ConfigService {
     public static final String KEY_LAST_FOLDER = "last_folder";
     public static final String KEY_LOG = "log";
+    public static final String KEY_LANGUAGE = "language";
 
     private final String userHome = System.getProperty("user.home");
     private final String imagikBaseFolder = userHome + "/.imagik/";
@@ -38,15 +39,15 @@ public class ConfigService {
             ex.printStackTrace();
         }
 
-        if(getEntry(KEY_LOG) == null)
-            setEntry(KEY_LOG, imagikLog);
+        if(getConfigEntry(KEY_LOG) == null)
+            setConfigEntry(KEY_LOG, imagikLog);
     }
 
-    public String getEntry(String key) {
+    public String getConfigEntry(String key) {
         return properties.getProperty(key);
     }
 
-    public void setEntry(String key, String value) {
+    public void setConfigEntry(String key, String value) {
         try (OutputStream output = new FileOutputStream(imagikConfig)) {
             properties.setProperty(key, value);
             properties.store(output, null);

@@ -4,6 +4,7 @@ import ch.imagik.dialog.BulkDialog;
 import ch.imagik.dialog.ResizeDialog;
 import ch.imagik.model.Folder;
 import ch.imagik.model.ResizeInfo;
+import ch.imagik.service.NotificationService;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import javafx.beans.property.BooleanProperty;
@@ -12,7 +13,6 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -22,9 +22,7 @@ import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
-import javafx.util.Duration;
 import org.apache.commons.io.FilenameUtils;
-import org.controlsfx.control.Notifications;
 
 
 import javax.imageio.ImageIO;
@@ -296,17 +294,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void brokenImageHandler(BrokenImageEvent e) {
-        final int iconSize = 48;
-        ImageView iconView = new ImageView(MainModel.getInstance().getImageService().getBrokenImage());
-        iconView.setFitHeight(iconSize);
-        iconView.setFitWidth(iconSize);
-
-        Notifications.create()
-                .title(MainModel.getInstance().getLocalizedString("image_format_unsupported"))
-                .text(e.getFile().getName())
-                .graphic(iconView)
-                .owner(imageView)
-                .position(Pos.BOTTOM_RIGHT)
-                .hideAfter(Duration.seconds(4)).show();
+        String fileName = e.getFile().getName();
+        String title = MainModel.getInstance().getLocalizedString("image_format_unsupported");
+        Image icon = MainModel.getInstance().getImageService().getBrokenImageIcon();
+        NotificationService.showWarning(title, fileName, imageView, icon);
     }
 }

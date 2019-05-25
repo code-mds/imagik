@@ -21,7 +21,7 @@ public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final Map<File, Image> thumbnailCache = new HashMap<>();
 
-    private Image brokenImage;
+    private Image brokenImageIcon;
     private Image appIcon;
 
     public static ImageService  build() {
@@ -31,16 +31,6 @@ public final class ImageService implements EventSubscriber {
     }
 
     private ImageService() {
-        try {
-            BufferedImage bufferedImage = ImageIO.read(this.getClass().getResource("/ch/imagik/icon/image-broken.png"));
-            brokenImage = SwingFXUtils.toFXImage(bufferedImage, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Image getBrokenImage() {
-        return brokenImage;
     }
 
     public static File[] listImages(Folder folder) {
@@ -95,6 +85,19 @@ public final class ImageService implements EventSubscriber {
                 return true;
         }
         return false;
+    }
+
+    public Image getBrokenImageIcon() {
+        if(brokenImageIcon == null) {
+            try {
+                BufferedImage bufferedImage = ImageIO.read(this.getClass().getResource("/ch/imagik/icon/image-broken.png"));
+                brokenImageIcon = SwingFXUtils.toFXImage(bufferedImage, null);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return brokenImageIcon;
     }
 
     public Image getAppIcon() {

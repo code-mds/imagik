@@ -52,7 +52,7 @@ public class SideBarController implements Initializable, EventSubscriber {
         if(dir == null || !dir.isDirectory())
             return;
 
-        MainModel.getInstance().getConfigService().setEntry(ConfigService.KEY_LAST_FOLDER, dir.getAbsolutePath());
-        EventManager.getInstance().post(new FolderSelectedEvent(new Folder(dir)));
+        MainModel.getInstance().getConfigService().setConfigEntry(ConfigService.KEY_LAST_FOLDER, dir.getAbsolutePath());
+        EventManager.getInstance().post(new FolderSelectedEvent(dir));
     }
 }
