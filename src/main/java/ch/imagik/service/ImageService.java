@@ -20,7 +20,9 @@ import java.util.Map;
 public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final Map<File, Image> thumbnailCache = new HashMap<>();
+
     private Image brokenImage;
+    private Image appIcon;
 
     public static ImageService  build() {
         ImageService imageService = new ImageService();
@@ -93,5 +95,11 @@ public final class ImageService implements EventSubscriber {
                 return true;
         }
         return false;
+    }
+
+    public Image getAppIcon() {
+        if(appIcon == null)
+            appIcon = new Image(this.getClass().getResource("/ch/imagik/icon/icon-app.png").toString());
+        return appIcon;
     }
 }

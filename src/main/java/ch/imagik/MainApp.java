@@ -22,6 +22,28 @@ public class MainApp extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
+        Locale locale = setLanguage();
+
+        ResourceBundle bundle = ResourceBundle.getBundle("ch.imagik.bundles.imagik", locale);
+        Parent root = FXMLLoader.load(getClass().getResource("/ch/imagik/view/Main.fxml"), bundle);
+        primaryStage.setTitle(MainModel.getInstance().getLocalizedString("app_name"));
+        Image appIcon = MainModel.getInstance().getImageService().getAppIcon();
+        primaryStage.getIcons().add(appIcon);
+
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add("/ch/imagik/css/style.css");
+
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        String lastFolder = MainModel.getInstance().getConfigService().getEntry(ConfigService.KEY_LAST_FOLDER);
+        if(lastFolder != null) {
+            File dir = new File(lastFolder);
+            EventManager.getInstance().post(new FolderSelectedEvent(new Folder(dir)));
+        }
+    }
+
+    private Locale setLanguage() {
         String language = MainModel.getInstance().getConfigService().getEntry("language");
         Locale locale;
         switch (language == null ? "" : language) {
@@ -35,22 +57,6 @@ public class MainApp extends Application {
                 locale = Locale.getDefault();
         }
         Locale.setDefault(locale);
-
-        ResourceBundle bundle = ResourceBundle.getBundle("ch.imagik.bundles.imagik", locale);
-        Parent root = FXMLLoader.load(getClass().getResource("/ch/imagik/view/Main.fxml"), bundle);
-        primaryStage.setTitle("Imagik Image Viewer");
-        primaryStage.getIcons().add(new Image(this.getClass().getResource("/ch/imagik/icon/icon-app.png").toString()));
-
-        Scene scene = new Scene(root);
-        scene.getStylesheets().add("/ch/imagik/css/style.css");
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-
-        String lastFolder = MainModel.getInstance().getConfigService().getEntry(ConfigService.KEY_LAST_FOLDER);
-        if(lastFolder != null) {
-            File dir = new File(lastFolder);
-            EventManager.getInstance().post(new FolderSelectedEvent(new Folder(dir)));
-        }
+        return locale;
     }
 }

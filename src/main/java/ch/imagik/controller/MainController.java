@@ -1,5 +1,6 @@
 package ch.imagik.controller;
 
+import ch.imagik.dialog.AboutDialog;
 import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
@@ -40,20 +41,7 @@ public class MainController implements Initializable, EventSubscriber {
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void showAbout(ShowAboutEvent e) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-
-        String title = MainModel.getInstance().getLocalizedString("about_dialog.title");
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        ImageView img = new ImageView(this.getClass().getResource("/ch/imagik/icon/wand.png").toString());
-        img.setFitWidth(70);
-        img.setFitHeight(70);
-        alert.setGraphic(img);
-
-        String content = MainModel.getInstance().getLocalizedString("about_dialog.content");
-        alert.setContentText(content);
-
-        alert.showAndWait();
+        AboutDialog.show();
     }
 
     @SuppressWarnings("UnstableApiUsage")
