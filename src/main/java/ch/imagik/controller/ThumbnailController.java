@@ -3,15 +3,19 @@ package ch.imagik.controller;
 import ch.imagik.event.*;
 import ch.imagik.model.Folder;
 import com.google.common.eventbus.Subscribe;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
@@ -112,5 +116,11 @@ public class ThumbnailController implements Initializable, EventSubscriber {
             int oldPos = imageList.indexOf(file);
             imageList.set(oldPos, file);
         }
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void brokenImageHandler(BrokenImageEvent e) {
+        imageList.remove(e.getFile());
     }
 }

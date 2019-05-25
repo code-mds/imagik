@@ -5,9 +5,13 @@ import ch.imagik.model.Folder;
 import ch.imagik.service.processor.Processor;
 import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
@@ -16,6 +20,7 @@ import java.util.Map;
 public final class ImageService implements EventSubscriber {
     private static final String[] EXTENSIONS = new String[] {"jpg", "jpeg", "png", "gif"};
     private final Map<File, Image> thumbnailCache = new HashMap<>();
+    private Image brokenImage;
 
     public static ImageService  build() {
         ImageService imageService = new ImageService();
@@ -23,7 +28,18 @@ public final class ImageService implements EventSubscriber {
         return imageService;
     }
 
-    private ImageService() {}
+    private ImageService() {
+        try {
+            BufferedImage bufferedImage = ImageIO.read(this.getClass().getResource("/ch/imagik/icon/image-broken.png"));
+            brokenImage = SwingFXUtils.toFXImage(bufferedImage, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Image getBrokenImage() {
+        return brokenImage;
+    }
 
     public static File[] listImages(Folder folder) {
         return folder == null ? new File[0] : folder.listFiles((f, name) -> acceptExtension(name.toLowerCase()));
@@ -41,6 +57,13 @@ public final class ImageService implements EventSubscriber {
         if(!thumbnailCache.containsKey(file)) {
             String uri = file.toURI().toString();
             image = new Image(uri, thumbSize, thumbSize, true, false, true);
+            image.errorProperty().addListener((observable, oldValue, imageError) -> {
+                if (imageError) {
+                    thumbnailCache.remove(file);
+                    EventManager.getInstance().post(new BrokenImageEvent(file));
+                }
+            });
+
             thumbnailCache.put(file, image);
         } else {
             image = thumbnailCache.get(file);

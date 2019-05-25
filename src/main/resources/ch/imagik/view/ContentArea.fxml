@@ -74,7 +74,7 @@
                         </graphic>
                     </Button>
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
-                        <tooltip><Tooltip text="%save_changes" /></tooltip>
+                        <tooltip><Tooltip text="%save_as" /></tooltip>
                         <graphic>
                             <FontIcon styleClass="save-icon" />
                         </graphic>

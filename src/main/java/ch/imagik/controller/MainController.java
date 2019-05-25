@@ -24,6 +24,8 @@ public class MainController implements Initializable, EventSubscriber {
     @FXML private Label totalFiles;
     @FXML private Node welcomePane1;
 
+    private int totalNr;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         EventManager.getInstance().register(this);
@@ -74,6 +76,14 @@ public class MainController implements Initializable, EventSubscriber {
     private void updateStatusBar(Folder folder) {
         currentFolder.setText(folder.toString());
         File[] files = ImageService.listImages(folder);
-        totalFiles.setText(String.format("%d files", files.length));
+        totalNr = files.length;
+        totalFiles.setText(String.format("%d files", totalNr));
+    }
+
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void brokenImageHandler(BrokenImageEvent e) {
+        totalNr--;
+        totalFiles.setText(String.format("%d files", totalNr));
     }
 }

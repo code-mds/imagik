@@ -39,7 +39,7 @@ public class MainApp extends Application {
         ResourceBundle bundle = ResourceBundle.getBundle("ch.imagik.bundles.imagik", locale);
         Parent root = FXMLLoader.load(getClass().getResource("/ch/imagik/view/Main.fxml"), bundle);
         primaryStage.setTitle("Imagik Image Viewer");
-        primaryStage.getIcons().add(new Image(this.getClass().getResource("/ch/imagik/icon/wand.png").toString()));
+        primaryStage.getIcons().add(new Image(this.getClass().getResource("/ch/imagik/icon/icon-app.png").toString()));
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/ch/imagik/css/style.css");

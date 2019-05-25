@@ -74,7 +74,7 @@
                     </graphic>
                 </MenuItem>
 
-                <MenuItem mnemonicParsing="false" text="%save_changes" onAction="#saveChanges"  disable="${controller.disableEdit}">
+                <MenuItem mnemonicParsing="false" text="%save_as" onAction="#saveChanges" disable="${controller.disableEdit}">
                     <graphic>
                         <FontIcon styleClass="save-icon"/>
                     </graphic>

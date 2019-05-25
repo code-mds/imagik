@@ -21,7 +21,9 @@ import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
+import javafx.util.Duration;
 import org.apache.commons.io.FilenameUtils;
+import org.controlsfx.control.Notifications;
 
 
 import javax.imageio.ImageIO;
@@ -86,14 +88,9 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         EventManager.getInstance().post(new ResetChangesEvent());
     }
 
-    private void setBackgroundOnCondition(String url) {
-        try {
-            currentImage=ImageIO.read(this.getClass().getResource(url));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
-        zoomFit(new ZoomFitEvent());
+    private void updateFromBufferedImage() {
+        Image image = currentImage == null ? null : SwingFXUtils.toFXImage(currentImage, null);
+        imageView.setImage(image);
     }
 
     @SuppressWarnings("UnstableApiUsage")
@@ -120,12 +117,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
                 File currentFile = selectedFiles.get(0);
                 currentImage = ImageIO.read(currentFile);
-                Image image = null;
-                if(currentImage != null) {
-                    image = SwingFXUtils.toFXImage(currentImage, null);
-                    zoomFit(new ZoomFitEvent());
-                }
-                imageView.imageProperty().setValue(image);
+                updateFromBufferedImage();
+                zoomFit(new ZoomFitEvent());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -200,7 +193,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private void applyFilter(String processToCall) {
         if (selectedFiles.size() == 1) {
             currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage));
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
+            updateFromBufferedImage();
         } else if (selectedFiles.size() > 1) {
             if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles));
@@ -210,7 +203,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private void applyFilter(String processToCall,ResizeInfo resizeInfo) {
         if (selectedFiles.size() == 1) {
             currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage, "resizeInfo", resizeInfo));
-            imageView.setImage(SwingFXUtils.toFXImage(currentImage, null));
+            updateFromBufferedImage();
         } else if (selectedFiles.size() > 1) {
             if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
                 ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles, "resizeInfo", resizeInfo));
@@ -299,4 +292,19 @@ public class ContentAreaController implements Initializable, EventSubscriber {
         loadImage(selectedFiles);
     }
 
+    @SuppressWarnings("UnstableApiUsage")
+    @Subscribe
+    private void brokenImageHandler(BrokenImageEvent e) {
+        final int iconSize = 48;
+        ImageView iconView = new ImageView(MainModel.getInstance().getImageService().getBrokenImage());
+        iconView.setFitHeight(iconSize);
+        iconView.setFitWidth(iconSize);
+
+        Notifications.create()
+                .title(MainModel.getInstance().getLocalizedString("image_format_unsupported"))
+                .text(e.getFile().getName())
+                .graphic(iconView)
+                .owner(imageView)
+                .hideAfter(Duration.seconds(5)).show();
+    }
 }
