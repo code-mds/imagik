@@ -15,6 +15,7 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 import ch.imagik.model.MainModel;
 import org.controlsfx.control.textfield.CustomTextField;
+import org.kordamp.ikonli.javafx.FontIcon;
 
 import java.io.File;
 import java.net.URL;
@@ -23,6 +24,7 @@ import java.util.ResourceBundle;
 public class SideBarController implements Initializable, EventSubscriber {
     private final static double SPLIT_POS_METADATA_VISIBLE = 0.5;
     private final static double SPLIT_POS_METADATA_HIDDEN = 1.0;
+    public FontIcon clearIcon;
 
     @FXML private AnchorPane metadataPane;
     @FXML private SplitPane splitPane;
@@ -33,6 +35,7 @@ public class SideBarController implements Initializable, EventSubscriber {
         EventManager.getInstance().register(this);
         searchField.textProperty().addListener((obs, old, newVal) -> MainModel.getInstance().setFilter(newVal));
         MainModel.getInstance().showMetadataProperty().addListener((o, v, n) -> updateSplitPosition(n));
+        clearIcon.setOnMouseClicked( e -> searchField.textProperty().setValue(""));
     }
 
     private void updateSplitPosition(Boolean showMetadata) {

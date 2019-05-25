@@ -12,6 +12,7 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -305,6 +306,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
                 .text(e.getFile().getName())
                 .graphic(iconView)
                 .owner(imageView)
-                .hideAfter(Duration.seconds(5)).show();
+                .position(Pos.BOTTOM_RIGHT)
+                .hideAfter(Duration.seconds(4)).show();
     }
 }
