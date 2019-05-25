@@ -1,7 +1,5 @@
 package ch.imagik.service.processor;
 
-import ch.imagik.event.EventManager;
-import ch.imagik.event.FilesChangedEvent;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.imageio.ImageIO;
@@ -12,26 +10,25 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class Processor {
-    protected BufferedImage currentImage;
-    protected final List<File> passedFiles;
-
-
-    Processor(Map<String,Object> parameters){
-        currentImage=(BufferedImage)parameters.get("currentImage");
-        passedFiles=(List<File>)parameters.get("selectedFiles");
+    protected Map<String,Object> parameters;
+    Processor(Map<String,Object> parameters) {
+        this.parameters = parameters;
     }
 
-    public abstract BufferedImage process();
-    public void multiProcess() {
-        for (File currentFile : passedFiles) {
-            try {
-                currentImage = ImageIO.read(currentFile);
-                currentImage=process();
-                ImageIO.write(currentImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+    public abstract BufferedImage process(BufferedImage image);
+
+    public void multiProcess(List<File> selectedFiles) {
+        // leverage parallel processing and notify user at the end
+        selectedFiles.parallelStream().forEach(this::processAndSave);
+    }
+
+    public void processAndSave(File currentFile) {
+        try {
+            BufferedImage bufferedImage = ImageIO.read(currentFile);
+            bufferedImage = process(bufferedImage);
+            ImageIO.write(bufferedImage, FilenameUtils.getExtension(currentFile.getName()), currentFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        EventManager.getInstance().post(new FilesChangedEvent(passedFiles));
     }
 }

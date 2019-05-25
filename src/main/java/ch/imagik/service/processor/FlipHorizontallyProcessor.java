@@ -13,7 +13,7 @@ public class FlipHorizontallyProcessor extends Processor {
     }
 
     @Override
-    public BufferedImage process() {
+    public BufferedImage process(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         ImageProcessor currentImageProcessor = imageToEdit.getProcessor();
         currentImageProcessor.flipHorizontal();

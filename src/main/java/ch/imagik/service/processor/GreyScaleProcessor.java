@@ -13,7 +13,7 @@ public class GreyScaleProcessor extends Processor {
     }
 
     @Override
-    public BufferedImage process() {
+    public BufferedImage process(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         ImageConverter imageToConvert = new ImageConverter(imageToEdit);
         imageToConvert.convertToGray32();

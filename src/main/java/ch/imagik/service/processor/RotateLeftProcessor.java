@@ -11,7 +11,7 @@ public class RotateLeftProcessor extends Processor {
     }
 
     @Override
-    public BufferedImage process() {
+    public BufferedImage process(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         return imageToEdit.getProcessor().rotateLeft().getBufferedImage();
     }

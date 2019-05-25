@@ -9,6 +9,8 @@ import com.google.common.eventbus.Subscribe;
 import ch.imagik.event.*;
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,8 +23,10 @@ import javafx.scene.layout.VBox;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Window;
 import org.apache.commons.io.FilenameUtils;
+import org.controlsfx.dialog.ProgressDialog;
 
 
 import javax.imageio.ImageIO;
@@ -31,20 +35,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.awt.image.BufferedImage;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ContentAreaController implements Initializable, EventSubscriber {
     private static final double ZOOM_FACTOR = 0.1;
     private static final double NO_ZOOM = 1.0;
 
     @FXML private Node welcomePane2;
+    @FXML private ImageView imageView;
+    @FXML private ScrollPane scrollPane;
+    @FXML private VBox editPane;
 
     private double currentZoom = NO_ZOOM;
     private BufferedImage currentImage;
     private List<File> selectedFiles;
-
-    @FXML private ImageView imageView;
-    @FXML private ScrollPane scrollPane;
-    @FXML private VBox editPane;
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     // bind to disable button property
     public BooleanProperty disableEditProperty() {
@@ -73,7 +79,8 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
         MainModel.getInstance()
                 .getSelectedFiles()
-                .addListener((ListChangeListener.Change<? extends File> l)-> loadImage( MainModel.getInstance().getSelectedFiles()));
+                .addListener((ListChangeListener.Change<? extends File> l) ->
+                        loadImage( MainModel.getInstance().getSelectedFiles()));
     }
 
     @FXML private void rotateLeft(ActionEvent e) { EventManager.getInstance().post(new RotateLeftEvent()); }
@@ -190,22 +197,30 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     }
 
     private void applyFilter(String processToCall) {
-        if (selectedFiles.size() == 1) {
-            currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage));
-            updateFromBufferedImage();
-        } else if (selectedFiles.size() > 1) {
-            if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles));
-        }
+        applyFilter(processToCall, Map.of());
     }
 
-    private void applyFilter(String processToCall,ResizeInfo resizeInfo) {
-        if (selectedFiles.size() == 1) {
-            currentImage = ImageService.applyFilter(processToCall, Map.of("currentImage", currentImage, "resizeInfo", resizeInfo));
+    private void applyFilter(String processToCall, ResizeInfo resizeInfo) {
+        applyFilter(processToCall, Map.of("resizeInfo", resizeInfo));
+    }
+
+    private void applyFilter(String processToCall, Map map) {
+        if (selectedFiles.size() > 1) {
+            ObservableList<File> selectedFiles = MainModel.getInstance().getSelectedFiles();
+            if (!BulkDialog.showConfirmDialog(selectedFiles))
+                return;
+
+            Task<Void> task = ImageService.createMultiprocessTask(processToCall, selectedFiles, map);
+            ProgressDialog progDiag = new ProgressDialog(task);
+            String title = MainModel.getInstance().getLocalizedString("notification.processing");
+            progDiag.setHeaderText(null);
+            progDiag.setTitle(title);
+            progDiag.initOwner(imageView.getScene().getWindow());
+            progDiag.initModality(Modality.WINDOW_MODAL);
+            executorService.submit(task);
+        } else {
+            currentImage = ImageService.applyFilter(processToCall, currentImage, map);
             updateFromBufferedImage();
-        } else if (selectedFiles.size() > 1) {
-            if (BulkDialog.show(MainModel.getInstance().getSelectedFiles()))
-                ImageService.applyFilter(processToCall, Map.of("selectedFiles", selectedFiles, "resizeInfo", resizeInfo));
         }
     }
 
@@ -236,7 +251,6 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     private void resize(ResizeEvent e) {
         String processToCall = "ch.imagik.service.processor.ResizeProcessor";
         Optional<ResizeInfo> optionalData;
-        System.out.println("RESIZE");
         if(selectedFiles.size()>1){
             optionalData = ResizeDialog.show(1, 1, true);
         }else{
@@ -275,7 +289,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
             try {
                 ImageIO.write(currentImage, FilenameUtils.getExtension(file.getName()), file);
 
-                // SAVE AS IN SAME DIRECTORY, NEED TO REFRESH THUMB CONTENT
+                // SAVE AS IN SAME DIRECTORY -> NEED TO REFRESH THUMB CONTENT
                 if(!file.equals(selectedFiles.get(0)) && file.getParent().equals(selectedFiles.get(0).getParent())) {
                     EventManager.getInstance().post(new FolderRefreshEvent(new Folder(file.getParentFile())));
                 }
@@ -295,7 +309,7 @@ public class ContentAreaController implements Initializable, EventSubscriber {
     @Subscribe
     private void brokenImageHandler(BrokenImageEvent e) {
         String fileName = e.getFile().getName();
-        String title = MainModel.getInstance().getLocalizedString("image_format_unsupported");
+        String title = MainModel.getInstance().getLocalizedString("notification.image_format_unsupported");
         Image icon = MainModel.getInstance().getImageService().getBrokenImageIcon();
         NotificationService.showWarning(title, fileName, imageView, icon);
     }

@@ -22,4 +22,12 @@ public class NotificationService {
                 .position(Pos.BOTTOM_RIGHT)
                 .hideAfter(Duration.seconds(4)).show();
     }
+
+    public static void showInfo(String text, Node owner) {
+        Notifications.create()
+                .text(text)
+                .owner(owner)
+                .position(Pos.BOTTOM_RIGHT)
+                .hideAfter(Duration.seconds(4)).showInformation();
+    }
 }

@@ -2,20 +2,17 @@ package ch.imagik.controller;
 
 import ch.imagik.event.*;
 import ch.imagik.model.Folder;
+import ch.imagik.service.NotificationService;
 import com.google.common.eventbus.Subscribe;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import ch.imagik.service.ImageService;
 import ch.imagik.model.MainModel;
@@ -43,11 +40,13 @@ public class ThumbnailController implements Initializable, EventSubscriber {
 
         mainModel.addFilterListener((observable, oldValue, newValue) -> filterList(newValue));
         ImageService imageService = mainModel.getImageService();
+
         thumbListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         thumbListView.setItems(filteredImageList);
         thumbListView.getSelectionModel()
                 .getSelectedItems()
-                .addListener((ListChangeListener.Change<? extends File> l) -> MainModel.getInstance().setSelectedFiles(l.getList()));
+                .addListener((ListChangeListener.Change<? extends File> l) ->
+                        MainModel.getInstance().setSelectedFiles(l.getList()));
 
         thumbListView.setCellFactory(param -> new ListCell<>() {
             private final ImageView imageView = new ImageView();
@@ -59,6 +58,7 @@ public class ThumbnailController implements Initializable, EventSubscriber {
                     setText(null);
                     setGraphic(null);
                 } else {
+                    // render listView cell (icon + text)
                     imageView.fitHeightProperty().setValue(THUMB_SIZE);
                     imageView.fitWidthProperty().setValue(THUMB_SIZE);
                     imageView.setImage(imageService.getThumbnail(file, THUMB_SIZE));
@@ -116,11 +116,15 @@ public class ThumbnailController implements Initializable, EventSubscriber {
             int oldPos = imageList.indexOf(file);
             imageList.set(oldPos, file);
         }
+
+        String title = e.getFiles().size() + " " + MainModel.getInstance().getLocalizedString("notification.images_processed");
+        NotificationService.showInfo(title, thumbListView);
     }
 
     @SuppressWarnings("UnstableApiUsage")
     @Subscribe
     private void brokenImageHandler(BrokenImageEvent e) {
+        // remove broken images from the available list
         imageList.remove(e.getFile());
     }
 }

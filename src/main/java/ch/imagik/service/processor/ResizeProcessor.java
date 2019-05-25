@@ -14,7 +14,7 @@ public class ResizeProcessor extends Processor {
     }
 
     @Override
-    public BufferedImage process() {
+    public BufferedImage process(BufferedImage currentImage) {
         ImagePlus imageToEdit = new ImagePlus("editing image", currentImage);
         if(info.isPercentage()){
             int calculatedWidth=(int)(imageToEdit.getWidth()*info.getPercentage());
