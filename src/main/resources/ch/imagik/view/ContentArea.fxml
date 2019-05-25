@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.control.Separator?>
+
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.imagik.controller.ContentAreaController">
+    <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+
+        <StackPane VBox.vgrow="SOMETIMES" >
+            <HBox >
+                <ScrollPane fx:id="scrollPane" styleClass="edge-to-edge" HBox.hgrow="SOMETIMES">
+                    <ImageView fx:id="imageView" preserveRatio="true"/>
+                </ScrollPane>
+                <VBox fx:id="editPane" spacing="5.0" visible="${controller.showEditPane}" managed="${controller.showEditPane}" prefWidth="40" styleClass="editor">
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#blackWhite" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%grayscale" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="grayscale-icon" />
+                        </graphic>
+                    </Button>
+
+                    <Separator/>
+
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateLeft" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%rotate_left" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="rotate-left-icon" />
+                        </graphic>
+                    </Button>
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateRight" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%rotate_right" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="rotate-right-icon" />
+                        </graphic>
+                    </Button>
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipHorizontally" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%flip_horizontally" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="flip-horizontal-icon" />
+                        </graphic>
+                    </Button>
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipVertically" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%flip_vertically" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="flip-vertical-icon" />
+                        </graphic>
+                    </Button>
+
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%resize" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="resize-icon" />
+                        </graphic>
+                    </Button>
+
+                    <Separator/>
+
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resetChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%reset" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="reset-icon" />
+                        </graphic>
+                    </Button>
+                    <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
+                        <tooltip><Tooltip text="%save_as" /></tooltip>
+                        <graphic>
+                            <FontIcon styleClass="save-icon" />
+                        </graphic>
+                    </Button>
+                    <padding>
+                       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                    </padding>
+                </VBox>
+            </HBox>
+
+
+            <GridPane  alignment="CENTER" fx:id="welcomePane2" visible="false" >
+                <Label text="%welcome_3" styleClass="welcome-label" />
+                <Label text="%welcome_4" styleClass="welcome-label" GridPane.rowIndex="1" />
+            </GridPane>
+        </StackPane>
+
+    </VBox>
+</AnchorPane>
