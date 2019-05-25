@@ -120,8 +120,11 @@ public class ContentAreaController implements Initializable, EventSubscriber {
 
                 File currentFile = selectedFiles.get(0);
                 currentImage = ImageIO.read(currentFile);
-                Image image = SwingFXUtils.toFXImage(currentImage, null);
-                zoomFit(new ZoomFitEvent());
+                Image image = null;
+                if(currentImage != null) {
+                    image = SwingFXUtils.toFXImage(currentImage, null);
+                    zoomFit(new ZoomFitEvent());
+                }
                 imageView.imageProperty().setValue(image);
             } catch (IOException e) {
                 e.printStackTrace();

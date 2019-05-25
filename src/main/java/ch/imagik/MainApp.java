@@ -22,7 +22,20 @@ public class MainApp extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Locale locale = Locale.getDefault();
+        String language = MainModel.getInstance().getConfigService().getEntry("language");
+        Locale locale;
+        switch (language == null ? "" : language) {
+            case "it":
+                locale = Locale.ITALY;
+                break;
+            case "en":
+                locale = Locale.ENGLISH;
+                break;
+            default:
+                locale = Locale.getDefault();
+        }
+        Locale.setDefault(locale);
+
         ResourceBundle bundle = ResourceBundle.getBundle("ch.imagik.bundles.imagik", locale);
         Parent root = FXMLLoader.load(getClass().getResource("/ch/imagik/view/Main.fxml"), bundle);
         primaryStage.setTitle("Imagik Image Viewer");
