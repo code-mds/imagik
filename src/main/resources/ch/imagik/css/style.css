@@ -79,6 +79,10 @@
 .clear-search-icon {
     -fx-icon-code: mdi-eraser;
 }
+.clear-search-icon:hover {
+    -fx-cursor: hand;
+}
+
 .clear-search {
     -fx-background-color: transparent;
     -fx-background-insets: 0;

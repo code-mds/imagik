@@ -15,20 +15,13 @@
 
         <ToolBar>
             <CustomTextField fx:id="searchField"  promptText="%search" styleClass="search-field" HBox.hgrow="SOMETIMES">
-                                <left>
-                                    <FontIcon styleClass="clear-search-icon" fx:id="clearIcon"/>
-                                </left>
+                <left>
+                    <FontIcon styleClass="clear-search-icon" fx:id="clearIcon"/>
+                </left>
                 <right>
                     <FontIcon styleClass="search-icon" />
                 </right>
             </CustomTextField>
-<!--            <Button styleClass="clear-search">-->
-<!--                <tooltip><Tooltip text="%clear_search" /></tooltip>-->
-<!--                <graphic>-->
-<!--                    <FontIcon styleClass="clear-search-icon" />-->
-<!--                </graphic>-->
-<!--            </Button>-->
-
         </ToolBar>
 
 
