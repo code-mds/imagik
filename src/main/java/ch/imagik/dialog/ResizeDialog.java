@@ -4,11 +4,13 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import ch.imagik.model.MainModel;
 import ch.imagik.model.ResizeInfo;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Optional;
 
@@ -114,6 +116,9 @@ public final class ResizeDialog {
 
         dialog.getDialogPane().setContent(masterContainer);
 
+        Image appIcon = MainModel.getInstance().getImageService().getAppIcon();
+        Stage stage = (Stage)dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(appIcon);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == ButtonType.OK) {

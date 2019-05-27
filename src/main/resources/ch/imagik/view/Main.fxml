@@ -12,6 +12,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.geometry.Insets?>
 <AnchorPane prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.172-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.imagik.controller.MainController">
     <VBox  AnchorPane.bottomAnchor="0.0"
@@ -28,12 +32,23 @@
             </SplitPane>
 
             <GridPane alignment="CENTER" fx:id="welcomePane1" visible="true" >
-                <Label text="%welcome_1" styleClass="welcome-label" contentDisplay="RIGHT">
+                <ImageView GridPane.rowIndex="0" fitWidth="100" fitHeight="100" GridPane.halignment="CENTER" >
+                    <GridPane.margin>
+                        <Insets bottom="30"/>
+                    </GridPane.margin>
+                    <effect>
+                        <ColorAdjust brightness="0.75" />
+                    </effect>
+                    <Image url="/ch/imagik/icon/icon-app.png" />
+                </ImageView>
+
+                <Label text="%welcome_1" styleClass="welcome-label" contentDisplay="RIGHT"
+                       GridPane.halignment="CENTER"  GridPane.rowIndex="1">
                     <graphic>
-                        <FontIcon styleClass="folder-icon"/>
+                        <FontIcon styleClass="folder-icon" />
                     </graphic>
                 </Label>
-                <Label text="%welcome_2" styleClass="welcome-label" GridPane.rowIndex="1" />
+                <Label text="%welcome_2" styleClass="welcome-label" GridPane.rowIndex="2" />
             </GridPane>
         </StackPane>
 

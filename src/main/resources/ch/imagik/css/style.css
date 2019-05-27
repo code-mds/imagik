@@ -104,6 +104,10 @@
 .folder-icon {
    -fx-icon-code: fa-folder-open-o;
 }
+.welcome-label .folder-icon {
+    -fx-icon-color: grey;
+    -fx-icon-size: 20px;
+}
 
 .bold-label{
     -fx-font-weight: bold;
@@ -112,4 +116,5 @@
 .welcome-label {
     -fx-font-weight: bold;
     -fx-font-size: 2em;
+    -fx-text-fill: grey;
 }
