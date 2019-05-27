@@ -5,6 +5,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
 import ch.imagik.model.MainModel;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.util.Optional;
@@ -24,7 +26,12 @@ public final class BulkDialog {
 
         ListView<File> list = new ListView<>();
         list.setItems(selectedFiles);
+
         alert.getDialogPane().setExpandableContent(list);
+
+        Image appIcon = MainModel.getInstance().getImageService().getAppIcon();
+        Stage stage = (Stage)alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(appIcon);
 
         Optional<ButtonType> result = alert.showAndWait();
         return result.isPresent() && result.get() == ButtonType.OK;

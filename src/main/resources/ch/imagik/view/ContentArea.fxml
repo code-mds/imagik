@@ -15,6 +15,8 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.imagik.controller.ContentAreaController">
     <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
 
@@ -87,8 +89,18 @@
 
 
             <GridPane  alignment="CENTER" fx:id="welcomePane2" visible="false" >
-                <Label text="%welcome_3" styleClass="welcome-label" />
-                <Label text="%welcome_4" styleClass="welcome-label" GridPane.rowIndex="1" />
+                <ImageView GridPane.rowIndex="0" fitWidth="100" fitHeight="100" GridPane.halignment="CENTER" >
+                    <GridPane.margin>
+                        <Insets bottom="30"/>
+                    </GridPane.margin>
+                    <effect>
+                        <ColorAdjust brightness="0.75" />
+                    </effect>
+                    <Image url="/ch/imagik/icon/icon-app.png" />
+                </ImageView>
+
+                <Label text="%welcome_3" styleClass="welcome-label" GridPane.rowIndex="1" />
+                <Label text="%welcome_4" styleClass="welcome-label" GridPane.rowIndex="2" />
             </GridPane>
         </StackPane>
 
