@@ -38,13 +38,13 @@ public final class ResizeDialog {
         GridPane gridTop = new GridPane();
         gridTop.setHgap(12);
         gridTop.setVgap(6);
-        gridTop.getColumnConstraints().add(0,new ColumnConstraints(130.0,60.0,60.0));
+        gridTop.getColumnConstraints().add(0,new ColumnConstraints(100.0,60.0,60.0));
         gridTop.setPadding(new Insets(0,0,0,0));
 
         GridPane gridDown = new GridPane();
         gridDown.setHgap(12);
         gridDown.setVgap(6);
-        gridDown.getColumnConstraints().add(0,new ColumnConstraints(130.0,60.0,60.0));
+        gridDown.getColumnConstraints().add(0,new ColumnConstraints(100.0,60.0,60.0));
         gridDown.setPadding(new Insets(0,0,0,0));
 
         label = MainModel.getInstance().getLocalizedString("resize_dialog.percentage");
