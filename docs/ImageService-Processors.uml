@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ch.imagik.service.processor.FlipHorizontallyProcessor</OriginalElement>
+  <nodes>
+    <node x="0.0" y="153.0">ch.imagik.service.processor.ResizeProcessor</node>
+    <node x="813.0" y="153.0">ch.imagik.service.processor.GreyScaleProcessor</node>
+    <node x="271.0" y="153.0">ch.imagik.service.processor.RotateRightProcessor</node>
+    <node x="494.0" y="247.0">ch.imagik.controller.ContentAreaController</node>
+    <node x="0.0" y="247.0">ch.imagik.service.ImageService</node>
+    <node x="677.5" y="0.0">ch.imagik.service.processor.Processor</node>
+    <node x="542.0" y="153.0">ch.imagik.service.processor.FlipHorizontallyProcessor</node>
+    <node x="1084.0" y="153.0">ch.imagik.service.processor.FlipVerticallyProcessor</node>
+    <node x="1355.0" y="153.0">ch.imagik.service.processor.RotateLeftProcessor</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="ch.imagik.service.processor.FlipHorizontallyProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="667.5" y="133.0" />
+      <point x="782.0833333333334" y="133.0" />
+      <point x="-20.91666666666663" y="46.5" />
+    </edge>
+    <edge source="ch.imagik.service.processor.FlipVerticallyProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="1209.5" y="123.0" />
+      <point x="865.75" y="123.0" />
+      <point x="62.75" y="46.5" />
+    </edge>
+    <edge source="ch.imagik.service.processor.ResizeProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="125.5" y="113.0" />
+      <point x="698.4166666666666" y="113.0" />
+      <point x="-104.58333333333337" y="46.5" />
+    </edge>
+    <edge source="ch.imagik.service.processor.RotateLeftProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="1480.5" y="113.0" />
+      <point x="907.5833333333334" y="113.0" />
+      <point x="104.58333333333337" y="46.5" />
+    </edge>
+    <edge source="ch.imagik.service.processor.RotateRightProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="396.5" y="123.0" />
+      <point x="740.25" y="123.0" />
+      <point x="-62.75" y="46.5" />
+    </edge>
+    <edge source="ch.imagik.service.processor.GreyScaleProcessor" target="ch.imagik.service.processor.Processor">
+      <point x="0.0" y="-24.5" />
+      <point x="938.5" y="133.0" />
+      <point x="823.9166666666666" y="133.0" />
+      <point x="20.91666666666663" y="46.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="597.0" y="48.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>public</VISIBILITY>
+</Diagram>
+
