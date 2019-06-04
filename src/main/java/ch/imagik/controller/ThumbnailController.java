@@ -85,7 +85,7 @@ public class ThumbnailController implements Initializable, EventSubscriber {
     }
 
     private void filterList(String filter) {
-        filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter));
+        filteredImageList.setPredicate(file -> file.getName().toLowerCase().contains(filter.toLowerCase()));
     }
 
     private void populateImageList(Folder dir) {
