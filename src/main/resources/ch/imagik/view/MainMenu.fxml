@@ -4,6 +4,8 @@
 <?import javafx.scene.layout.*?>
 
 <?import org.kordamp.ikonli.javafx.FontIcon?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="ch.imagik.controller.MainMenuController"
@@ -41,7 +43,10 @@
         <Button mnemonicParsing="false" onAction="#zoomFit" disable="${controller.disableZoom}">
             <tooltip><Tooltip text="%zoom_fit" /></tooltip>
             <graphic>
-                <FontIcon styleClass="zoom-fit-icon" />
+                <!--                            <FontIcon styleClass="zoom-fit-icon" />-->
+                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                    <Image url="@../icon/gmi-aspect-ratio.png"/>
+                </ImageView>
             </graphic>
         </Button>
 
@@ -103,7 +108,11 @@
 
                     <MenuItem mnemonicParsing="false" text="%zoom_fit" onAction="#zoomFit">
                         <graphic>
-                            <FontIcon styleClass="zoom-fit-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/gmi-aspect-ratio.png"/>
+                            </ImageView>
+
+<!--                            <FontIcon styleClass="zoom-fit-icon" />-->
                         </graphic>
                     </MenuItem>
                 </Menu>
@@ -111,32 +120,52 @@
                 <Menu text="%edit" disable="${controller.disableEdit}">
                     <MenuItem mnemonicParsing="false" text="%grayscale" onAction="#blackWhite">
                         <graphic>
-                            <FontIcon styleClass="grayscale-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-invert-colors.png"/>
+                            </ImageView>
+
+<!--                            <FontIcon styleClass="grayscale-icon" />-->
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%rotate_left" onAction="#rotateLeft">
                         <graphic>
-                            <FontIcon styleClass="rotate-left-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-rotate-left.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="rotate-left-icon" />-->
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%rotate_right" onAction="#rotateRight">
                         <graphic>
-                            <FontIcon styleClass="rotate-right-icon" />
+
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-rotate-right.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="rotate-right-icon" />-->
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%flip_horizontally" onAction="#flipHorizontally">
                         <graphic>
-                            <FontIcon styleClass="flip-horizontal-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-swap-horizontal.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="flip-horizontal-icon" />-->
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%flip_vertically" onAction="#flipVertically">
                         <graphic>
-                            <FontIcon styleClass="flip-vertical-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-swap-vertical.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="flip-vertical-icon" />-->
                         </graphic>
                     </MenuItem>
                     <MenuItem mnemonicParsing="false" text="%resize" onAction="#resize">
                         <graphic>
-                            <FontIcon styleClass="resize-icon" />
+                            <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-move-resize-variant.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="resize-icon" />-->
                         </graphic>
                     </MenuItem>
                 </Menu>
