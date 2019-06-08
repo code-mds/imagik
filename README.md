@@ -22,22 +22,13 @@ Il programma deve inoltre permettere all’utente di applicare alle immagini una
 * L'utente permette di salvare l'immagine modificata in un nuovo file (save as).
 * Il programma dovrà supportare la localizzazione in almeno due lingue (inglese, italiano).
 
-### Requisiti Impliciti
-* Il programma mostra le informazioni della cartella corrente: percorso, numero file, ... 
-* La lista delle immagine e' composta da una miniatura e il nome del file.
+### Personalizzazioni
+* UI ispirata a HIG GNOME 3
+* Istruzioni di base presentate nello sfondo dell'applicazione
+* Il programma mostra le informazioni della cartella corrente: percorso e numero immagini
+* La lista delle immagini e' composta da una miniatura e le informazioni base del file.
 * Un'area piu' grande mostra l'anteprima dell'immagine selezionata.
-* Il programma puo' essere invocato da linea di comando. La cartella da aprire puo' essere passata come parametro opzionale.
 * Il programma ricorda l'ultima cartella aperta e all'avvio mostra il suo contenuto.
-
-### Look & Feel
-http://www.fastrawviewer.com/sites/fastrawviewer.com/files/FastRawViewer_RAF.jpeg
-https://is1-ssl.mzstatic.com/image/thumb/Purple124/v4/19/54/81/19548111-0424-42c7-8cf1-f597194e163d/pr_source.jpg/643x0w.jpg
-https://amazingtop10.com/wp-content/uploads/2018/01/faststone-image-viewer-6.0.png
-https://i.stack.imgur.com/q55yU.png
-https://www.itechtics.com/wp-content/uploads/2017/06/2-22-670x387.png
-https://raw.githubusercontent.com/hughsie/fedora-appstream/master/screenshots-extra/eog/b.png
-http://www.debugpoint.com/blog/wp-content/uploads/2016/08/nomacs-Running-in-Ubuntu.png
-
 
 ### Tecnologie
 * Java e JavaFX
