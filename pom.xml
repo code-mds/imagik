@@ -7,7 +7,7 @@
     <groupId>ch.imagik</groupId>
     <artifactId>imagik</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+<!--    <packaging>jar</packaging>-->
 
     <repositories>
         <repository>
@@ -46,6 +46,28 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>ch.imagik.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
 
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -79,6 +101,7 @@
             <artifactId>ij</artifactId>
             <version>1.52e</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.drewnoakes/metadata-extractor -->
         <dependency>
             <groupId>com.drewnoakes</groupId>
@@ -93,50 +116,57 @@
             <version>25.0-jre</version>
         </dependency>
 
-        <!-- Icons -->
-
-
-        <!--<dependency>-->
-            <!--<groupId>com.cathive.fonts</groupId>-->
-            <!--<artifactId>fonts-fontawesome</artifactId>-->
-            <!--<version>RELEASE</version>-->
-        <!--</dependency>-->
-
-        <!--https://bitbucket.org/Jerady/fontawesomefx-->
-        <!--https://github.com/Jerady/fontawesomefx-glyphsbrowser-->
-<!--        <dependency>-->
-<!--            <groupId>de.jensd</groupId>-->
-<!--            <artifactId>fontawesomefx</artifactId>-->
-<!--            <version>8.1</version>-->
-<!--        </dependency>-->
-
         <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
         <dependency>
             <groupId>org.openjfx</groupId>
-            <artifactId>javafx</artifactId>
-            <version>11.0.2</version>
-            <type>pom</type>
+            <artifactId>javafx-controls</artifactId>
+            <version>11</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-fxml -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>11</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>11</version>
+            <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>11</version>
+            <classifier>linux</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>11</version>
+            <classifier>win</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>11</version>
+            <classifier>mac</classifier>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-graphics</artifactId>
+            <version>11</version>
+            <classifier>linux</classifier>
+        </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>11.0.2</version>
+            <version>11</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-        <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-controls</artifactId>
-            <version>11.0.2</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-swing -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-swing</artifactId>
-            <version>11.0.2</version>
+            <version>11</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
@@ -146,38 +176,45 @@
             <version>2.6</version>
         </dependency>
 
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-javafx</artifactId>
-            <version>11.1.0</version>
-        </dependency>
+        <!--        https://github.com/aalmiray/ikonli/tree/master/icon-packs -->
+<!--        <dependency>-->
+<!--            <groupId>org.kordamp.ikonli</groupId>-->
+<!--            <artifactId>ikonli-materialdesign-pack</artifactId>-->
+<!--            <version>11.3.4</version>-->
+<!--        </dependency>-->
 
-<!--        https://github.com/aalmiray/ikonli/tree/master/icon-packs-->
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-materialdesign-pack</artifactId>
-            <version>11.2.0</version>
-        </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
             <artifactId>ikonli-fontawesome-pack</artifactId>
-            <version>11.2.0</version>
+            <version>11.3.4</version>
         </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-material-pack</artifactId>
-            <version>11.2.0</version>
+            <artifactId>ikonli-core</artifactId>
+            <version>11.3.4</version>
         </dependency>
         <dependency>
             <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-entypo-pack</artifactId>
-            <version>11.2.0</version>
+            <artifactId>ikonli-javafx</artifactId>
+            <version>11.3.4</version>
         </dependency>
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-foundation-pack</artifactId>
-            <version>11.2.0</version>
-        </dependency>
+
+        <!--        <dependency>-->
+<!--            <groupId>org.kordamp.ikonli</groupId>-->
+<!--            <artifactId>ikonli-material-pack</artifactId>-->
+<!--            <version>11.3.4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.kordamp.ikonli</groupId>-->
+<!--            <artifactId>ikonli-entypo-pack</artifactId>-->
+<!--            <version>11.3.4</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.kordamp.ikonli</groupId>-->
+<!--            <artifactId>ikonli-foundation-pack</artifactId>-->
+<!--            <version>11.3.4</version>-->
+<!--        </dependency>-->
+
         <dependency>
             <groupId>org.controlsfx</groupId>
             <artifactId>controlsfx</artifactId>
@@ -185,4 +222,9 @@
         </dependency>
 
     </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 </project>

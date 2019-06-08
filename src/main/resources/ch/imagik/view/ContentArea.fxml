@@ -29,7 +29,11 @@
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#blackWhite" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%grayscale" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="grayscale-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-invert-colors.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="grayscale-icon" />-->
                         </graphic>
                     </Button>
 
@@ -38,32 +42,52 @@
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateLeft" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%rotate_left" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="rotate-left-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-rotate-left.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="rotate-left-icon" />-->
                         </graphic>
                     </Button>
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#rotateRight" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%rotate_right" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="rotate-right-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-rotate-right.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="rotate-right-icon" />-->
                         </graphic>
                     </Button>
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipHorizontally" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%flip_horizontally" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="flip-horizontal-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-swap-horizontal.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="flip-horizontal-icon" />-->
                         </graphic>
                     </Button>
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#flipVertically" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%flip_vertically" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="flip-vertical-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-swap-vertical.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="flip-vertical-icon" />-->
                         </graphic>
                     </Button>
 
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resize" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%resize" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="resize-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-move-resize-variant.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="resize-icon" />-->
                         </graphic>
                     </Button>
 
@@ -72,7 +96,11 @@
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#resetChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >
                         <tooltip><Tooltip text="%reset" /></tooltip>
                         <graphic>
-                            <FontIcon styleClass="reset-icon" />
+
+                            <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                                <Image url="@../icon/mdi-undo.png"/>
+                            </ImageView>
+<!--                            <FontIcon styleClass="reset-icon" />-->
                         </graphic>
                     </Button>
                     <Button disable="${controller.disableEdit}" mnemonicParsing="false" onAction="#saveChanges" prefWidth="${editPane.width}" alignment="BASELINE_LEFT" >

@@ -16,40 +16,29 @@
     -fx-icon-code: fa-ellipsis-v;
 }
 
-.app-icon {
-    -fx-icon-code: fa-magic;
-}
-
 .save-icon {
     -fx-icon-code: fa-save;
 }
 
 .reset-icon {
-    -fx-icon-code: mdi-undo;
 }
 
 .resize-icon {
-    -fx-icon-code: mdi-move-resize-variant;
 }
 
 .flip-vertical-icon {
-    -fx-icon-code: mdi-swap-vertical;
 }
 
 .flip-horizontal-icon {
-    -fx-icon-code: mdi-swap-horizontal;
 }
 
 .rotate-right-icon {
-    -fx-icon-code: mdi-rotate-right;
 }
 
 .rotate-left-icon {
-    -fx-icon-code: mdi-rotate-left;
 }
 
 .grayscale-icon {
-    -fx-icon-code: mdi-invert-colors;
 }
 
 .zoom-in-icon {
@@ -61,15 +50,14 @@
 }
 
 .zoom-fit-icon {
-   -fx-icon-code: gmi-aspect-ratio;
- }
+}
 
 .zoom-1-1-icon {
     -fx-icon-code: fa-expand;
  }
 
 .metadata-icon {
-    -fx-icon-code: mdi-tag-text-outline;
+    -fx-icon-code: fa-wpforms;
 }
 
 .edit-icon {
@@ -77,7 +65,7 @@
 }
 
 .clear-search-icon {
-    -fx-icon-code: mdi-eraser;
+    -fx-icon-code: fa-eraser;
 }
 .clear-search-icon:hover {
     -fx-cursor: hand;
